@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/lay_title" />
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="230.0dip">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/device" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/fengeline2"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:textSize="@dimen/textsize_32px"
+            android:textColor="#ff4d4d4d"
+            android:id="@id/tv_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32.0dip"
+            android:text="@string/add_device_loading"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:textSize="@dimen/textsize_32px"
+            android:textColor="#ff4d4d4d"
+            android:id="@id/tv_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32.0dip"
+            android:layout_toRightOf="@id/tv_msg"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+</LinearLayout>

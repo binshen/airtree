@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/lay_title" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <RelativeLayout
+            android:id="@id/rl_nickname"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor"
+                android:id="@id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:text="@string/nickname" android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18.0dip"
+                android:src="@mipmap/details_small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor2"
+                android:id="@id/tv_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8.0dip"
+                android:text="未登录"
+                android:layout_toLeftOf="@id/iv"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip" />
+
+        <RelativeLayout
+            android:id="@id/rl_revisepwd"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor"
+                android:id="@id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:text="@string/revisepwd"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18.0dip"
+                android:src="@mipmap/details_small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip" />
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip"
+            android:layout_marginTop="48.0dip" />
+
+        <RelativeLayout
+            android:id="@id/rl_check"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor"
+                android:id="@id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:text="@string/lwcheck"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18.0dip"
+                android:src="@mipmap/details_small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip" />
+
+        <RelativeLayout
+            android:id="@id/rl_feedback"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor"
+                android:id="@id/tv_nick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:text="@string/feedback"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@id/iv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="18.0dip"
+                android:src="@mipmap/details_small"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:textSize="@dimen/textsize_36px"
+                android:textColor="@color/white"
+                android:id="@id/btn_exit"
+                android:background="@mipmap/button_bg"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="64.0dip"
+                android:text="@string/exit_user" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="260.0dip" android:layout_height="wrap_content"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="260.0dip"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="@dimen/textsize_32px"
+            android:textColor="#ff404040"
+            android:gravity="center"
+            android:id="@id/tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip" />
+
+        <TextView
+            android:textSize="@dimen/textsize_30px"
+            android:textColor="#ff666666"
+            android:gravity="center"
+            android:id="@id/tv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:layout_marginBottom="20.0dip" />
+    </LinearLayout>
+
+    <View
+        android:background="@color/fengeline2"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textSize="@dimen/textsize_28px"
+            android:textColor="@color/btnpress"
+            android:layout_gravity="center"
+            android:id="@id/btn_ok"
+            android:background="@null"
+            android:layout_width="130.0dip"
+            android:layout_height="44.0dip"
+            android:text="@string/ok" />
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="0.5dip"
+            android:layout_height="fill_parent" />
+
+        <Button
+            android:textSize="@dimen/textsize_28px"
+            android:textColor="@color/btnpress"
+            android:layout_gravity="center"
+            android:id="@id/btn_cancle"
+            android:background="@null"
+            android:layout_width="130.0dip"
+            android:layout_height="44.0dip"
+            android:text="@string/cancle" />
+    </LinearLayout>
+</LinearLayout>

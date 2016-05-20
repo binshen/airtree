@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/lay_title" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="15.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:textSize="@dimen/textsize_30px"
+            android:textColor="@color/listtextcolor"
+            android:layout_gravity="center_vertical"
+            android:id="@id/tv_wifiname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10.0dip"
+            android:layout_marginBottom="20.0dip"
+            android:drawableLeft="@mipmap/icon_tianji"
+            android:drawablePadding="15.0dip" />
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="#fff2f2f2"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip">
+
+            <EditText
+                android:textSize="@dimen/textsize_28px"
+                android:textColor="@color/etcolor"
+                android:textColorHint="@color/hintcolor"
+                android:id="@id/et_wifipwd"
+                android:background="@null"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:hint="@string/input_wifi_password"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <Button
+            android:textColor="@color/btntextnormal"
+            android:id="@id/btn_ok"
+            android:background="@mipmap/button_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19.0dip"
+            android:text="@string/ok" />
+    </LinearLayout>
+</LinearLayout>

@@ -58,14 +58,14 @@ public class PersonalRevisePwdActivity extends ABaseActivity implements View.OnC
                                 changePassword(oldpwd, newpwd);
                                 return;
                             }
-                            Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show();
                             return;
                         }
-                        Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show();
                     }
                     return;
                 }
-                Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show()
+                Toast.makeText(PersonalRevisePwdActivity.this, "", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

@@ -1,25 +1,34 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.utils.NetUtils;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends ABaseActivity implements View.OnClickListener {
 
-    private String checkNet;
+    private boolean collected;
     private Button mBtnLogin;
     private EditText mEtPassword;
     private EditText mEtUsername;
-//    TextWatcher mTextWatcher;
     private TextView mTvForgetpwd;
     private TextView mTvRegister;
 
@@ -38,8 +47,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         mTvForgetpwd.setOnClickListener(this);
         mTvRegister.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
-//        mEtUsername.addTextChangedListener(mTextWatcher);
-//        mEtPassword.addTextChangedListener(mTextWatcher);
     }
 
     @Override
@@ -53,11 +60,10 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     }
 
     private void checkNetWork() {
-//        checkNet = NetUtils.getNetConnect(this);
-//        if(checkNet.equals("NO")) {
-//            localString1 = MyToast.makeText(this, getResources().getString(0x7f0c006d), 0x0);
-//            getResources().getString(0x7f0c006d).show();
-//        }
+        collected = NetUtils.getNetConnect(this);
+        if(!collected) {
+            Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -75,34 +81,29 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
-                startActivity(new Intent(this, MainActivity.class));
-
-//                if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
-//                    if(checkNet.equals("NO")) {
-//                        //localString1 = MyToast.makeText(this, getResources().getString(0x7f0c006d), 0x0);
-//                        //getResources().getString(0x7f0c006d).show();
-//                        return;
-//                    }
-//                    if((username.startsWith("1")) && (username.length() == 0xb)) {
-//                        login(username, password);
-//                        return;
-//                        //localint2 = MyToast.makeText(this, username.length(), 0x0);
-//                    }
-//                    //localString1 = getResources().getString(0x7f0c0014);
-//                    //getResources().show();
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(username)) {
-//                    //localResources3 = MyToast.makeText(this, TextUtils.isEmpty(username), 0x0);
-//                    //localResources3 = getResources().getString(0x7f0c0016);
-//                    //getResources().show();
-//                    return;
-//                }
-//                if(TextUtils.isEmpty(password)) {
-//                    //localString4 = MyToast.makeText(this, getResources().getString(0x7f0c001e), 0x0);
-//                    //getResources().getString(0x7f0c001e).show();
-//                    break;
-//                }
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                /*
+                if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
+                    if(!collected) {
+                        Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if((username.startsWith("1")) && (username.length() == 11)) {
+                        login(username, password);
+                        return;
+                    }
+                    Toast.makeText(this, R.string.input_phonenum, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(username)) {
+                    Toast.makeText(this, R.string.input_username, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(password)) {
+                    Toast.makeText(this, R.string.input_pwd, Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                */
                 break;
         }
     }
@@ -110,5 +111,24 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     public void login(String tel, String pwd) {
         mLoadDialog.show();
 
+        String url = "";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("username", tel);
+        params.put("password", pwd);
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(jsonObjRequest);
     }
 }

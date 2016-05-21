@@ -42,8 +42,15 @@ public class DeviceManagerActivity extends ABaseActivity {
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvRight.setImageResource(R.mipmap.add_contact);
         mIvLeft.setImageResource(R.mipmap.back);
+        mIvLeft.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         mLv = (ListView)findViewById(R.id.lv);
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 long deviceId = 1;//(ACUserDevice)mDevises.get(position).getDeviceId();
                 Intent intent = new Intent();
@@ -55,7 +62,6 @@ public class DeviceManagerActivity extends ABaseActivity {
             }
         });
         mIvRight.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), DeviceAddActivity.class));
@@ -66,16 +72,8 @@ public class DeviceManagerActivity extends ABaseActivity {
     }
 
     private void initData() {
-        //mDevices = new ArrayList<Device>();
-
-//        Device d = new Device();
-//        d.setName("1111111");
-//        d.setStatus(1);
-//        mDevices.add(d);
 
         mDevices = application.mDevices;
-
-        //Collections.sort(mDevices, new DeviceManagerActivity.SortByStatus());
         mDevicesAdapter = new DeviceAdapter(this, mDevices);
         mLv.setAdapter(mDevicesAdapter);
     }
@@ -85,10 +83,4 @@ public class DeviceManagerActivity extends ABaseActivity {
         super.onStart();
         mDevicesAdapter.notifyDataSetChanged();
     }
-
-//    class SortByStatus implements Comparator {
-//        public int compare(Object o1, Object o2) {
-//            return ((Device)o1).getStatus(). ((Device)o2).getStatus();
-//        }
-//    }
 }

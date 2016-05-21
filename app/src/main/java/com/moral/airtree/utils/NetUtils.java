@@ -10,22 +10,19 @@ import java.io.IOException;
  */
 public class NetUtils {
 
-    public static String getNetConnect(Context context) {
-
-        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService("connectivity");
-        NetworkInfo.State mobile = connectivityManager.getNetworkInfo(0x0).getState();
-        NetworkInfo.State wifi = connectivityManager.getNetworkInfo(0x1).getState();
-        if((mobile == NetworkInfo.State.CONNECTED) || (mobile == NetworkInfo.State.CONNECTING)) {
-
+    public static boolean getNetConnect(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+//            if(activeNetInfo.getType()==ConnectivityManager.TYPE_WIFI){ //判断WIFI网
+//
+//            } else if(activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE) { //判断3G网
+//
+//            }
+            if (activeNetworkInfo != null && activeNetworkInfo.isConnected()) {
+                return true;
+            }
         }
-        if((wifi == NetworkInfo.State.CONNECTED) || (wifi == NetworkInfo.State.CONNECTING)) {
-
-        }
-        //return netWorkString;
-        return "No";
-    }
-
-    public static void pingNet(Context context) {
-        // :( Parsing error. Please contact me.
+        return false;
     }
 }

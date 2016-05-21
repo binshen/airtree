@@ -1,9 +1,6 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -15,9 +12,6 @@ import com.moral.airtree.adapter.DeviceAdapter;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Device;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class DeviceManagerActivity extends ABaseActivity {

@@ -1,6 +1,7 @@
 package com.moral.airtree;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -54,7 +55,19 @@ public class PersonalMainActivity extends Activity implements View.OnClickListen
                 break;
 
             case R.id.btn_exit:
+                finish();
+                break;
 
+            case R.id.rl_nickname:
+                startActivity(new Intent(getApplicationContext(), PersonalReviseNickNameActivity.class));
+                break;
+
+            case R.id.rl_revisepwd:
+                startActivity(new Intent(getApplicationContext(), PersonalRevisePwdActivity.class));
+                break;
+
+            case R.id.rl_feedback:
+                startActivity(new Intent(getApplicationContext(), PersonalFeedbackActivity.class));
                 break;
         }
     }

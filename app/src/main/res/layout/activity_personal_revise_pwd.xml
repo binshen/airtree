@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <include layout="@layout/lay_title" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:padding="15.0dip"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="#fff2f2f2"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:layout_marginTop="5.0dip">
+
+            <EditText
+                android:textSize="@dimen/textsize_28px"
+                android:textColor="@color/etcolor"
+                android:textColorHint="@color/hintcolor"
+                android:id="@id/et_oldpwd"
+                android:background="@null"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:hint="@string/input_oldpwd"
+                android:singleLine="true"
+                android:maxLength="20" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="#fff2f2f2"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:layout_marginTop="10.0dip">
+
+            <EditText
+                android:textSize="@dimen/textsize_28px"
+                android:textColor="@color/etcolor"
+                android:textColorHint="@color/hintcolor"
+                android:id="@id/et_newpwd"
+                android:background="@null"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:hint="@string/input_newpwd"
+                android:singleLine="true"
+                android:maxLength="20"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="#fff2f2f2"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:layout_marginTop="10.0dip">
+
+            <EditText
+                android:textSize="@dimen/textsize_28px"
+                android:textColor="@color/etcolor"
+                android:textColorHint="@color/hintcolor"
+                android:id="@id/et_aginnewpwd"
+                android:background="@null"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="10.0dip"
+                android:layout_marginRight="10.0dip"
+                android:hint="@string/input_aginnewpwd"
+                android:singleLine="true"
+                android:maxLength="20"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
+        <Button
+            android:textColor="@color/btntextnormal"
+            android:id="@id/btn_revise"
+            android:background="@mipmap/button_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60.0dip"
+            android:text="@string/revise" />
+    </LinearLayout>
+</LinearLayout>

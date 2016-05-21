@@ -14,6 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.utils.NetUtils;
@@ -25,7 +26,6 @@ import java.util.Map;
 
 public class LoginActivity extends ABaseActivity implements View.OnClickListener {
 
-    private boolean collected;
     private Button mBtnLogin;
     private EditText mEtPassword;
     private EditText mEtUsername;
@@ -47,6 +47,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         mTvForgetpwd.setOnClickListener(this);
         mTvRegister.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
+
+        mEtUsername.setText("13913913999");
+        mEtPassword.setText("test");
     }
 
     @Override
@@ -60,8 +63,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     }
 
     private void checkNetWork() {
-        collected = NetUtils.getNetConnect(this);
-        if(!collected) {
+        if(!NetUtils.getNetConnect(this)) {
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
         }
     }
@@ -81,10 +83,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                /*
+                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
-                    if(!collected) {
+                    if(!NetUtils.getNetConnect(this)) {
                         Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -103,7 +104,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     Toast.makeText(this, R.string.input_pwd, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                */
                 break;
         }
     }
@@ -111,14 +111,30 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     public void login(String tel, String pwd) {
         mLoadDialog.show();
 
-        String url = "";
+        String url = "http://saas.funmall.com.cn/index/test";
         RequestQueue queue = Volley.newRequestQueue(this);
-        Map<String, String> params = new HashMap<String, String>();
+
+        final Map<String, String> params = new HashMap<String, String>();
         params.put("username", tel);
         params.put("password", pwd);
-        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+//        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+//
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//        queue.add(jsonObjRequest);
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
-            public void onResponse(JSONObject response) {
+            public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -128,7 +144,12 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
             }
-        });
-        queue.add(jsonObjRequest);
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                return params;
+            }
+        };
+        queue.add(stringRequest);
     }
 }

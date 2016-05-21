@@ -37,7 +37,7 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
     private void initTitle() {
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
-        mTvTitle.setText("");
+        mTvTitle.setText("历史数据");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
         mIvLeft.setOnClickListener(new View.OnClickListener() {

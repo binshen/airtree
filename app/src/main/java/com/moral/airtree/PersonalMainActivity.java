@@ -30,7 +30,7 @@ public class PersonalMainActivity extends Activity implements View.OnClickListen
 
         ScreenManager.getScreenManager().pushActivity(this);
         mTvTitle = (TextView)findViewById(R.id.tv_title);
-        mTvTitle.setText("");
+        mTvTitle.setText("用户信息");
         mRlNickname = (RelativeLayout)findViewById(R.id.rl_nickname);
         mRlRevisepwd = (RelativeLayout)findViewById(R.id.rl_revisepwd);
         mRlCheck = (RelativeLayout)findViewById(R.id.rl_check);

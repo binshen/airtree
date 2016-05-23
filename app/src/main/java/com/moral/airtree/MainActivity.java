@@ -1,11 +1,10 @@
 package com.moral.airtree;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.moral.airtree.common.ABaseActivity;
@@ -37,7 +36,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.iv_personal:
-                startActivity(new Intent(this, PersonalMainActivity.class));
+                //startActivity(new Intent(this, PersonalMainActivity.class));
+                startActivityForResult(new Intent(this, PersonalMainActivity.class), 1);
                 break;
 
             case R.id.iv_mall:
@@ -51,6 +51,21 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             case R.id.tv_devicemanager:
                 startActivity(new Intent(this, DeviceManagerActivity.class));
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_CANCELED) {
+            return;
+        }
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                finish();
+            }
         }
     }
 }

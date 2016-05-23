@@ -9,9 +9,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.model.User;
 import com.moral.airtree.utils.ScreenManager;
 
-public class PersonalMainActivity extends Activity implements View.OnClickListener {
+public class PersonalMainActivity extends ABaseActivity implements View.OnClickListener {
 
     private Button mBtnExit;
     private ImageView mIvLeft;
@@ -28,7 +30,7 @@ public class PersonalMainActivity extends Activity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_main);
 
-        ScreenManager.getScreenManager().pushActivity(this);
+        //ScreenManager.getScreenManager().pushActivity(this);
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mTvTitle.setText("用户信息");
         mRlNickname = (RelativeLayout)findViewById(R.id.rl_nickname);
@@ -46,6 +48,11 @@ public class PersonalMainActivity extends Activity implements View.OnClickListen
         mRlUserfeedback.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnExit.setOnClickListener(this);
+
+        User loginUser = application.getLoginUser();
+        if(loginUser != null) {
+            mTvUserName.setText(application.getLoginUser().getUsername());
+        }
     }
 
     public void onClick(View v) {
@@ -55,6 +62,8 @@ public class PersonalMainActivity extends Activity implements View.OnClickListen
                 break;
 
             case R.id.btn_exit:
+                application.setLoginUser(null);
+                setResult(Activity.RESULT_OK, new Intent());
                 finish();
                 break;
 

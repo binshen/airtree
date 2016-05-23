@@ -17,6 +17,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.model.User;
 import com.moral.airtree.utils.NetUtils;
 
 import org.json.JSONObject;
@@ -56,7 +57,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     protected void onStart() {
         super.onStart();
 
-        if(false) {
+        if(application.getLoginUser() != null) {
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
@@ -108,7 +109,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         }
     }
 
-    public void login(String tel, String pwd) {
+    public void login(final String tel, final String pwd) {
         mLoadDialog.show();
 
         String url = "http://saas.funmall.com.cn/index/test";
@@ -117,6 +118,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         final Map<String, String> params = new HashMap<String, String>();
         params.put("username", tel);
         params.put("password", pwd);
+
         /*
         JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
@@ -137,8 +139,12 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
+                User loginUser = new User();
+                loginUser.setUsername(tel);
+                loginUser.setPassword(pwd);
+                application.setLoginUser(loginUser);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         }, new Response.ErrorListener() {

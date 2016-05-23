@@ -1,6 +1,5 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextWatcher;
@@ -9,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moral.airtree.common.ABaseActivity;
 
@@ -20,8 +20,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
     private EditText mEtInputvalidate;
     private EditText mEtPhonenum;
     private ImageView mIvBack;
-    TextWatcher mTextWatcher;
-    //private RegisterActivity.TimeCount mTime;
+    private CountDownTimer mTime;
     private TextView mTvTitle;
     TextWatcher mVerifyTextWatcher;
 
@@ -41,10 +40,19 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         mIvBack.setOnClickListener(this);
         mBtnGetvalidate.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
-        mEtInputvalidate.addTextChangedListener(mTextWatcher);
-        mEtInputpasswd.addTextChangedListener(mTextWatcher);
         mEtPhonenum.addTextChangedListener(mVerifyTextWatcher);
-        //mTime = new RegisterActivity.TimeCount(this, 0xea60, 0x3e8);
+
+        mTime = new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mBtnGetvalidate.setClickable(false);
+                mBtnGetvalidate.setText("剩余" + millisUntilFinished / 1000 + "秒");
+            }
+
+            public void onFinish() {
+                mBtnGetvalidate.setClickable(true);
+                mBtnGetvalidate.setText("获取验证码");
+            }
+        };
     }
 
     @Override
@@ -58,27 +66,12 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_getvalidate:
+                mTime.start();
                 break;
 
             case R.id.btn_register:
+                Toast.makeText(getApplicationContext(), "注册账户", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
-//    class TimeCount extends CountDownTimer {
-//
-//        public TimeCount(RegisterActivity p1, long millisInFuture, long countDownInterval) {
-//            // :( Parsing error. Please contact me.
-//        }
-//
-//        public void onFinish() {
-//            // :( Parsing error. Please contact me.
-//        }
-//
-//        public void onTick(long millisUntilFinished) {
-//            mBtnGetvalidate.setClickable(false);
-//            mBtnGetvalidate.setText("S");
-//            mBtnGetvalidate.setText("\u79d2\u540e\u91cd\u8bd5");
-//        }
-//    }
 }

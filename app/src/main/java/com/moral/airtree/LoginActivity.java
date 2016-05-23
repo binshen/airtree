@@ -117,20 +117,22 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         final Map<String, String> params = new HashMap<String, String>();
         params.put("username", tel);
         params.put("password", pwd);
-//        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-//
-//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//        queue.add(jsonObjRequest);
+        /*
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(jsonObjRequest);
+        */
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -151,5 +153,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             }
         };
         queue.add(stringRequest);
+
     }
 }

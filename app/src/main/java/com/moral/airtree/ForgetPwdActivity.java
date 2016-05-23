@@ -2,12 +2,14 @@ package com.moral.airtree;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.moral.airtree.common.ABaseActivity;
 
@@ -19,11 +21,8 @@ public class ForgetPwdActivity extends ABaseActivity implements View.OnClickList
     private EditText mEtInputnewpasswd;
     private EditText mEtInputvalidate;
     private EditText mEtPhonenum;
-    TextWatcher mTextWatcher;
-//    private ForgetPwdActivity.TimeCount mTime;
+    private CountDownTimer mTime;
     private TextView mTvTitle;
-    TextWatcher mVerifyTextWatcher;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +40,18 @@ public class ForgetPwdActivity extends ABaseActivity implements View.OnClickList
         mBtnBack.setOnClickListener(this);
         mBtnGetvalidate.setOnClickListener(this);
         mBtnResetpwd.setOnClickListener(this);
-        mEtInputvalidate.addTextChangedListener(mTextWatcher);
-        mEtInputnewpasswd.addTextChangedListener(mTextWatcher);
-        mEtPhonenum.addTextChangedListener(mVerifyTextWatcher);
-//        mTime = new ForgetPwdActivity.TimeCount(this, 0xea60, 0x3e8);
+
+        mTime = new CountDownTimer(60000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                mBtnGetvalidate.setClickable(false);
+                mBtnGetvalidate.setText("剩余" + millisUntilFinished / 1000 + "秒");
+            }
+
+            public void onFinish() {
+                mBtnGetvalidate.setClickable(true);
+                mBtnGetvalidate.setText("获取验证码");
+            }
+        };
     }
 
     @Override
@@ -58,11 +65,11 @@ public class ForgetPwdActivity extends ABaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_getvalidate:
-
+                mTime.start();
                 break;
 
             case R.id.btn_resetpwd:
-
+                Toast.makeText(getApplicationContext(), "重置密码", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

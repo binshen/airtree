@@ -84,7 +84,12 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
+                User loginUser = new User();
+                loginUser.setUsername(username);
+                loginUser.setPassword(password);
+                application.setLoginUser(loginUser);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
                 /*
                 if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
                     if(!NetUtils.getNetConnect(this)) {

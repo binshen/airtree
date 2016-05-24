@@ -39,7 +39,9 @@
         <activity android:name=".DeviceAddLoadActivity" />
         <activity android:name=".PersonalRevisePwdActivity" />
         <activity android:name=".PersonalReviseNickNameActivity" />
-        <activity android:name=".PersonalFeedbackActivity"></activity>
+        <activity android:name=".PersonalFeedbackActivity" />
+        <activity android:name=".DeviceDetailReviseActivity" />
+        <activity android:name=".MonitorActivity"></activity>
     </application>
 
 </manifest>

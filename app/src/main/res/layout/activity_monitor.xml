@@ -69,5 +69,13 @@
             app:pageColor="@color/dotsnormal"
             app:radius="4.0dip" />
 -->
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@id/vc_pageindicator"
+            android:layout_width="180.0dip"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30.0dip"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true" />
     </RelativeLayout>
 </RelativeLayout>

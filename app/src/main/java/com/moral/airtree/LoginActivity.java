@@ -49,8 +49,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         mTvRegister.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
 
-        mEtUsername.setText("13913913999");
-        mEtPassword.setText("test");
+        mEtUsername.setText("13999999999");
+        mEtPassword.setText("888888");
     }
 
     @Override
@@ -84,13 +84,13 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
-                User loginUser = new User();
-                loginUser.setUsername(username);
-                loginUser.setPassword(password);
-                application.setLoginUser(loginUser);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                User loginUser = new User();
+//                loginUser.setUsername(username);
+//                loginUser.setPassword(password);
+//                application.setLoginUser(loginUser);
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-                /*
+
                 if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
                     if(!NetUtils.getNetConnect(this)) {
                         Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
@@ -111,7 +111,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     Toast.makeText(this, R.string.input_pwd, Toast.LENGTH_SHORT).show();
                     return;
                 }
-                */
+
                 break;
         }
     }
@@ -119,40 +119,48 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     public void login(final String tel, final String pwd) {
         mLoadDialog.show();
 
-        String url = "http://saas.funmall.com.cn/index/test";
+        String url = basePath + "/user/login";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("username", tel);
         params.put("password", pwd);
 
-        /*
         JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    //Toast.makeText(getApplicationContext(), response.optJSONObject("userInfo").toString(), Toast.LENGTH_LONG).show();
+                    User loginUser = new User();
+                    loginUser.setUsername(tel);
+                    loginUser.setPassword(pwd);
+                    application.setLoginUser(loginUser);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         });
         queue.add(jsonObjRequest);
-        */
 
+/*
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
 
                 User loginUser = new User();
                 loginUser.setUsername(tel);
                 loginUser.setPassword(pwd);
                 application.setLoginUser(loginUser);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
         }, new Response.ErrorListener() {
             @Override
@@ -166,6 +174,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             }
         };
         queue.add(stringRequest);
-
+*/
     }
 }

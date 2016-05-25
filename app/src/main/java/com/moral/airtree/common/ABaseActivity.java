@@ -9,6 +9,9 @@ import com.moral.airtree.widget.LoadDialog;
 import android.os.Bundle;
 
 public abstract class ABaseActivity extends FragmentActivity {
+
+    protected String basePath = "http://192.168.2.128:3000";
+
     public Handler mHandler;
     protected LoadDialog mLoadDialog;
 

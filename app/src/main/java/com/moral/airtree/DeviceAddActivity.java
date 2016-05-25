@@ -64,7 +64,7 @@ public class DeviceAddActivity extends ABaseActivity {
                 Intent intent = new Intent(getApplicationContext(), DeviceAddLoadActivity.class);
                 intent.putExtra("ssid", wifiName);
                 intent.putExtra("password", wifipwd);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -120,6 +120,21 @@ public class DeviceAddActivity extends ABaseActivity {
             unregisterReceiver(mWifiChangedReceiver);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_CANCELED) {
+            return;
+        }
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                finish();
+            }
         }
     }
 }

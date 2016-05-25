@@ -2,6 +2,7 @@ package com.moral.airtree;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -118,6 +119,8 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
                 Toast.makeText(getApplicationContext(), "设备连接完成", Toast.LENGTH_SHORT).show();
                 mLoadDialog.dismiss();
                 mIsConncting = false;
+
+                setResult(Activity.RESULT_OK, new Intent());
                 finish();
             }
         });

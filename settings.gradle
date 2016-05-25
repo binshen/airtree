@@ -1,1 +1,4 @@
-include ':app', ':volley', ':ViewPagerIndicator'
+include ':app'
+include ':volley'
+include ':ViewPagerIndicator'
+include ':pickerview'

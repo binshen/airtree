@@ -84,13 +84,13 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
-//                User loginUser = new User();
-//                loginUser.setUsername(username);
-//                loginUser.setPassword(password);
-//                application.setLoginUser(loginUser);
-//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                User loginUser = new User();
+                loginUser.setUsername(username);
+                loginUser.setPassword(password);
+                application.setLoginUser(loginUser);
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
-
+/*
                 if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
                     if(!NetUtils.getNetConnect(this)) {
                         Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
@@ -111,7 +111,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     Toast.makeText(this, R.string.input_pwd, Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+*/
                 break;
         }
     }

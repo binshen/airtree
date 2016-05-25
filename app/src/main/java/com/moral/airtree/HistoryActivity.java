@@ -1,13 +1,17 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.TimePickerView;
+
 import com.moral.airtree.common.ABaseActivity;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class HistoryActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -59,10 +63,23 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         mTvHistoryDate.setOnClickListener(this);
     }
 
+    protected void onStart() {
+        super.onStart();
+        String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+        mTvHistoryDate.setText(date);
+        initData(date);
+        //int chipLife = PreferencesUtils.getInt(this, "chiplife", 0x0);
+        //mPb.setProgress(chipLife);
+    }
+
+    private void initData(String time) {
+
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()) {
-            case R.id.tv_history:
+            case R.id.tv_history_date:
             {
                 showDatePicker();
                 break;
@@ -71,22 +88,18 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
     }
 
     private void showDatePicker() {
-//        TimePopupWindow pwTime = new TimePopupWindow(this, TimePopupWindow.Type.YEAR_MONTH_DAY);
-//        Date initDate = new Date();
-//        pwTime.setTime(initDate);
-//        pwTime.setOnTimeSelectListener(new TimePopupWindow.OnTimeSelectListener(this) {
-//
-//            3(HistoryActivity p1) {
-//            }
-//
-//            public void onTimeSelect(Date date) {
-//                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-//                if(date != null) {
-//                    mTvHistoryDate.setText(format.format(date));
-//                    String time = format.format(date);
-//                }
-//            }
-//        });
-//        pwTime.showAtLocation(mTvHistoryDate, 0x50, 0x0, 0x0, new Date());
+        TimePickerView pwTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
+        pwTime.setTime(new Date());
+        pwTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+            @Override
+            public void onTimeSelect(Date date) {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                if(date != null) {
+                    mTvHistoryDate.setText(format.format(date));
+                    String time = format.format(date);
+                }
+            }
+        });
+        pwTime.show();
     }
 }

@@ -20,7 +20,6 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
     ArrayList<Device> mDevises;
     private EditText mEtDeviceDetail;
     private ImageView mIvLeft;
-    //TextWatcher mTextWatcher;
     private TextView mTvTitle;
 
     @Override
@@ -35,7 +34,6 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         mIvLeft.setImageResource(R.mipmap.back);
         mEtDeviceDetail = (EditText)findViewById(R.id.et_devicedetail);
         mBtnOk = (Button)findViewById(R.id.btn_ok);
-        //mEtDeviceDetail.addTextChangedListener(mTextWatcher);
         if(getIntent() == null) {
             return;
         }

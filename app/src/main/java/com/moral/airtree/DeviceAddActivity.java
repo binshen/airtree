@@ -31,7 +31,6 @@ public class DeviceAddActivity extends ABaseActivity {
     private Button mBtnOk;
     private EditText mEtWifiPwd;
     private ImageView mIvLeft;
-    //TextWatcher mTextWatcher;
     private TextView mTvTitle;
     private TextView mTvWifiName;
 
@@ -50,7 +49,6 @@ public class DeviceAddActivity extends ABaseActivity {
         mTvWifiName = (TextView)findViewById(R.id.tv_wifiname);
         mEtWifiPwd = (EditText)findViewById(R.id.et_wifipwd);
         mBtnOk = (Button)findViewById(R.id.btn_ok);
-        //mEtWifiPwd.addTextChangedListener(mTextWatcher);
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

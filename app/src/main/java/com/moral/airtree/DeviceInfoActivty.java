@@ -64,7 +64,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 finish();
                 break;
 
-            case R.id.btn_removebind:
+            case R.id.btn_removebind
                 unbindDeviceWithUser(mDevieId.longValue());
                 break;
         }

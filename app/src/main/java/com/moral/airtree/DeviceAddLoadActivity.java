@@ -23,15 +23,8 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
 
     public static final String EXTRA_SMARTLINK_VERSION = "EXTRA_SMARTLINK_VERSION";
 
-//    private static final int CHANGE_POINT_DELAYMILLIS = 0x1f4;
-//    private static final int CHANGE_TITLE_WHAT = 0x1;
-//    private static final int MAX_POINT_NUM = 0x5;
-//    private static final int STOP_CODE = 0x2;
-//    private static final char SUFFIX = '.';
-//    private static final int WAIT_CODE = 0x3;
-//    private static final int WAIT_TIME = 0x7d0;
-    private RelativeLayout mCommonTitle;
-    private Handler mHandler;
+    //private RelativeLayout mCommonTitle;
+    //private Handler mHandler;
     private ImageView mIvLeft;
     private String mPwd;
     private String mSSID;
@@ -55,7 +48,6 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         mTvTitle.setText("设备管理");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
-//        mHandler.sendEmptyMessage(0);
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -109,7 +101,6 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         mViewHandler.post(new Runnable() {
             @Override
             public void run() {
-                //Toast.makeText(getApplicationContext(), "Linked - Mac:" + module.getMac() + " Ip:" + module.getModuleIP(), Toast.LENGTH_SHORT).show();
                 Device device = new Device();
                 device.setMac(module.getMac());
                 device.setIp(module.getModuleIP());

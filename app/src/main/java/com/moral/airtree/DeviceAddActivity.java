@@ -48,6 +48,7 @@ public class DeviceAddActivity extends ABaseActivity {
         mIvLeft.setImageResource(R.mipmap.back);
         mTvWifiName = (TextView)findViewById(R.id.tv_wifiname);
         mEtWifiPwd = (EditText)findViewById(R.id.et_wifipwd);
+        mEtWifiPwd.setText("asdfasdf");
         mBtnOk = (Button)findViewById(R.id.btn_ok);
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override

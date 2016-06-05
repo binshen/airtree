@@ -11,9 +11,11 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.moral.airtree.model.Device;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends ABaseActivity implements View.OnClickListener {
@@ -34,7 +36,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        mFragmentList = new ArrayList<Fragment>();
 
         ImageView ivPersonal = (ImageView)findViewById(R.id.iv_personal);
         ivPersonal.setOnClickListener(this);
@@ -54,9 +56,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mPagerIndicator = (CirclePageIndicator)findViewById(R.id.pageindicator);
         mPagerIndicator.setViewPager(mViewPager);
 
+        addFragments();
         setViewPagerChanger();
     }
 
+    @Override
     protected void onStart() {
         super.onStart();
         if(mIsFirst) {
@@ -110,40 +114,22 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private void addFragments() {
         mLoadDialog.show();
-        removeFragments();
+        //removeFragments();
 
-        /*
-        DeviceRequestBiz deviceBiz = new DeviceRequestBiz(this);
-        deviceBiz.requestDeviceList(new Handler(this) {
+        Device device = new Device();
+        device.setIp("192.168.2.13");
+        device.setMac("XXXXXXXXXXXX");
+        device.setStatus(1);
+        mFragmentList.add(new RoomFragment(device));
 
-            1(MainActivity p1) {
-            }
+        runOnUiThread (new Thread(new Runnable() {
+            public void run() {
+                mViewPagerAdapter.notifyDataSetChanged();
+                mPagerIndicator.notifyDataSetChanged();
 
-            public void handleMessage(Message msg) {
-                super.handleMessage(msg);
-                ArrayList<ACUserDevice> devices = msg.obj;
-                if(devices != null) {
-                    mACUserDevices.clear();
-                    mACUserDevices.addAll(devices);
-                    if(!devices.iterator().hasNext()) {
-                    }
-                    ACUserDevice device = (ACUserDevice)devices.iterator().next();
-                    mFragmentList.add(new RoomFragment(device));
-                    runOnUiThread(new Runnable(this) {
-
-                        1(MainActivity.1 p1) {
-                        }
-
-                        public void run() {
-                            MainActivity.1.this$0.mViewPagerAdapter.notifyDataSetChanged();
-                            MainActivity.1.this$0.mPagerIndicator.notifyDataSetChanged();
-                        }
-                    });
-                }
                 mLoadDialog.dismiss();
             }
-        });
-        */
+        }));
     }
 
     private void removeFragments() {
@@ -190,7 +176,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         }
 
         public Fragment getItem(int position) {
-            return (Fragment)mFragmentList.get(position);
+            return (Fragment) mFragmentList.get(position);
         }
 
         public int getItemPosition(Object object) {

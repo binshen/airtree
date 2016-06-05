@@ -1,9 +1,11 @@
 package com.moral.airtree.model;
 
+import java.io.Serializable;
+
 /**
  * Created by bin.shen on 5/20/16.
  */
-public class Device {
+public class Device implements Serializable {
 
     private String mac;
 

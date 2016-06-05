@@ -74,7 +74,6 @@
             android:layout_marginBottom="30.0dip"
             android:layout_alignParentBottom="true">
 
-            <!--
             <com.viewpagerindicator.CirclePageIndicator
                 android:id="@id/pageindicator"
                 android:paddingTop="10.0dip"
@@ -86,7 +85,7 @@
                 app:fillColor="@color/dotsselect"
                 app:pageColor="@color/dotsnormal"
                 app:radius="4.0dip" />
-            -->
+
         </LinearLayout>
     </RelativeLayout>
 

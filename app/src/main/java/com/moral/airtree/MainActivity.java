@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,14 +21,13 @@ import java.util.List;
 
 public class MainActivity extends ABaseActivity implements View.OnClickListener {
 
-    TextView mTvTitle;
-
-    ViewPager mViewPager;
-    CirclePageIndicator mPagerIndicator;
-    List<Fragment> mFragmentList;
-    DevicePagerAdapter mViewPagerAdapter;
+    private TextView mTvTitle;
+    private ViewPager mViewPager;
+    private CirclePageIndicator mPagerIndicator;
+    private List<Device> mDevices;
+    private List<Fragment> mFragmentList;
+    private DevicePagerAdapter mViewPagerAdapter;
     private boolean mIsFirst;
-
     private TextView mTvDeviceManager;
     private TextView mTvHistory;
 
@@ -36,6 +36,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mDevices = new ArrayList<Device>();
         mFragmentList = new ArrayList<Fragment>();
 
         ImageView ivPersonal = (ImageView)findViewById(R.id.iv_personal);
@@ -114,12 +115,30 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private void addFragments() {
         mLoadDialog.show();
-        //removeFragments();
+        removeFragments();
 
         Device device = new Device();
         device.setIp("192.168.2.13");
         device.setMac("XXXXXXXXXXXX");
         device.setStatus(1);
+
+        mDevices.add(device);
+        mFragmentList.add(new RoomFragment(device));
+
+        device = new Device();
+        device.setIp("192.168.2.14");
+        device.setMac("YYYYYYYYYYYY");
+        device.setStatus(2);
+
+        mDevices.add(device);
+        mFragmentList.add(new RoomFragment(device));
+
+        device = new Device();
+        device.setIp("192.168.2.15");
+        device.setMac("ZZZZZZZZZZZZ");
+        device.setStatus(3);
+
+        mDevices.add(device);
         mFragmentList.add(new RoomFragment(device));
 
         runOnUiThread (new Thread(new Runnable() {
@@ -145,6 +164,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         }
         mPagerIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageSelected(int position) {
+                setFragmentTitle();
             }
 
             public void onPageScrolled(int arg0, float arg1, int arg2) {
@@ -157,16 +177,16 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private void setFragmentTitle() {
         int position = mViewPager.getCurrentItem();
-        /*
-        if((mACUserDevices.size() > 0) && (position < mACUserDevices.size())) {
-            ACUserDevice device = (ACUserDevice)mACUserDevices.get(position);
-            if((device != null) && (!TextUtils.isEmpty(device.getName()))) {
-                mTvTitle.setText(device.getName());
-                mDeviceId = device.getDeviceId();
+
+        if((mDevices.size() > 0) && (position < mDevices.size())) {
+            Device device = (Device)mDevices.get(position);
+            if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
+                mTvTitle.setText(device.getMac());
+                //mDeviceId = device.getDeviceId();
             }
             return;
         }
-        */
+
         mTvTitle.setText("XXXXX");
     }
 

@@ -81,7 +81,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             mMonitor = (Monitor)savedInstanceState.get("monitor");
         }
 
-
         MonitorPm mPm = new MonitorPm("2", 2l, "2");
         MonitorWindSpeed mWs = new MonitorWindSpeed("3", 3l, "3");
         MonitorHumidity mHu = new MonitorHumidity("4", "4", "4");

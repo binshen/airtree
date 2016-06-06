@@ -25,7 +25,7 @@ public class History {
     }
 
     public void setFormaldehyde_dataMean(String formaldehyde_dataMean) {
-        formaldehyde_dataMean = formaldehyde_dataMean;
+        this.formaldehyde_dataMean = formaldehyde_dataMean;
     }
 
     public String getHumidity_dataMean() {
@@ -33,7 +33,7 @@ public class History {
     }
 
     public void setHumidity_dataMean(String humidity_dataMean) {
-        humidity_dataMean = humidity_dataMean;
+        this.humidity_dataMean = humidity_dataMean;
     }
 
     public String getPm_dataMean() {
@@ -41,23 +41,7 @@ public class History {
     }
 
     public void setPm_dataMean(String pm_dataMean) {
-        pm_dataMean = pm_dataMean;
-    }
-
-    public String getTemperature_dataMean() {
-        return temperature_dataMean;
-    }
-
-    public void setTemperature_dataMean(String temperature_dataMean) {
-        temperature_dataMean = temperature_dataMean;
-    }
-
-    public String getWindSpeed_dataMean() {
-        return windSpeed_dataMean;
-    }
-
-    public void setWindSpeed_dataMean(String windSpeed_dataMean) {
-        windSpeed_dataMean = windSpeed_dataMean;
+        this.pm_dataMean = pm_dataMean;
     }
 
     public String getPurificationAdd() {
@@ -65,6 +49,22 @@ public class History {
     }
 
     public void setPurificationAdd(String purificationAdd) {
-        purificationAdd = purificationAdd;
+        this.purificationAdd = purificationAdd;
+    }
+
+    public String getTemperature_dataMean() {
+        return temperature_dataMean;
+    }
+
+    public void setTemperature_dataMean(String temperature_dataMean) {
+        this.temperature_dataMean = temperature_dataMean;
+    }
+
+    public String getWindSpeed_dataMean() {
+        return windSpeed_dataMean;
+    }
+
+    public void setWindSpeed_dataMean(String windSpeed_dataMean) {
+        this.windSpeed_dataMean = windSpeed_dataMean;
     }
 }

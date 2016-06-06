@@ -16,20 +16,12 @@ public class MonitorTemperature implements Serializable {
         this.temperatureId = temperatureId;
     }
 
-    public String getTemperature_data() {
-        return temperature_data;
-    }
-
-    public void setTemperature_data(String temperature_data) {
-        temperature_data = temperature_data;
-    }
-
     public String getCreate_date() {
         return create_date;
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
+        this.create_date = create_date;
     }
 
     public String getTemperatureId() {
@@ -37,6 +29,14 @@ public class MonitorTemperature implements Serializable {
     }
 
     public void setTemperatureId(String temperatureId) {
-        temperatureId = temperatureId;
+        this.temperatureId = temperatureId;
+    }
+
+    public String getTemperature_data() {
+        return temperature_data;
+    }
+
+    public void setTemperature_data(String temperature_data) {
+        this.temperature_data = temperature_data;
     }
 }

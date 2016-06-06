@@ -20,7 +20,11 @@ import android.widget.Toast;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.model.MonitorEnum;
+import com.moral.airtree.model.MonitorFormaldehyde;
+import com.moral.airtree.model.MonitorHumidity;
 import com.moral.airtree.model.MonitorPm;
+import com.moral.airtree.model.MonitorTemperature;
+import com.moral.airtree.model.MonitorWindSpeed;
 import com.moral.airtree.utils.FlagUtils;
 import com.moral.airtree.widget.LoadDialog;
 
@@ -76,6 +80,14 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             mDevice = (Device)savedInstanceState.get("mDevice");
             mMonitor = (Monitor)savedInstanceState.get("monitor");
         }
+
+
+        MonitorPm mPm = new MonitorPm("2", 2l, "2");
+        MonitorWindSpeed mWs = new MonitorWindSpeed("3", 3l, "3");
+        MonitorHumidity mHu = new MonitorHumidity("4", "4", "4");
+        MonitorTemperature mTe = new MonitorTemperature("5", "5", "5");
+        MonitorFormaldehyde mFo = new MonitorFormaldehyde(6l, "6", "6");
+        mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "1", mPm, mWs, mHu, mTe, mFo);
     }
 
     public void onSaveInstanceState(Bundle outState) {

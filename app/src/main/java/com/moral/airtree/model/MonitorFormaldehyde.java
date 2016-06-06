@@ -16,20 +16,12 @@ public class MonitorFormaldehyde implements Serializable {
         this.formaldehydeId = formaldehydeId;
     }
 
-    public Long getFormaldehyde_data() {
-        return formaldehyde_data;
-    }
-
-    public void setFormaldehyde_data(Long formaldehyde_data) {
-        formaldehyde_data = formaldehyde_data;
-    }
-
     public String getCreate_date() {
         return create_date;
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
+        this.create_date = create_date;
     }
 
     public String getFormaldehydeId() {
@@ -37,6 +29,14 @@ public class MonitorFormaldehyde implements Serializable {
     }
 
     public void setFormaldehydeId(String formaldehydeId) {
-        formaldehydeId = formaldehydeId;
+        this.formaldehydeId = formaldehydeId;
+    }
+
+    public Long getFormaldehyde_data() {
+        return formaldehyde_data;
+    }
+
+    public void setFormaldehyde_data(Long formaldehyde_data) {
+        this.formaldehyde_data = formaldehyde_data;
     }
 }

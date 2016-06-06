@@ -20,44 +20,12 @@ public class Humidity {
         this.humidity = humidity;
     }
 
-    public String getHumidity_data() {
-        return humidity_data;
-    }
-
-    public void setHumidity_data(String humidity_data) {
-        humidity_data = humidity_data;
-    }
-
-    public String getHumidity_tips() {
-        return humidity_tips;
-    }
-
-    public void setHumidity_tips(String humidity_tips) {
-        humidity_tips = humidity_tips;
-    }
-
-    public String getHumidityId() {
-        return humidityId;
-    }
-
-    public void setHumidityId(String humidityId) {
-        humidityId = humidityId;
-    }
-
     public String getDataId() {
         return dataId;
     }
 
     public void setDataId(String dataId) {
-        dataId = dataId;
-    }
-
-    public String getHumidity_date() {
-        return humidity_date;
-    }
-
-    public void setHumidity_date(String humidity_date) {
-        humidity_date = humidity_date;
+        this.dataId = dataId;
     }
 
     public String getHumidity() {
@@ -65,6 +33,38 @@ public class Humidity {
     }
 
     public void setHumidity(String humidity) {
-        humidity = humidity;
+        this.humidity = humidity;
+    }
+
+    public String getHumidityId() {
+        return humidityId;
+    }
+
+    public void setHumidityId(String humidityId) {
+        this.humidityId = humidityId;
+    }
+
+    public String getHumidity_data() {
+        return humidity_data;
+    }
+
+    public void setHumidity_data(String humidity_data) {
+        this.humidity_data = humidity_data;
+    }
+
+    public String getHumidity_date() {
+        return humidity_date;
+    }
+
+    public void setHumidity_date(String humidity_date) {
+        this.humidity_date = humidity_date;
+    }
+
+    public String getHumidity_tips() {
+        return humidity_tips;
+    }
+
+    public void setHumidity_tips(String humidity_tips) {
+        this.humidity_tips = humidity_tips;
     }
 }

@@ -49,7 +49,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setAirQuality(String airQuality) {
-        airQuality = airQuality;
+        this.airQuality = airQuality;
     }
 
     public String getCreate_date() {
@@ -57,7 +57,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
+        this.create_date = create_date;
     }
 
     public String getDataId() {
@@ -65,7 +65,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setDataId(String dataId) {
-        dataId = dataId;
+        this.dataId = dataId;
     }
 
     public String getElectricQuantity() {
@@ -73,7 +73,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setElectricQuantity(String electricQuantity) {
-        electricQuantity = electricQuantity;
+        this.electricQuantity = electricQuantity;
     }
 
     public String getFormaldehydeId() {
@@ -81,7 +81,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setFormaldehydeId(String formaldehydeId) {
-        formaldehydeId = formaldehydeId;
+        this.formaldehydeId = formaldehydeId;
     }
 
     public String getHumidityId() {
@@ -89,7 +89,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setHumidityId(String humidityId) {
-        humidityId = humidityId;
+        this.humidityId = humidityId;
     }
 
     public String getPlace() {
@@ -97,7 +97,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setPlace(String place) {
-        place = place;
+        this.place = place;
     }
 
     public String getPmId() {
@@ -105,7 +105,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setPmId(String pmId) {
-        pmId = pmId;
+        this.pmId = pmId;
     }
 
     public String getPurification() {
@@ -113,7 +113,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setPurification(String purification) {
-        purification = purification;
+        this.purification = purification;
     }
 
     public String getTemperatureId() {
@@ -121,7 +121,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setTemperatureId(String temperatureId) {
-        temperatureId = temperatureId;
+        this.temperatureId = temperatureId;
     }
 
     public String getTips() {
@@ -129,7 +129,7 @@ public class MonitorOther implements Serializable {
     }
 
     public void setTips(String tips) {
-        tips = tips;
+        this.tips = tips;
     }
 
     public String getWindSpeedId() {
@@ -137,6 +137,6 @@ public class MonitorOther implements Serializable {
     }
 
     public void setWindSpeedId(String windSpeedId) {
-        windSpeedId = windSpeedId;
+        this.windSpeedId = windSpeedId;
     }
 }

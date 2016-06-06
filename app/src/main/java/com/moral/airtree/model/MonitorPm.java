@@ -22,23 +22,7 @@ public class MonitorPm implements Serializable {
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
-    }
-
-    public Long getPm_data() {
-        return pm_data;
-    }
-
-    public void setPm_data(Long pm_data) {
-        pm_data = pm_data;
-    }
-
-    public String getPmId() {
-        return pmId;
-    }
-
-    public void setPmId(String pmId) {
-        pmId = pmId;
+        this.create_date = create_date;
     }
 
     public int getPm03p01() {
@@ -46,6 +30,22 @@ public class MonitorPm implements Serializable {
     }
 
     public void setPm03p01(int pm03p01) {
-        pm03p01 = pm03p01;
+        this.pm03p01 = pm03p01;
+    }
+
+    public String getPmId() {
+        return pmId;
+    }
+
+    public void setPmId(String pmId) {
+        this.pmId = pmId;
+    }
+
+    public Long getPm_data() {
+        return pm_data;
+    }
+
+    public void setPm_data(Long pm_data) {
+        this.pm_data = pm_data;
     }
 }

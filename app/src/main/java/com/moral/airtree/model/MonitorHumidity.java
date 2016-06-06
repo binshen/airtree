@@ -21,7 +21,7 @@ public class MonitorHumidity implements Serializable {
     }
 
     public void setHumidity_data(String humidity_data) {
-        humidity_data = humidity_data;
+        this.humidity_data = humidity_data;
     }
 
     public String getCreate_date() {
@@ -29,7 +29,7 @@ public class MonitorHumidity implements Serializable {
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
+        this.create_date = create_date;
     }
 
     public String getHumidityId() {
@@ -37,6 +37,6 @@ public class MonitorHumidity implements Serializable {
     }
 
     public void setHumidityId(String humidityId) {
-        humidityId = humidityId;
+        this.humidityId = humidityId;
     }
 }

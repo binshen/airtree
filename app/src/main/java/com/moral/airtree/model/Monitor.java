@@ -21,35 +21,19 @@ public class Monitor implements Serializable {
     private MonitorWindSpeed windSpeed;
 
     public Monitor(String dataId, String electricQuantity, String chipLife, Long light, String deviceId, Long deviceStatus, String purification, String create_date, MonitorPm pm, MonitorWindSpeed windSpeed, MonitorHumidity humidity, MonitorTemperature temperature, MonitorFormaldehyde formaldehyde) {
-        dataId = dataId;
-        electricQuantity = electricQuantity;
-        chipLife = chipLife;
-        light = light;
-        deviceId = deviceId;
-        deviceStatus = deviceStatus;
-        purification = purification;
-        create_date = create_date;
-        pm = pm;
-        windSpeed = windSpeed;
-        humidity = humidity;
-        temperature = temperature;
-        formaldehyde = formaldehyde;
-    }
-
-    public String getDataId() {
-        return dataId;
-    }
-
-    public void setDataId(String dataId) {
-        dataId = dataId;
-    }
-
-    public String getElectricQuantity() {
-        return electricQuantity;
-    }
-
-    public void setElectricQuantity(String electricQuantity) {
-        electricQuantity = electricQuantity;
+        this.dataId = dataId;
+        this.electricQuantity = electricQuantity;
+        this.chipLife = chipLife;
+        this.light = light;
+        this.deviceId = deviceId;
+        this.deviceStatus = deviceStatus;
+        this.purification = purification;
+        this.create_date = create_date;
+        this.pm = pm;
+        this.windSpeed = windSpeed;
+        this.humidity = humidity;
+        this.temperature = temperature;
+        this.formaldehyde = formaldehyde;
     }
 
     public String getChipLife() {
@@ -57,39 +41,7 @@ public class Monitor implements Serializable {
     }
 
     public void setChipLife(String chipLife) {
-        chipLife = chipLife;
-    }
-
-    public Long getLight() {
-        return light;
-    }
-
-    public void setLight(Long light) {
-        light = light;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        deviceId = deviceId;
-    }
-
-    public Long getDeviceStatus() {
-        return deviceStatus;
-    }
-
-    public void setDeviceStatus(Long deviceStatus) {
-        deviceStatus = deviceStatus;
-    }
-
-    public String getPurification() {
-        return purification;
-    }
-
-    public void setPurification(String purification) {
-        purification = purification;
+        this.chipLife = chipLife;
     }
 
     public String getCreate_date() {
@@ -97,39 +49,39 @@ public class Monitor implements Serializable {
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
+        this.create_date = create_date;
     }
 
-    public MonitorPm getPm() {
-        return pm;
+    public String getDataId() {
+        return dataId;
     }
 
-    public void setPm(MonitorPm pm) {
-        pm = pm;
+    public void setDataId(String dataId) {
+        this.dataId = dataId;
     }
 
-    public MonitorWindSpeed getWindSpeed() {
-        return windSpeed;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setWindSpeed(MonitorWindSpeed windSpeed) {
-        windSpeed = windSpeed;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public MonitorHumidity getHumidity() {
-        return humidity;
+    public Long getDeviceStatus() {
+        return deviceStatus;
     }
 
-    public void setHumidity(MonitorHumidity humidity) {
-        humidity = humidity;
+    public void setDeviceStatus(Long deviceStatus) {
+        this.deviceStatus = deviceStatus;
     }
 
-    public MonitorTemperature getTemperature() {
-        return temperature;
+    public String getElectricQuantity() {
+        return electricQuantity;
     }
 
-    public void setTemperature(MonitorTemperature temperature) {
-        temperature = temperature;
+    public void setElectricQuantity(String electricQuantity) {
+        this.electricQuantity = electricQuantity;
     }
 
     public MonitorFormaldehyde getFormaldehyde() {
@@ -137,6 +89,54 @@ public class Monitor implements Serializable {
     }
 
     public void setFormaldehyde(MonitorFormaldehyde formaldehyde) {
-        formaldehyde = formaldehyde;
+        this.formaldehyde = formaldehyde;
+    }
+
+    public MonitorHumidity getHumidity() {
+        return humidity;
+    }
+
+    public void setHumidity(MonitorHumidity humidity) {
+        this.humidity = humidity;
+    }
+
+    public Long getLight() {
+        return light;
+    }
+
+    public void setLight(Long light) {
+        this.light = light;
+    }
+
+    public MonitorPm getPm() {
+        return pm;
+    }
+
+    public void setPm(MonitorPm pm) {
+        this.pm = pm;
+    }
+
+    public String getPurification() {
+        return purification;
+    }
+
+    public void setPurification(String purification) {
+        this.purification = purification;
+    }
+
+    public MonitorTemperature getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(MonitorTemperature temperature) {
+        this.temperature = temperature;
+    }
+
+    public MonitorWindSpeed getWindSpeed() {
+        return windSpeed;
+    }
+
+    public void setWindSpeed(MonitorWindSpeed windSpeed) {
+        this.windSpeed = windSpeed;
     }
 }

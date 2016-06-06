@@ -21,15 +21,7 @@ public class MonitorWindSpeed implements Serializable {
     }
 
     public void setCreate_date(String create_date) {
-        create_date = create_date;
-    }
-
-    public Long getWindSpeed_data() {
-        return windSpeed_data;
-    }
-
-    public void setWindSpeed_data(Long windSpeed_data) {
-        windSpeed_data = windSpeed_data;
+        this.create_date = create_date;
     }
 
     public String getWindSpeedId() {
@@ -37,6 +29,14 @@ public class MonitorWindSpeed implements Serializable {
     }
 
     public void setWindSpeedId(String windSpeedId) {
-        windSpeedId = windSpeedId;
+        this.windSpeedId = windSpeedId;
+    }
+
+    public Long getWindSpeed_data() {
+        return windSpeed_data;
+    }
+
+    public void setWindSpeed_data(Long windSpeed_data) {
+        this.windSpeed_data = windSpeed_data;
     }
 }

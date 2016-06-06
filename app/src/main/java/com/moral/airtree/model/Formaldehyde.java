@@ -20,44 +20,12 @@ public class Formaldehyde {
         this.formaldehyde = formaldehyde;
     }
 
-    public String getFormaldehyde_data() {
-        return formaldehyde_data;
-    }
-
-    public void setFormaldehyde_data(String formaldehyde_data) {
-        formaldehyde_data = formaldehyde_data;
-    }
-
-    public String getFormaldehyde_tips() {
-        return formaldehyde_tips;
-    }
-
-    public void setFormaldehyde_tips(String formaldehyde_tips) {
-        formaldehyde_tips = formaldehyde_tips;
-    }
-
-    public String getFormaldehydeId() {
-        return formaldehydeId;
-    }
-
-    public void setFormaldehydeId(String formaldehydeId) {
-        formaldehydeId = formaldehydeId;
-    }
-
     public String getDataId() {
         return dataId;
     }
 
     public void setDataId(String dataId) {
-        dataId = dataId;
-    }
-
-    public String getFormaldehyde_date() {
-        return formaldehyde_date;
-    }
-
-    public void setFormaldehyde_date(String formaldehyde_date) {
-        formaldehyde_date = formaldehyde_date;
+        this.dataId = dataId;
     }
 
     public String getFormaldehyde() {
@@ -65,6 +33,38 @@ public class Formaldehyde {
     }
 
     public void setFormaldehyde(String formaldehyde) {
-        formaldehyde = formaldehyde;
+        this.formaldehyde = formaldehyde;
+    }
+
+    public String getFormaldehydeId() {
+        return formaldehydeId;
+    }
+
+    public void setFormaldehydeId(String formaldehydeId) {
+        this.formaldehydeId = formaldehydeId;
+    }
+
+    public String getFormaldehyde_data() {
+        return formaldehyde_data;
+    }
+
+    public void setFormaldehyde_data(String formaldehyde_data) {
+        this.formaldehyde_data = formaldehyde_data;
+    }
+
+    public String getFormaldehyde_date() {
+        return formaldehyde_date;
+    }
+
+    public void setFormaldehyde_date(String formaldehyde_date) {
+        this.formaldehyde_date = formaldehyde_date;
+    }
+
+    public String getFormaldehyde_tips() {
+        return formaldehyde_tips;
+    }
+
+    public void setFormaldehyde_tips(String formaldehyde_tips) {
+        this.formaldehyde_tips = formaldehyde_tips;
     }
 }

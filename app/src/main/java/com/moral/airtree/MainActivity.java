@@ -57,7 +57,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mPagerIndicator = (CirclePageIndicator)findViewById(R.id.pageindicator);
         mPagerIndicator.setViewPager(mViewPager);
 
-        addFragments();
+        mIsFirst = true;
         setViewPagerChanger();
     }
 

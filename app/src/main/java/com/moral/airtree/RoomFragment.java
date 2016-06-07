@@ -70,11 +70,13 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     }
 
     public RoomFragment(Device device) {
-        mDevice = device;
+        this.mDevice = device;
     }
 
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mLoadDialog = new LoadDialog(getActivity());
         if((savedInstanceState != null) && (savedInstanceState.containsKey("mDevice"))) {
             mDevice = (Device)savedInstanceState.get("mDevice");
@@ -86,10 +88,12 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         MonitorHumidity mHu = new MonitorHumidity("4", "4", "4");
         MonitorTemperature mTe = new MonitorTemperature("5", "5", "5");
         MonitorFormaldehyde mFo = new MonitorFormaldehyde(6l, "6", "6");
-        mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "1", mPm, mWs, mHu, mTe, mFo);
+        mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "2016-06-06 12:13:14", mPm, mWs, mHu, mTe, mFo);
     }
 
+    @Override
     public void onSaveInstanceState(Bundle outState) {
+
         outState.putSerializable("mDevice", mDevice);
         outState.putSerializable("monitor", mMonitor);
         super.onSaveInstanceState(outState);
@@ -161,6 +165,8 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         mContext = getActivity();
         initView();
+
+        initData();
     }
 
     public void onDestroy() {
@@ -199,23 +205,24 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initData() {
-        int deviceStatus = mDevice.getStatus();
-        int code = deviceStatus;
-        String status = "";
-        if(code == 0) {
-            status = mMonitor.getCreate_date();
-        } else if(code == 0x1) {
-        } else if(code == 0x2) {
-        } else if(code == 0x3) {
-        }
-        mTvSuggest.setText(status);
+//        int deviceStatus = mDevice.getStatus();
+//        int code = deviceStatus;
+//        String status = "";
+//        if(code == 0) {
+//            status = mMonitor.getCreate_date();
+//        } else if(code == 0x1) {
+//        } else if(code == 0x2) {
+//        } else if(code == 0x3) {
+//        }
+//        mTvSuggest.setText(status);
+        mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreate_date());
         if(mMonitor == null) {
             return;
         }
         if((mMonitor.getPm() != null) && (mMonitor.getPm().getPm_data() != null)) {
-            mTvPM25Value.setText("ug/m\u00b3");
+            mTvPM25Value.setText(mMonitor.getPm().getPm_data() + "ug/m³");
             mTvMain.setText(String.valueOf(mMonitor.getPm().getPm03p01()));
-            mTvMainLabel.setText("0.3um\u9897\u7c92\u7269\u4e2a\u6570");
+            mTvMainLabel.setText("0.3um颗粒物个数");
         } else {
             mTvPM25Value.setText(R.string.airquality_unknow);
             mTvMain.setText(R.string.airquality_unknow);
@@ -225,11 +232,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             if(!TextUtils.isEmpty(mMonitor.getHumidity().getHumidity_data())) {
                 try {
                     int data = Integer.parseInt(mMonitor.getHumidity().getHumidity_data());
-                    if(data == 0x6c) {
-                        mTvHumidityValue.setText("?????");
-                    } else {
-                        mTvHumidityValue.setText("%");
-                    }
+                    mTvHumidityValue.setText(data + "%");
                 }  catch(Exception ex) {
                     Log.e("RoomFragment", ex.toString());
                     mTvHumidityValue.setText(R.string.airquality_unknow);
@@ -242,11 +245,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             if(mMonitor.getTemperature().getTemperature_data() != null) {
                 try {
                     String data = mMonitor.getTemperature().getTemperature_data();
-                    if(Integer.valueOf(data).intValue() == -0xd6) {
-                        mTvTemperature2.setText("?????");
-                    } else {
-                        mTvTemperature2.setText("\u2103");
-                    }
+                    mTvTemperature2.setText(data + "℃");
                 } catch(Exception ex) {
                     Log.e("RoomFragment", ex.toString());
                     mTvTemperature2.setText(R.string.airquality_unknow);
@@ -255,8 +254,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         }
         if(mMonitor.getFormaldehyde() != null) {
             if(mMonitor.getFormaldehyde().getFormaldehyde_data() != null) {
-                mTvFormaldehydeValue.setText((String.valueOf(String.valueOf(mMonitor.getFormaldehyde()))));
-                //localStringBuilder1 = (String.valueOf(String.valueOf(mMonitor.getFormaldehyde()))).append("mg/m\u00b3").toString();
+                mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde().getFormaldehyde_data()) + "mg/m³");
             }
         } else {
             mTvFormaldehydeValue.setText(R.string.airquality_unknow);

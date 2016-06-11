@@ -79,13 +79,14 @@ public class DeviceAddActivity extends ABaseActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                //NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
                     mTvWifiName.setText(getSSid());
                     mEtWifiPwd.requestFocus();
                     mBtnOk.setEnabled(true);
                 }else {
-                    mTvWifiName.setText("没有可用的Wifi信号");
+                    mTvWifiName.setText("");
                     mTvWifiName.requestFocus();
                     mBtnOk.setEnabled(false);
                     if (mLoadDialog.isShowing()) {

@@ -67,10 +67,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     };
 
     public RoomFragment() {
-    }
-
-    public RoomFragment(Device device) {
-        this.mDevice = device;
+        //this.mDevice = (Device) getArguments().getSerializable("device");
     }
 
     @Override
@@ -78,10 +75,12 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         mLoadDialog = new LoadDialog(getActivity());
-        if((savedInstanceState != null) && (savedInstanceState.containsKey("mDevice"))) {
-            mDevice = (Device)savedInstanceState.get("mDevice");
-            mMonitor = (Monitor)savedInstanceState.get("monitor");
-        }
+//        if((savedInstanceState != null) && (savedInstanceState.containsKey("mDevice"))) {
+//            mDevice = (Device)savedInstanceState.get("mDevice");
+//            mMonitor = (Monitor)savedInstanceState.get("monitor");
+//        }
+
+        this.mDevice = (Device) getArguments().getSerializable("device");
 
         MonitorPm mPm = new MonitorPm("2", 2l, "2");
         MonitorWindSpeed mWs = new MonitorWindSpeed("3", 3l, "3");

@@ -123,7 +123,12 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         device.setStatus(1);
 
         mDevices.add(device);
-        mFragmentList.add(new RoomFragment(device));
+
+        Fragment roomFragment = new RoomFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("device", device);
+        roomFragment.setArguments(bundle);
+        mFragmentList.add(roomFragment);
 
         device = new Device();
         device.setIp("192.168.2.14");
@@ -131,7 +136,12 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         device.setStatus(2);
 
         mDevices.add(device);
-        mFragmentList.add(new RoomFragment(device));
+
+        roomFragment = new RoomFragment();
+        bundle = new Bundle();
+        bundle.putSerializable("device", device);
+        roomFragment.setArguments(bundle);
+        mFragmentList.add(roomFragment);
 
         device = new Device();
         device.setIp("192.168.2.15");
@@ -139,7 +149,12 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         device.setStatus(3);
 
         mDevices.add(device);
-        mFragmentList.add(new RoomFragment(device));
+
+        roomFragment = new RoomFragment();
+        bundle = new Bundle();
+        bundle.putSerializable("device", device);
+        roomFragment.setArguments(bundle);
+        mFragmentList.add(roomFragment);
 
         runOnUiThread (new Thread(new Runnable() {
             public void run() {

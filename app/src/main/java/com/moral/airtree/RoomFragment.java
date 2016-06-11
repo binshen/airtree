@@ -124,35 +124,30 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             Toast.makeText(getActivity(), "\u8bf7\u542f\u52a8\u7a7a\u6c14\u6811\u8bbe\u5907", Toast.LENGTH_SHORT).show();
             return;
         }
+        Intent intent = new Intent(getActivity(), MonitorActivity.class);
+        intent.putExtra("monitor", mMonitor);
         switch(v.getId()) {
             case R.id.rl_pm25:
                 if(mMonitor.getPm() != null) {
-                    Intent intent = new Intent(getActivity(), MonitorActivity.class);
-                    intent.putExtra("monitor", mMonitor);
+
                     intent.putExtra("monitorType", MonitorEnum.PM);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_temperature:
                 if(mMonitor.getWindSpeed() != null) {
-                    Intent intent = new Intent(getActivity(), MonitorActivity.class);
-                    intent.putExtra("monitor", mMonitor);
                     intent.putExtra("monitorType", MonitorEnum.TEMPERATURE);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_humidity:
                 if(mMonitor.getHumidity() != null) {
-                    Intent intent = new Intent(getActivity(), MonitorActivity.class);
-                    intent.putExtra("monitor", mMonitor);
                     intent.putExtra("monitorType", MonitorEnum.HUMIDITY);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_formaldehyde:
                 if(mMonitor.getFormaldehyde() != null) {
-                    Intent intent = new Intent(getActivity(), MonitorActivity.class);
-                    intent.putExtra("monitor", mMonitor);
                     intent.putExtra("monitorType", MonitorEnum.FORMALDEHYDE);
                     startActivity(intent);
                 }

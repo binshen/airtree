@@ -56,7 +56,7 @@
                 android:layout_marginLeft="8.0dip"
                 android:maxLines="3" />
         </LinearLayout>
-<!--
+
         <com.viewpagerindicator.CirclePageIndicator
             android:id="@id/vc_pageindicator"
             android:layout_width="180.0dip"
@@ -68,7 +68,6 @@
             app:fillColor="@color/dotswhiiteselect"
             app:pageColor="@color/dotsnormal"
             app:radius="4.0dip" />
--->
 
         <com.viewpagerindicator.CirclePageIndicator
             android:id="@id/vc_pageindicator"

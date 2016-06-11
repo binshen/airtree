@@ -25,23 +25,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ForgetPwdActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".DeviceManagerActivity" />
-        <activity android:name=".HistoryActivity" />
-        <activity android:name=".ShopActivity" />
-        <activity android:name=".PersonalMainActivity" />
-        <activity android:name=".DeviceAddActivity" />
-        <activity android:name=".DeviceAddErrorActivity" />
-        <activity android:name=".DeviceInfoActivty" />
-        <activity android:name=".DeviceAddLoadActivity" />
-        <activity android:name=".PersonalRevisePwdActivity" />
-        <activity android:name=".PersonalReviseNickNameActivity" />
-        <activity android:name=".PersonalFeedbackActivity" />
-        <activity android:name=".DeviceDetailReviseActivity" />
-        <activity android:name=".MonitorActivity"></activity>
+        <activity android:name=".LoginActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ForgetPwdActivity" android:screenOrientation="portrait" />
+        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceManagerActivity" android:screenOrientation="portrait" />
+        <activity android:name=".HistoryActivity" android:screenOrientation="portrait" />
+        <activity android:name=".ShopActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PersonalMainActivity" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceAddActivity" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceAddErrorActivity" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceInfoActivty" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceAddLoadActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PersonalRevisePwdActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PersonalReviseNickNameActivity" android:screenOrientation="portrait" />
+        <activity android:name=".PersonalFeedbackActivity" android:screenOrientation="portrait" />
+        <activity android:name=".DeviceDetailReviseActivity" android:screenOrientation="portrait" />
+        <activity android:name=".MonitorActivity" android:screenOrientation="portrait" />
     </application>
 
 </manifest>

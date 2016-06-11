@@ -38,10 +38,10 @@ public class MonitorFragment extends ABaseFragment {
     public MonitorFragment() {
     }
 
-//    public MonitorFragment(MonitorEnum monitorType, Monitor monitor) {
-//        mMonitorType = monitorType;
-//        mMonitor = monitor;
-//    }
+    public MonitorFragment(MonitorEnum monitorType, Monitor monitor) {
+        mMonitorType = monitorType;
+        mMonitor = monitor;
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

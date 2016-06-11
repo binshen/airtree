@@ -82,11 +82,11 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
 
         this.mDevice = (Device) getArguments().getSerializable("device");
 
-        MonitorPm mPm = new MonitorPm("2", 2l, "2");
-        MonitorWindSpeed mWs = new MonitorWindSpeed("3", 3l, "3");
-        MonitorHumidity mHu = new MonitorHumidity("4", "4", "4");
-        MonitorTemperature mTe = new MonitorTemperature("5", "5", "5");
-        MonitorFormaldehyde mFo = new MonitorFormaldehyde(6l, "6", "6");
+        MonitorPm mPm = new MonitorPm("2016-06-02 08:30:30", 2l, "2");
+        MonitorWindSpeed mWs = new MonitorWindSpeed("2016-06-02 09:30:30", 3l, "3");
+        MonitorHumidity mHu = new MonitorHumidity("4", "2016-06-02 10:30:30", "4");
+        MonitorTemperature mTe = new MonitorTemperature("5", "2016-06-02 11:30:30", "5");
+        MonitorFormaldehyde mFo = new MonitorFormaldehyde(6l, "2016-06-02 12:30:30", "6");
         mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "2016-06-06 12:13:14", mPm, mWs, mHu, mTe, mFo);
     }
 

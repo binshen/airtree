@@ -91,22 +91,22 @@ public class MonitorActivity extends ABaseActivity {
         if(mMonitor.getPm().getPm_data() != null) {
             long pmData = mMonitor.getPm().getPm_data().longValue();
             if((pmData > 0x0) && (pmData <= 0x23)) {
-                //mGifView.setMovieResource(0x7f050004);
+                mGifView.setMovieResource(R.raw.good);
                 mTvContent.setText(getResources().getString(R.string.good));
                 return;
             }
             if((pmData > 0x23) && (pmData <= 0x4b)) {
-                //mGifView.setMovieResource(0x7f050007);
+                mGifView.setMovieResource(R.raw.very);
                 mTvContent.setText(getResources().getString(R.string.very));
                 return;
             }
             if((pmData > 0x4b) && (pmData <= 0x96)) {
-                //mGifView.setMovieResource(0x7f050001);
+                mGifView.setMovieResource(R.raw.general);
                 mTvContent.setText(getResources().getString(R.string.general));
                 return;
             }
             if(pmData > 0x96) {
-                //mGifView.setMovieResource(0x7f050006);
+                mGifView.setMovieResource(R.raw.poor);
                 mTvContent.setText(getResources().getString(R.string.poor));
             }
         }

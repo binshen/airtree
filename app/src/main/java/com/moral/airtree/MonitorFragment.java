@@ -88,51 +88,51 @@ public class MonitorFragment extends ABaseFragment {
     }
 
     private void initFormaldehydePage() {
-        mRlatMonitor.setBackgroundResource(R.color.black);
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_jiaquan);
         mTvMonitortype.setVisibility(View.GONE);
         mMyCircleView.setVisibility(View.GONE);
-        mTvBottomDanwei.setText("mg/m\u00b3");
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.bg_title));
+        mTvBottomDanwei.setText("mg/m³");
+        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_jiaquan_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
         if(mMonitor.getFormaldehyde() == null) {
             return;
         }
-        mTvValue.setTextColor(getResources().getColor(R.color.bg_title));
+        mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
         float size = (float)DisplayUtil.sp2px(getActivity(), 30.0f);
         mTvValue.setTextSize(size);
         if((mMonitor.getFormaldehyde() != null) && (mMonitor.getFormaldehyde().getFormaldehyde_data() != null)) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde().getFormaldehyde_data()));
         } else {
-            mTvValue.setText("XXXXX");
+            mTvValue.setText(R.string.get_none);
         }
         mTvTime.setText(mMonitor.getFormaldehyde().getCreate_date());
     }
 
     private void initTemperaturePage() {
-        mRlatMonitor.setBackgroundResource(R.mipmap.back);
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_wendu);
         mTvMonitortype.setVisibility(View.GONE);
         mMyCircleView.setVisibility(View.GONE);
         mTvRightDanwei.setVisibility(View.VISIBLE);
         mTvBottomDanwei.setVisibility(View.VISIBLE);
-        mTvBottomDanwei.setText("\u5f53\u524d\u6e29\u5ea6");
-        mTvRightDanwei.setText("\u2103");
-        mTvRightDanwei.setTextColor(getResources().getColor(R.color.bg_title));
-        mTvValue.setTextColor(getResources().getColor(R.color.bg_title));
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.bg_title));
+        mTvBottomDanwei.setText("当前温度");
+        mTvRightDanwei.setText("℃");
+        mTvRightDanwei.setTextColor(getResources().getColor(R.color.color_wendu));
+        mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
+        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
         if(mMonitor.getTemperature() == null) {
             return;
         }
         if((mMonitor.getTemperature() != null) && (mMonitor.getTemperature().getTemperature_data() != null)) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature().getTemperature_data()));
         } else {
-            mTvValue.setText("YYYYY");
+            mTvValue.setText(R.string.get_none);
         }
         mTvTime.setText(mMonitor.getWindSpeed().getCreate_date());
         mLoadDialog.dismiss();
     }
 
     private void initHumidityPage() {
-        mTvMonitortype.setText("TTTTTT");
+        mTvMonitortype.setText(R.string.monitor_humidity);
         mTvRightDanwei.setVisibility(View.VISIBLE);
         mMyCircleView.setVisibility(View.VISIBLE);
         mTvBottomDanwei.setVisibility(View.INVISIBLE);
@@ -147,33 +147,32 @@ public class MonitorFragment extends ABaseFragment {
                 mTvRightDanwei.setVisibility(View.VISIBLE);
             } catch(Exception ex) {
                 mTvRightDanwei.setVisibility(View.GONE);
-                mTvValue.setText("AAAAAA");
+                mTvValue.setText(R.string.get_none);
             }
-//            else {
-//                mTvRightDanwei.setVisibility(View.GONE);
-//                mTvValue.setText("BBBBBB");
-//            }
+        } else {
+            mTvRightDanwei.setVisibility(View.GONE);
+            mTvValue.setText(R.string.get_none);
         }
         mTvTime.setText(mMonitor.getHumidity().getCreate_date());
         mLoadDialog.dismiss();
     }
 
     private void initPmPage() {
-        mRlatMonitor.setBackgroundResource(R.mipmap.back);
-        mTvMonitortype.setText("ZZZZZ");
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
+        mTvMonitortype.setText(R.string.monitor_pm);
         mMyCircleView.setVisibility(View.GONE);
-        mTvMonitortype.setTextColor(getResources().getColor(R.color.bg_title));
-        mTvBottomDanwei.setText("ug/m\u00b3");
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.bg_title));
+        mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));
+        mTvBottomDanwei.setText("ug/m³");
+        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_pm_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
         if(mMonitor.getPm() == null) {
             return;
         }
-        mTvValue.setTextColor(getResources().getColor(R.color.bg_title));
+        mTvValue.setTextColor(getResources().getColor(R.color.color_pm_value));
         if((mMonitor.getPm() != null) && (mMonitor.getPm().getPm_data() != null)) {
             mTvValue.setText(String.valueOf(mMonitor.getPm().getPm_data()));
         } else {
-            mTvValue.setText("CCCCCC");
+            mTvValue.setText(R.string.get_none);
         }
         mTvTime.setText(mMonitor.getPm().getCreate_date());
     }

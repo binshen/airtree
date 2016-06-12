@@ -147,24 +147,24 @@ public class MonitorActivity extends ABaseActivity {
         });
     }
 
-    protected void setFragmentPage(int position) {
-        MonitorFragment fragment = (MonitorFragment) mViewPagerAdapter.getItem((position - 1));
-        if(position == 1) {
-            fragment.initViewData(MonitorEnum.PM);
-            return;
-        }
-        if(position == 2) {
-            fragment.initViewData(MonitorEnum.TEMPERATURE);
-            return;
-        }
-        if(position == 3) {
-            fragment.initViewData(MonitorEnum.HUMIDITY);
-            return;
-        }
-        if(position == 4) {
-            fragment.initViewData(MonitorEnum.FORMALDEHYDE);
-        }
-    }
+//    protected void setFragmentPage(int position) {
+//        MonitorFragment fragment = (MonitorFragment) mViewPagerAdapter.getItem((position - 1));
+//        if(position == 1) {
+//            fragment.initViewData(MonitorEnum.PM);
+//            return;
+//        }
+//        if(position == 2) {
+//            fragment.initViewData(MonitorEnum.TEMPERATURE);
+//            return;
+//        }
+//        if(position == 3) {
+//            fragment.initViewData(MonitorEnum.HUMIDITY);
+//            return;
+//        }
+//        if(position == 4) {
+//            fragment.initViewData(MonitorEnum.FORMALDEHYDE);
+//        }
+//    }
 
     private void initFragments() {
         mFragmentList.add(new MonitorFragment(MonitorEnum.PM, mMonitor));

@@ -119,7 +119,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         Device device = new Device();
         device.setIp("192.168.2.13");
-        device.setMac("XXXXXXXXXXXX");
+        device.setMac("ea24a2d456");
+        device.setName("测试设备1");
         device.setStatus(1);
 
         mDevices.add(device);
@@ -132,7 +133,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         device = new Device();
         device.setIp("192.168.2.14");
-        device.setMac("YYYYYYYYYYYY");
+        device.setMac("ea24a2d457");
+        device.setName("测试设备2");
         device.setStatus(2);
 
         mDevices.add(device);
@@ -145,7 +147,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         device = new Device();
         device.setIp("192.168.2.15");
-        device.setMac("ZZZZZZZZZZZZ");
+        device.setMac("ea24a2d458");
+        device.setName("测试设备3");
         device.setStatus(3);
 
         mDevices.add(device);
@@ -196,13 +199,12 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         if((mDevices.size() > 0) && (position < mDevices.size())) {
             Device device = (Device)mDevices.get(position);
             if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
-                mTvTitle.setText(device.getMac());
+                mTvTitle.setText(device.getName());
                 //mDeviceId = device.getDeviceId();
             }
             return;
         }
-
-        mTvTitle.setText("XXXXX");
+        mTvTitle.setText("未知设备");
     }
 
     class DevicePagerAdapter extends FragmentPagerAdapter {

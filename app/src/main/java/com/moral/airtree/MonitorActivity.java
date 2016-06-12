@@ -136,6 +136,7 @@ public class MonitorActivity extends ABaseActivity {
         }
         mPagerIndicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             public void onPageSelected(int position) {
+                setFragmentTitleAndTip(position);
             }
 
             public void onPageScrolled(int arg0, float arg1, int arg2) {

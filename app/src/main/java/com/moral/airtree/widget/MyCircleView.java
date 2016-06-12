@@ -10,6 +10,8 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.graphics.Canvas;
 
+import com.moral.airtree.R;
+
 public class MyCircleView extends View {
     private final Context mContext;
     private int mMaxProgress;
@@ -36,35 +38,37 @@ public class MyCircleView extends View {
             height = min;
         }
         mPaint.setAntiAlias(true);
-        canvas.drawColor(0x0);
+        canvas.drawColor(0);
         mPaint.setStrokeWidth(35.0f);
         mPaint.setStyle(Paint.Style.STROKE);
-        mRectF.left = 0.0f;
-        mRectF.top = 0.0f;
-        mRectF.right = (float)(width - 0x11);
-        mRectF.bottom = (float)(height - 0x11);
+        mRectF.left = 17;
+        mRectF.top = 17;
+        mRectF.right = (float)(width - 17);
+        mRectF.bottom = (float)(height - 17);
         mPaint.setARGB(0xff, 0xff, 0xf5, 0x99);
         canvas.drawArc(mRectF, 0.0f, 0.0f, false, mPaint);
         mPaint.setARGB(0xff, 0x99, 0xd9, 0xff);
         canvas.drawArc(mRectF, 180.0f, 0.0f, false, mPaint);
         mPaint.setARGB(0xff, 0xff, 0xe1, 0xcd);
-        canvas.drawArc(mRectF, 0.0f, -0x3d4c, false, mPaint);
+        canvas.drawArc(mRectF, 0.0f, -360.0f, false, mPaint);
         mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawColor(0x0);
-        mRectF.left = 0.0f;
-        mRectF.top = 0.0f;
-        mRectF.right = (float)((width - 0x23) - 0x1);
-        mRectF.bottom = (float)((height - 0x23) - 0x1);
-        mPaint.setARGB(0xff, 0x1c, 0xa9, 0xff);
-        canvas.drawArc(mRectF, 0.0f, 0.0f, false, mPaint);
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawColor(0x0);
-        mRectF.left = 0.0f;
-        mRectF.top = 0.0f;
-        mRectF.right = (float)(width - 0x38);
-        mRectF.bottom = (float)(height - 0x38);
-        mPaint.setARGB(0xff, 0x99, 0xd9, 0xff);
-        canvas.drawArc(mRectF, 0.0f, 0.0f, false, mPaint);
+        canvas.drawColor(0);
+
+//        mRectF.left = 36;
+//        mRectF.top = 36;
+//        mRectF.right = (float)(width - 36);
+//        mRectF.bottom = (float)(height - 36);
+//        mPaint.setARGB(0xff, 0x1c, 0xa9, 0xff);
+//        canvas.drawArc(mRectF, 0.0f, 0.0f, false, mPaint);
+//        mPaint.setStyle(Paint.Style.FILL);
+//        canvas.drawColor(0);
+//
+//        mRectF.left = 56;
+//        mRectF.top = 56;
+//        mRectF.right = (float)(width - 56);
+//        mRectF.bottom = (float)(height - 56);
+//        mPaint.setARGB(0xff, 0x99, 0xd9, 0xff);
+//        canvas.drawArc(mRectF, 0.0f, 0.0f, false, mPaint);
     }
 
     public int getMaxProgress() {

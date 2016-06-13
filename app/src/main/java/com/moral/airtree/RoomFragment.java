@@ -83,6 +83,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         this.mDevice = (Device) getArguments().getSerializable("device");
 
         MonitorPm mPm = new MonitorPm("2016-06-02 08:30:30", 2l, "2");
+        mPm.setPm03p01(12345);
         MonitorWindSpeed mWs = new MonitorWindSpeed("2016-06-02 09:30:30", 3l, "3");
         MonitorHumidity mHu = new MonitorHumidity("4", "2016-06-02 10:30:30", "4");
         MonitorTemperature mTe = new MonitorTemperature("5", "2016-06-02 11:30:30", "5");
@@ -121,7 +122,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         if(mDevice.getStatus() == 0) {
-            Toast.makeText(getActivity(), "\u8bf7\u542f\u52a8\u7a7a\u6c14\u6811\u8bbe\u5907", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "请启动空气树设备", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(getActivity(), MonitorActivity.class);

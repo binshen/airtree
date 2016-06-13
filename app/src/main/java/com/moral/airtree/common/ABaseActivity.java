@@ -12,7 +12,7 @@ public abstract class ABaseActivity extends FragmentActivity {
 
     protected String basePath = "http://121.40.92.176:3000";
 
-    public Handler mHandler;
+    //public Handler mHandler;
     protected LoadDialog mLoadDialog;
 
     protected ABaseApplication application;

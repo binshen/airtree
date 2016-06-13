@@ -38,18 +38,18 @@ public class DeviceAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolde vHolde = null;
+        ViewHolder vHolder = null;
         if(convertView == null) {
-            vHolde = new DeviceAdapter.ViewHolde();
+            vHolder = new DeviceAdapter.ViewHolder();
             convertView = layoutInflater.inflate(R.layout.list_devices, null);
-            vHolde.tv_name = (TextView) convertView.findViewById(R.id.tv_where);
-            vHolde.tvDeviceStatus = (TextView)convertView.findViewById(R.id.tv_device_status);
-            convertView.setTag(vHolde);
+            vHolder.tv_name = (TextView) convertView.findViewById(R.id.tv_where);
+            vHolder.tvDeviceStatus = (TextView)convertView.findViewById(R.id.tv_device_status);
+            convertView.setTag(vHolder);
         } else {
-            vHolde = (ViewHolde) convertView.getTag();
+            vHolder = (ViewHolder) convertView.getTag();
         }
         Device device = deviceList.get(position);
-        vHolde.tv_name.setText(device.getMac() + " (" + device.getIp() + ")");
+        vHolder.tv_name.setText(device.getMac() + " (" + device.getIp() + ")");
         String status = "在线";
         int code = device.getStatus();
         if(code == 1) {
@@ -57,11 +57,11 @@ public class DeviceAdapter extends BaseAdapter {
         } else if(code == 2) {
 
         }
-        vHolde.tvDeviceStatus.setText(status);
+        vHolder.tvDeviceStatus.setText(status);
         return convertView;
     }
 
-    class ViewHolde {
+    class ViewHolder {
         public TextView tvDeviceStatus;
         public TextView tv_name;
     }

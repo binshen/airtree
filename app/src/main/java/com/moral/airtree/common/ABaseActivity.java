@@ -15,20 +15,7 @@ public abstract class ABaseActivity extends FragmentActivity {
     public Handler mHandler;
     protected LoadDialog mLoadDialog;
 
-//    public abstract void replaceContentWith(int p1, ABaseFragment p2);
-//
-//
-//    public abstract void replaceContentWith(ABaseFragment p1);
-
-
-    public void changeTitle(int id) {
-    }
-
-    public void changeTabSelectedColorState(int which) {
-    }
-
     protected ABaseApplication application;
-
 
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);

@@ -21,15 +21,15 @@ public abstract class ABaseFragment extends Fragment {
     }
 
     public ABaseFragment(int id) {
-        fragmentId = id;
+        this.fragmentId = id;
     }
 
     public ABaseFragment(AModel model) {
-        model = model;
+        this.model = model;
     }
 
     public ABaseFragment(AModel model, int id) {
-        model = model;
+        this.model = model;
         fragmentId = id;
     }
 
@@ -38,7 +38,7 @@ public abstract class ABaseFragment extends Fragment {
     }
 
     public void setModel(AModel model) {
-        model = model;
+        this.model = model;
     }
 
     public ABaseActivity getBaseActivity() {
@@ -50,7 +50,7 @@ public abstract class ABaseFragment extends Fragment {
     }
 
     public void setmBaseActivity(ABaseActivity mBaseActivity) {
-        mBaseActivity = mBaseActivity;
+        this.mBaseActivity = mBaseActivity;
     }
 
     public void onViewCreated(View view, Bundle savedInstanceState) {

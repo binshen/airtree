@@ -104,7 +104,7 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
             public void run() {
                 Device device = new Device();
                 device.setMac(module.getMac());
-                device.setIp(module.getModuleIP());
+                device.setIp(module.getIp());
                 device.setStatus(1);
                 application.mDevices.add(device);
             }

@@ -11,7 +11,7 @@ public class Device implements Serializable {
 
     private String mac;
 
-    private String ip;
+    private String userID;
 
     private int status;
 
@@ -31,12 +31,12 @@ public class Device implements Serializable {
         this.mac = mac;
     }
 
-    public String getIp() {
-        return ip;
+    public String getUserID() {
+        return userID;
     }
 
-    public void setIp(String ip) {
-        this.ip = ip;
+    public void setUserID(String userID) {
+        this.userID = userID;
     }
 
     public int getStatus() {

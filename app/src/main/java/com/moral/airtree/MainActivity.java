@@ -118,7 +118,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         removeFragments();
 
         Device device = new Device();
-        device.setIp("192.168.2.13");
         device.setMac("ea24a2d456");
         device.setName("测试设备1");
         device.setStatus(1);
@@ -132,7 +131,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mFragmentList.add(roomFragment);
 
         device = new Device();
-        device.setIp("192.168.2.14");
         device.setMac("ea24a2d457");
         device.setName("测试设备2");
         device.setStatus(2);
@@ -146,7 +144,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mFragmentList.add(roomFragment);
 
         device = new Device();
-        device.setIp("192.168.2.15");
         device.setMac("ea24a2d458");
         device.setName("测试设备3");
         device.setStatus(3);

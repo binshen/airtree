@@ -161,9 +161,12 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
                 if (success) {
-
+                    int status = response.optInt("status");
+                    if(status == 3) {
+                        Toast.makeText(getApplicationContext(), "该设备已被其他人绑定过", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "绑定时发生异常，请稍候再试", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

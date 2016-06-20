@@ -11,6 +11,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.hiflying.smartlink.ISmartLinker;
 import com.hiflying.smartlink.OnSmartLinkListener;
 import com.hiflying.smartlink.SmartLinkedModule;
@@ -19,13 +25,15 @@ import com.hiflying.smartlink.v7.MulticastSmartLinker;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.common.ABaseApplication;
 import com.moral.airtree.model.Device;
+import com.moral.airtree.model.User;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkListener {
 
-    public static final String EXTRA_SMARTLINK_VERSION = "EXTRA_SMARTLINK_VERSION";
-
-    //private RelativeLayout mCommonTitle;
-    //private Handler mHandler;
     private ImageView mIvLeft;
     private String mPwd;
     private String mSSID;
@@ -64,7 +72,7 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
     }
 
     private void initData() {
-        int smartLinkVersion = getIntent().getIntExtra(EXTRA_SMARTLINK_VERSION, 3);
+        int smartLinkVersion = getIntent().getIntExtra("EXTRA_SMARTLINK_VERSION", 7);
         if(smartLinkVersion == 7) {
             mSnifferSmartLinker = MulticastSmartLinker.getInstance();
         }else {
@@ -107,6 +115,8 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
                 device.setIp(module.getIp());
                 device.setStatus(1);
                 application.mDevices.add(device);
+
+                bindDeviceToUser(module.getMac(), application.getLoginUser().get_id());
             }
         });
     }
@@ -137,5 +147,32 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
                 finish();
             }
         });
+    }
+
+    private void bindDeviceToUser(String mac, String user_id) {
+        String url = basePath + "/user/add_device";
+        RequestQueue queue = Volley.newRequestQueue(this);
+
+        final Map<String, String> params = new HashMap<String, String>();
+        params.put("mac", mac);
+        params.put("user_id", user_id);
+
+        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean success = response.optBoolean("success");
+                if (success) {
+
+                } else {
+                    Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonObjRequest);
     }
 }

@@ -131,11 +131,12 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             @Override
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
-                if (success) {
-                    //Toast.makeText(getApplicationContext(), response.optJSONObject("userInfo").toString(), Toast.LENGTH_LONG).show();
+                JSONObject user = response.optJSONObject("user");
+                if (success && user != null) {
                     User loginUser = new User();
-                    loginUser.setUsername(tel);
-                    loginUser.setPassword(pwd);
+                    loginUser.setUsername(response.optJSONObject("user").optString("username"));
+                    loginUser.setPassword(response.optJSONObject("user").optString("password"));
+                    loginUser.set_id(response.optJSONObject("user").optString("_id"));
                     application.setLoginUser(loginUser);
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 } else {

@@ -48,11 +48,8 @@ public class DeviceManagerActivity extends ABaseActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), DeviceInfoActivty.class);
-                Device device = mDevices.get(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("deviceID", device.get_id());
-                bundle.putString("deviceMac", device.getMac());
-                bundle.putString("deviceName", device.getName());
+                bundle.putSerializable("device", mDevices.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

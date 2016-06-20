@@ -15,7 +15,7 @@ import com.moral.airtree.model.Device;
 public class DeviceInfoActivty extends ABaseActivity implements View.OnClickListener {
 
     private Button mBtnRemovebind;
-    private String mDeviceID;
+    private Device mDevice;
     private ImageView mIvLeft;
     private RelativeLayout mRl1;
     private TextView mTvBianma;
@@ -53,7 +53,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 Intent intent = new Intent();
                 intent.setClass(this, DeviceDetailReviseActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("deviceID", mDeviceID);
+                bundle.putString("deviceid", mDevice.get_id());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -85,10 +85,9 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         if(bundle == null) {
             return;
         }
-
-        mDeviceID = bundle.getString("deviceID");
-        mTvMac.setText(bundle.getString("deviceMac").toUpperCase());
-        mTvBianma.setText(mDeviceID);
-        mTvWhere.setText(bundle.getString("deviceName"));
+        mDevice = (Device) bundle.getSerializable("device");
+        mTvMac.setText(mDevice.getMac().toUpperCase());
+        mTvBianma.setText(mDevice.get_id());
+        mTvWhere.setText(mDevice.getName());
     }
 }

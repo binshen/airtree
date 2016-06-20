@@ -29,7 +29,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
 
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
-        mTvTitle.setText("xxxx");
+        mTvTitle.setText("修改设备名称");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
         mEtDeviceDetail = (EditText)findViewById(R.id.et_devicedetail);

@@ -11,10 +11,21 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +83,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 //            AirTreePreference.getInstance(this).setDeviceChanged(false);
 //            addFragments();
 //        }
-        setFragmentTitle();
+//        setFragmentTitle();
     }
 
 
@@ -117,53 +128,47 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mLoadDialog.show();
         removeFragments();
 
-        Device device = new Device();
-        device.setMac("ea24a2d456");
-        device.setName("测试设备1");
-        device.setStatus(1);
+        String url = basePath + "/user/" + application.getLoginUser().get_id() + "/get_device";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject obj = response.optJSONObject(i);
 
-        mDevices.add(device);
+                    Device device = new Device();
+                    device.setMac(obj.optString("mac"));
+                    if(!obj.optString("name").isEmpty()) {
+                        device.setName(obj.optString("name"));
+                    } else {
+                        device.setName(obj.optString("mac"));
+                    }
+                    device.setStatus(obj.optInt("status"));
+                    mDevices.add(device);
 
-        Fragment roomFragment = new RoomFragment();
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("device", device);
-        roomFragment.setArguments(bundle);
-        mFragmentList.add(roomFragment);
+                    Fragment roomFragment = new RoomFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("device", device);
+                    roomFragment.setArguments(bundle);
+                    mFragmentList.add(roomFragment);
+                }
 
-        device = new Device();
-        device.setMac("ea24a2d457");
-        device.setName("测试设备2");
-        device.setStatus(2);
-
-        mDevices.add(device);
-
-        roomFragment = new RoomFragment();
-        bundle = new Bundle();
-        bundle.putSerializable("device", device);
-        roomFragment.setArguments(bundle);
-        mFragmentList.add(roomFragment);
-
-        device = new Device();
-        device.setMac("ea24a2d458");
-        device.setName("测试设备3");
-        device.setStatus(3);
-
-        mDevices.add(device);
-
-        roomFragment = new RoomFragment();
-        bundle = new Bundle();
-        bundle.putSerializable("device", device);
-        roomFragment.setArguments(bundle);
-        mFragmentList.add(roomFragment);
-
-        runOnUiThread (new Thread(new Runnable() {
-            public void run() {
-                mViewPagerAdapter.notifyDataSetChanged();
-                mPagerIndicator.notifyDataSetChanged();
-
-                mLoadDialog.dismiss();
+                setFragmentTitle();
+                runOnUiThread (new Thread(new Runnable() {
+                    public void run() {
+                        mViewPagerAdapter.notifyDataSetChanged();
+                        mPagerIndicator.notifyDataSetChanged();
+                        mLoadDialog.dismiss();
+                    }
+                }));
             }
-        }));
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 
     private void removeFragments() {
@@ -197,7 +202,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             Device device = (Device)mDevices.get(position);
             if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
                 mTvTitle.setText(device.getName());
-                //mDeviceId = device.getDeviceId();
             }
             return;
         }

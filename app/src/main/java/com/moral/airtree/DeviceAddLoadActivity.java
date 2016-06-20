@@ -156,13 +156,13 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         params.put("mac", mac);
         params.put("user_id", user_id);
 
-        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
                 if (success) {
                     int status = response.optInt("status");
-                    if(status == 3) {
+                    if(status == 4) {
                         Toast.makeText(getApplicationContext(), "该设备已被其他人绑定过", Toast.LENGTH_SHORT).show();
                     }
                 } else {
@@ -175,6 +175,6 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         });
-        queue.add(jsonObjRequest);
+        queue.add(jsonRequest);
     }
 }

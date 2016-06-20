@@ -127,7 +127,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         params.put("username", tel);
         params.put("password", pwd);
 
-        JsonObjectRequest jsonObjRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
@@ -149,7 +149,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
             }
         });
-        queue.add(jsonObjRequest);
+        queue.add(jsonRequest);
 
 /*
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {

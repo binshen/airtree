@@ -46,12 +46,14 @@ public class DeviceManagerActivity extends ABaseActivity {
         mLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                long deviceId = 1;//(ACUserDevice)mDevises.get(position).getDeviceId();
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), DeviceInfoActivty.class);
-                //Bundle bundle = new Bundle();
-                //bundle.putLong("deviceId", deviceId);
-                //intent.putExtras(bundle);
+                Device device = mDevices.get(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("deviceID", device.get_id());
+                bundle.putString("deviceMac", device.getMac());
+                bundle.putString("deviceName", device.getName());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
@@ -67,7 +69,7 @@ public class DeviceManagerActivity extends ABaseActivity {
 
     private void initData() {
 
-        mDevices = application.mDevices;
+        mDevices = application.getDevices();
         mDevicesAdapter = new DeviceAdapter(this, mDevices);
         mLv.setAdapter(mDevicesAdapter);
     }

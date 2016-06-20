@@ -144,6 +144,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         device.setName(obj.optString("mac"));
                     }
                     device.setStatus(obj.optInt("status"));
+                    device.set_id(obj.optString("_id"));
                     mDevices.add(device);
 
                     Fragment roomFragment = new RoomFragment();
@@ -152,6 +153,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                     roomFragment.setArguments(bundle);
                     mFragmentList.add(roomFragment);
                 }
+
+                application.setDevices(mDevices);
 
                 setFragmentTitle();
                 runOnUiThread (new Thread(new Runnable() {

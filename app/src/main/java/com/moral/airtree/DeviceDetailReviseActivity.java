@@ -16,7 +16,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
 
     private static final int MAX_COUNT = 0x14;
     private Button mBtnOk;
-    private long mDeviceId;
+    private String mDeviceId;
     ArrayList<Device> mDevises;
     private EditText mEtDeviceDetail;
     private ImageView mIvLeft;
@@ -29,7 +29,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
 
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
-        mTvTitle.setText("");
+        mTvTitle.setText("xxxx");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
         mEtDeviceDetail = (EditText)findViewById(R.id.et_devicedetail);
@@ -40,7 +40,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
 
         Bundle bundle = getIntent().getExtras();
         if(bundle != null) {
-            mDeviceId = bundle.getLong("deviceid");
+            mDeviceId = bundle.getString("deviceid");
             mIvLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -56,15 +56,11 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         }
     }
 
-    private void refreshDeviceList() {
-
-    }
-
     protected void onStart() {
         super.onStart();
     }
 
-    public void changeDeviceName(String mSubDomainId, long mDeviceId, String name) {
+    public void changeDeviceName(long mDeviceId, String name) {
         mLoadDialog.show();
 
     }

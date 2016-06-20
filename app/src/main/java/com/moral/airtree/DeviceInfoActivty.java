@@ -10,22 +10,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.model.Device;
 
 public class DeviceInfoActivty extends ABaseActivity implements View.OnClickListener {
 
     private Button mBtnRemovebind;
-    private Long mDeviceId;
-    private Long mDevieId;
+    private String mDeviceID;
     private ImageView mIvLeft;
-    private String mName;
     private RelativeLayout mRl1;
-    private long mSubdomainid;
     private TextView mTvBianma;
     private TextView mTvMac;
-    private TextView mTvParamthree;
+//    private TextView mTvParamthree;
     private TextView mTvTitle;
     private TextView mTvWhere;
-    private Long mUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +31,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
 
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
-        mTvTitle.setText("");
+        mTvTitle.setText("设备信息");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
         mBtnRemovebind = (Button)findViewById(R.id.btn_removebind);
@@ -46,17 +43,18 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mRl1.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnRemovebind.setOnClickListener(this);
+
+        initData();
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.rl1:
                 Intent intent = new Intent();
-                //intent.setClass(this, DeviceDetailRevise.class);
-                Bundle tBundle = new Bundle();
-                tBundle.putLong("subdomainid", mSubdomainid);
-                tBundle.putLong("deviceid", mDeviceId.longValue());
-                intent.putExtras(tBundle);
+                intent.setClass(this, DeviceDetailReviseActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("deviceID", mDeviceID);
+                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
@@ -65,18 +63,17 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_removebind:
-                unbindDeviceWithUser(mDevieId.longValue());
+                unbindDeviceWithUser();
                 break;
         }
     }
 
-    public void unbindDeviceWithUser(long deviceId) {
+    public void unbindDeviceWithUser() {
         mLoadDialog.show();
-    }
 
-    private void refreshDeviceList() {
 
     }
+
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,22 +85,10 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         if(bundle == null) {
             return;
         }
-        mDeviceId = Long.valueOf(bundle.getLong("deviceId"));
-        /*
-        mUserId = Long.valueOf(PreferencesUtils.getLong(this, "userId"));
-        ArrayList<ACUserDevice> device = DeviceCache.getInstance(this).getDevicesFromCache();
-        if(device.iterator().hasNext()) {
-            ACUserDevice acUserDevice = (ACUserDevice)device.iterator().next();
-            if(mDeviceId.longValue() == acUserDevice.deviceId) {
-                mName = acUserDevice.getName();
-                mSubdomainid = acUserDevice.getSubDomainId();
-                mDevieId = Long.valueOf(acUserDevice.getDeviceId());
-                mTvParamthree.setText(String.valueOf(mSubdomainid));
-                mTvWhere.setText(mName);
-                mTvBianma.setText(String.valueOf(mDevieId));
-                mTvMac.setText(acUserDevice.getPhysicalDeviceId().substring(0x4, acUserDevice.getPhysicalDeviceId().length()));
-            }
-        }
-        */
+
+        mDeviceID = bundle.getString("deviceID");
+        mTvMac.setText(bundle.getString("deviceMac").toUpperCase());
+        mTvBianma.setText(mDeviceID);
+        mTvWhere.setText(bundle.getString("deviceName"));
     }
 }

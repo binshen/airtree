@@ -15,6 +15,8 @@ public class ABaseApplication extends Application {
 
     public User loginUser = null;
 
+    public List<Device> devices = new ArrayList<Device>();
+
     public User getLoginUser() {
         return loginUser;
     }
@@ -23,7 +25,13 @@ public class ABaseApplication extends Application {
         this.loginUser = loginUser;
     }
 
-    public List<Device> mDevices = new ArrayList<Device>();
+    public List<Device> getDevices() {
+        return devices;
+    }
+
+    public void setDevices(List<Device> devices) {
+        this.devices = devices;
+    }
 
     public void onCreate() {
         super.onCreate();

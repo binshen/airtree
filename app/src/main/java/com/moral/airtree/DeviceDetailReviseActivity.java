@@ -30,6 +30,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
     private static final int MAX_COUNT = 0x14;
     private Button mBtnOk;
     private String mDeviceId;
+    private int mPosition;
     ArrayList<Device> mDevises;
     private EditText mEtDeviceDetail;
     private ImageView mIvLeft;
@@ -49,6 +50,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         mBtnOk = (Button)findViewById(R.id.btn_ok);
 
         Bundle bundle = getIntent().getExtras();
+        mPosition = bundle.getInt("devicePosition");
         mDeviceId = bundle.getString("deviceID");
         mEtDeviceDetail.setText(bundle.getString("deviceName"));
         mIvLeft.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +71,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         super.onStart();
     }
 
-    public void changeDeviceName(String deviceId, String deviceName) {
+    public void changeDeviceName(String deviceId, final String deviceName) {
         if(deviceName == null || deviceName.isEmpty()) {
             Toast.makeText(getApplicationContext(), "请输入设备名称", Toast.LENGTH_LONG).show();
         } else {
@@ -86,7 +88,8 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
                 public void onResponse(JSONObject response) {
                     boolean success = response.optBoolean("success");
                     if (success) {
-                        application.setDeviceChanged(true);
+                        application.getDevices().get(mPosition).setName(deviceName);
+                        //application.setDeviceChanged(true);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

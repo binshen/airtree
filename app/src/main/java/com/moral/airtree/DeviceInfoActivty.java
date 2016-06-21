@@ -28,6 +28,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
 
     private Button mBtnRemovebind;
     private Device mDevice;
+    private int mPosition;
     private ImageView mIvLeft;
     private RelativeLayout mRl1;
     private TextView mTvBianma;
@@ -55,6 +56,11 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mRl1.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnRemovebind.setOnClickListener(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
 
         initData();
     }
@@ -67,6 +73,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 Bundle bundle = new Bundle();
                 bundle.putString("deviceID", mDevice.get_id());
                 bundle.putString("deviceName", mDevice.getName());
+                bundle.putInt("devicePosition", mPosition);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -120,7 +127,8 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         if(bundle == null) {
             return;
         }
-        mDevice = (Device) bundle.getSerializable("device");
+        mPosition = bundle.getInt("devicePosition");
+        mDevice = application.getDevices().get(mPosition);
         mTvMac.setText(mDevice.getMac().toUpperCase());
         mTvBianma.setText(mDevice.get_id());
         mTvWhere.setText(mDevice.getName());

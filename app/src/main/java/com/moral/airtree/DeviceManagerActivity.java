@@ -61,7 +61,7 @@ public class DeviceManagerActivity extends ABaseActivity {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), DeviceInfoActivty.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("device", mDevices.get(position));
+                bundle.putInt("devicePosition", position);
                 intent.putExtras(bundle);
                 startActivity(intent);
             }

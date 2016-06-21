@@ -38,7 +38,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private List<Device> mDevices;
     private List<Fragment> mFragmentList;
     private DevicePagerAdapter mViewPagerAdapter;
-    private boolean mIsFirst;
     private TextView mTvDeviceManager;
     private TextView mTvHistory;
 
@@ -68,19 +67,15 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mPagerIndicator = (CirclePageIndicator)findViewById(R.id.pageindicator);
         mPagerIndicator.setViewPager(mViewPager);
 
-        mIsFirst = true;
         setViewPagerChanger();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(mIsFirst) {
-            mIsFirst = false;
-            addFragments();
-        }
-    }
 
+        addFragments();
+    }
 
     @Override
     public void onClick(View v) {

@@ -49,13 +49,10 @@ public class DeviceAdapter extends BaseAdapter {
             vHolder = (ViewHolder) convertView.getTag();
         }
         Device device = deviceList.get(position);
-        vHolder.tv_name.setText(device.getName().isEmpty() ? device.getMac() : device.getName() + "(" + device.getMac() + ")");
+        vHolder.tv_name.setText(device.getName().isEmpty() ? device.getMac() : device.getName() + " (" + device.getMac() + ")");
         String status = "在线";
-        int code = device.getStatus();
-        if(code == 1) {
+        if(device.getStatus() > 1) {
             status = "不在线";
-        } else if(code == 2) {
-
         }
         vHolder.tvDeviceStatus.setText(status);
         return convertView;

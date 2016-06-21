@@ -21,6 +21,10 @@ public class ABaseApplication extends Application {
         return loginUser;
     }
 
+    public String getLoginUserID() {
+        return loginUser == null ? null : loginUser.get_id();
+    }
+
     public void setLoginUser(User loginUser) {
         this.loginUser = loginUser;
     }

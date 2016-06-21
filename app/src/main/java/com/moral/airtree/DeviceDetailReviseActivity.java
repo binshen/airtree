@@ -74,7 +74,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         } else {
             mLoadDialog.show();
 
-            String url = basePath + "/user/" + application.getLoginUserID() + "/device/" + deviceId;
+            String url = basePath + "/user/" + application.getLoginUserID() + "/device/" + deviceId + "/update_name";
             RequestQueue queue = Volley.newRequestQueue(this);
 
             final Map<String, String> params = new HashMap<String, String>();

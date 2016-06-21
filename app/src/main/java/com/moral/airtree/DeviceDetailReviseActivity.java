@@ -49,7 +49,8 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         mBtnOk = (Button)findViewById(R.id.btn_ok);
 
         Bundle bundle = getIntent().getExtras();
-        mDeviceId = bundle.getString("deviceid");
+        mDeviceId = bundle.getString("deviceID");
+        mEtDeviceDetail.setText(bundle.getString("deviceName"));
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,6 +86,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
                 public void onResponse(JSONObject response) {
                     boolean success = response.optBoolean("success");
                     if (success) {
+                        application.setDeviceChanged(true);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

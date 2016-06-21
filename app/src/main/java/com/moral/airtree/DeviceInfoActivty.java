@@ -65,7 +65,8 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 Intent intent = new Intent();
                 intent.setClass(this, DeviceDetailReviseActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("deviceid", mDevice.get_id());
+                bundle.putString("deviceID", mDevice.get_id());
+                bundle.putString("deviceName", mDevice.getName());
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -91,6 +92,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
                 if (success) {
+                    application.setDeviceChanged(true);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

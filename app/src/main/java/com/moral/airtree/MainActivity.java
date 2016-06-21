@@ -79,11 +79,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             mIsFirst = false;
             addFragments();
         }
-//        else if(AirTreePreference.getInstance(this).getDeviceChanged()) {
-//            AirTreePreference.getInstance(this).setDeviceChanged(false);
-//            addFragments();
-//        }
-//        setFragmentTitle();
     }
 
 
@@ -91,7 +86,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.iv_personal:
-                //startActivity(new Intent(this, PersonalMainActivity.class));
                 startActivityForResult(new Intent(this, PersonalMainActivity.class), 1);
                 break;
 
@@ -128,11 +122,13 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mLoadDialog.show();
         removeFragments();
 
-        String url = basePath + "/user/" + application.getLoginUser().get_id() + "/get_device";
+        String url = basePath + "/user/" + application.getLoginUserID() + "/get_device";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
+                application.setDeviceChanged(false);
+
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject obj = response.optJSONObject(i);
 

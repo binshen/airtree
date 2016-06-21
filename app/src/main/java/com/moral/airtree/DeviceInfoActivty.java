@@ -8,9 +8,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Device;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DeviceInfoActivty extends ABaseActivity implements View.OnClickListener {
 
@@ -71,7 +83,28 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
     public void unbindDeviceWithUser() {
         mLoadDialog.show();
 
+        String url = basePath + "/user/" + application.getLoginUserID() + "/device/" + mDevice.get_id() + "/unbind";
+        RequestQueue queue = Volley.newRequestQueue(this);
 
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                    mLoadDialog.dismiss();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                mLoadDialog.dismiss();
+            }
+        });
+        queue.add(jsonRequest);
     }
 
 

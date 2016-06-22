@@ -77,14 +77,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
 //        }
 
         this.mDevice = (Device) getArguments().getSerializable("device");
-
-        MonitorPm mPm = new MonitorPm("2016-06-02 08:30:30", 2l, "2");
-        mPm.setPm03p01(12345);
-        MonitorWindSpeed mWs = new MonitorWindSpeed("2016-06-02 09:30:30", 3l, "3");
-        MonitorHumidity mHu = new MonitorHumidity("4", "2016-06-02 10:30:30", "4");
-        MonitorTemperature mTe = new MonitorTemperature("5", "2016-06-02 11:30:30", "5");
-        MonitorFormaldehyde mFo = new MonitorFormaldehyde(6l, "2016-06-02 12:30:30", "6");
-        mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "2016-06-06 12:13:14", mPm, mWs, mHu, mTe, mFo);
+        this.mMonitor = (Monitor) getArguments().getSerializable("monitor");
     }
 
 //    @Override
@@ -242,29 +235,28 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         }
         if(!TextUtils.isEmpty(mMonitor.getElectricQuantity())) {
             int data = Integer.parseInt(mMonitor.getElectricQuantity());
-            if(data >= 0x5a) {
+            if(data >= 80) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_5);
-            } else if((data < 0x5a) && (data >= 0x50)) {
+            } else if(data >= 60) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_4);
-            } else if((data >= 0x3c) && (data < 0x50)) {
+            } else if(data >= 40) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_3);
-            } else if((data < 0x28) || (data >= 0x3c)) {
-                if((data >= 0x14) && (data < 0x28)) {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_1);
-                } else {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_2);
-                }
+            } else if(data >= 20) {
+                mIvElectric.setImageResource(R.mipmap.ic_ele_2);
+            } else {
+                mIvElectric.setImageResource(R.mipmap.ic_ele_1);
             }
         }
-        int chipLife = 0x0;
-        try {
-            chipLife = Integer.parseInt(mMonitor.getChipLife());
-        } catch(Exception ex) {
-            chipLife = 0x0;
-        }
-        if(getActivity() != null) {
-            //PreferencesUtils.putInt(getActivity(), "chiplife", chipLife);
-        }
+//滤芯寿命
+//        int chipLife = 0x0;
+//        try {
+//            chipLife = Integer.parseInt(mMonitor.getChipLife());
+//        } catch(Exception ex) {
+//            chipLife = 0x0;
+//        }
+//        if(getActivity() != null) {
+//            //PreferencesUtils.putInt(getActivity(), "chiplife", chipLife);
+//        }
         initAirQuality();
     }
 

@@ -21,13 +21,21 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
+import com.moral.airtree.model.Monitor;
+import com.moral.airtree.model.MonitorFormaldehyde;
+import com.moral.airtree.model.MonitorHumidity;
+import com.moral.airtree.model.MonitorPm;
+import com.moral.airtree.model.MonitorTemperature;
+import com.moral.airtree.model.MonitorWindSpeed;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends ABaseActivity implements View.OnClickListener {
@@ -125,22 +133,47 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 application.setDeviceChanged(false);
 
                 for (int i = 0; i < response.length(); i++) {
-                    JSONObject obj = response.optJSONObject(i);
+                    JSONObject json = response.optJSONObject(i);
 
                     Device device = new Device();
-                    device.setMac(obj.optString("mac"));
-                    if(!obj.optString("name").isEmpty()) {
-                        device.setName(obj.optString("name"));
+                    device.setMac(json.optString("mac"));
+                    if(!json.optString("name").isEmpty()) {
+                        device.setName(json.optString("name"));
                     } else {
-                        device.setName(obj.optString("mac"));
+                        device.setName(json.optString("mac"));
                     }
-                    device.setStatus(obj.optInt("status"));
-                    device.set_id(obj.optString("_id"));
+                    device.setStatus(json.optInt("status"));
+                    device.set_id(json.optString("_id"));
                     mDevices.add(device);
 
                     Fragment roomFragment = new RoomFragment();
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("device", device);
+
+                    Monitor mMonitor = null;
+                    JSONObject data = json.optJSONObject("data");
+                    if(data != null) {
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String date  = dateFormat.format(new Date(data.optLong("created")));
+
+                        MonitorPm mPm = new MonitorPm(date, data.optLong("x1"), "");
+                        mPm.setPm03p01(data.optInt("x3"));
+                        MonitorWindSpeed mWs = new MonitorWindSpeed(date, data.optLong("x12"), "");
+                        MonitorHumidity mHu = new MonitorHumidity(data.optString("x10"), date, "");
+                        MonitorTemperature mTe = new MonitorTemperature(data.optString("x11"), date, "");
+                        MonitorFormaldehyde mFo = new MonitorFormaldehyde(data.optLong("x9"), date, "");
+                        mMonitor = new Monitor("", data.optString("x13"), "", data.optLong("x14"), "", 1l, "", date, mPm, mWs, mHu, mTe, mFo);
+                    } else {
+                        MonitorPm mPm = new MonitorPm("", 0l, "");
+                        mPm.setPm03p01(0);
+                        MonitorWindSpeed mWs = new MonitorWindSpeed("", 0l, "");
+                        MonitorHumidity mHu = new MonitorHumidity("", "", "");
+                        MonitorTemperature mTe = new MonitorTemperature("", "", "");
+                        MonitorFormaldehyde mFo = new MonitorFormaldehyde(0l, "", "");
+                        mMonitor = new Monitor("", "", "", 0l, "", 0l, "", "", mPm, mWs, mHu, mTe, mFo);
+                    }
+                    bundle.putSerializable("monitor", mMonitor);
+
                     roomFragment.setArguments(bundle);
                     mFragmentList.add(roomFragment);
                 }
@@ -148,6 +181,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 application.setDevices(mDevices);
 
                 setFragmentTitle();
+
                 runOnUiThread (new Thread(new Runnable() {
                     public void run() {
                         mViewPagerAdapter.notifyDataSetChanged();
@@ -191,7 +225,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private void setFragmentTitle() {
         int position = mViewPager.getCurrentItem();
-
         if((mDevices.size() > 0) && (position < mDevices.size())) {
             Device device = (Device)mDevices.get(position);
             if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {

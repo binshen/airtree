@@ -8,17 +8,10 @@ import com.moral.airtree.widget.MyCircleView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.view.View;
-import android.content.res.Resources;
-import com.moral.airtree.model.MonitorFormaldehyde;
-import android.support.v4.app.FragmentActivity;
-import android.content.Context;
-import com.moral.airtree.utils.DisplayUtil;
-import com.moral.airtree.model.MonitorHumidity;
+
+import com.moral.airtree.utils.DisplayUtils;
+
 import android.text.TextUtils;
-import com.moral.airtree.widget.LoadDialog;
-import com.moral.airtree.model.MonitorPm;
-import com.moral.airtree.model.MonitorTemperature;
-import com.moral.airtree.model.MonitorWindSpeed;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -98,7 +91,7 @@ public class MonitorFragment extends ABaseFragment {
             return;
         }
         mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
-        float size = (float)DisplayUtil.sp2px(getActivity(), 30.0f);
+        float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
         mTvValue.setTextSize(size);
         if((mMonitor.getFormaldehyde() != null) && (mMonitor.getFormaldehyde().getFormaldehyde_data() != null)) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde().getFormaldehyde_data()));

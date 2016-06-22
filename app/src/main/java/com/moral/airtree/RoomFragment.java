@@ -62,13 +62,9 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private Handler timeHandler = new Handler();
     private Runnable runnable = new Runnable() {
         public void run() {
-            timeHandler.postDelayed(this, 0xea60);
+            timeHandler.postDelayed(this, 60000);
         }
     };
-
-    public RoomFragment() {
-        //this.mDevice = (Device) getArguments().getSerializable("device");
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,13 +87,13 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mMonitor = new Monitor("1", "1", "1", 1l, "1", 1l, "1", "2016-06-06 12:13:14", mPm, mWs, mHu, mTe, mFo);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-
-        outState.putSerializable("mDevice", mDevice);
-        outState.putSerializable("monitor", mMonitor);
-        super.onSaveInstanceState(outState);
-    }
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//
+//        outState.putSerializable("mDevice", mDevice);
+//        outState.putSerializable("monitor", mMonitor);
+//        super.onSaveInstanceState(outState);
+//    }
 
     public void onStart() {
         super.onStart();
@@ -110,7 +106,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         requestMonitorData();
         if(FlagUtils.flag) {
             timeHandler.removeCallbacks(runnable);
-            timeHandler.postDelayed(runnable, 0xea60);
+            timeHandler.postDelayed(runnable, 60000);
             FlagUtils.flag = false;
         }
         return mView;
@@ -191,7 +187,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mLayMainCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                if((System.currentTimeMillis() - mExitTime) > 0x5dc) {
+                if((System.currentTimeMillis() - mExitTime) > 1500) {
                     mExitTime = System.currentTimeMillis();
                     return;
                 }
@@ -200,16 +196,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initData() {
-//        int deviceStatus = mDevice.getStatus();
-//        int code = deviceStatus;
-//        String status = "";
-//        if(code == 0) {
-//            status = mMonitor.getCreate_date();
-//        } else if(code == 0x1) {
-//        } else if(code == 0x2) {
-//        } else if(code == 0x3) {
-//        }
-//        mTvSuggest.setText(status);
         mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreate_date());
         if(mMonitor == null) {
             return;

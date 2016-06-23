@@ -110,7 +110,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         if(mMonitor == null) {
             return;
         }
-        if(mDevice.getStatus() == 0) {
+        if(mDevice.getStatus() != 1) {
             Toast.makeText(getActivity(), "请启动空气树设备", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -272,19 +272,16 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private void initAirQuality() {
         if(mMonitor.getPm().getPm_data() != null) {
             long pmData = mMonitor.getPm().getPm_data().longValue();
-            if((pmData > 0x0) && (pmData <= 0x23)) {
+            if(pmData <= 35) {
                 mTvAirQuality.setText(R.string.airquality_good);
                 return;
-            }
-            if((pmData > 0x23) && (pmData <= 0x4b)) {
+            } else if(pmData <= 75) {
                 mTvAirQuality.setText(R.string.airquality_very);
                 return;
-            }
-            if((pmData > 0x4b) && (pmData <= 0x96)) {
+            } else if(pmData <= 150) {
                 mTvAirQuality.setText(R.string.airquality_general);
                 return;
-            }
-            if(pmData > 0x96) {
+            } else {
                 mTvAirQuality.setText(R.string.airquality_poor);
             }
         }

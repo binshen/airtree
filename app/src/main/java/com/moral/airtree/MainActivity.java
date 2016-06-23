@@ -6,10 +6,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,7 +19,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
@@ -86,53 +84,17 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mPagerIndicator.setViewPager(mViewPager);
 
         setViewPagerChanger();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
 
         addFragments();
 
-        timeHandler.removeCallbacks(runnable);
+        //timeHandler.removeCallbacks(runnable);
         timeHandler.postDelayed(runnable, 6000);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch(v.getId()) {
-            case R.id.iv_personal:
-                startActivityForResult(new Intent(this, PersonalMainActivity.class), 1);
-                break;
-
-            case R.id.iv_mall:
-                startActivity(new Intent(this, ShopActivity.class));
-                break;
-
-            case R.id.tv_history:
-                startActivity(new Intent(this, HistoryActivity.class));
-                break;
-
-            case R.id.tv_devicemanager:
-                startActivity(new Intent(this, DeviceManagerActivity.class));
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_CANCELED) {
-            return;
-        }
-
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                finish();
-            }
-        }
-    }
+//    @Override
+//    protected void onStart() {
+//        super.onStart();
+//    }
 
     public void onDestroy() {
         super.onDestroy();
@@ -199,13 +161,17 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
                 setFragmentTitle();
 
-                runOnUiThread (new Thread(new Runnable() {
-                    public void run() {
-                        mViewPagerAdapter.notifyDataSetChanged();
-                        mPagerIndicator.notifyDataSetChanged();
-                        mLoadDialog.dismiss();
-                    }
-                }));
+                mViewPagerAdapter.notifyDataSetChanged();
+                mPagerIndicator.notifyDataSetChanged();
+                mLoadDialog.dismiss();
+
+//                runOnUiThread (new Thread(new Runnable() {
+//                    public void run() {
+//                        mViewPagerAdapter.notifyDataSetChanged();
+//                        mPagerIndicator.notifyDataSetChanged();
+//                        mLoadDialog.dismiss();
+//                    }
+//                }));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -222,6 +188,18 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mViewPager.removeAllViews();
         mViewPagerAdapter.notifyDataSetChanged();
         mPagerIndicator.notifyDataSetChanged();
+    }
+
+    private void setFragmentTitle() {
+        int position = mViewPager.getCurrentItem();
+        if((mDevices.size() > 0) && (position < mDevices.size())) {
+            Device device = mDevices.get(position);
+            if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
+                mTvTitle.setText(device.getName());
+            }
+            return;
+        }
+        mTvTitle.setText("未知设备");
     }
 
     private void setViewPagerChanger() {
@@ -241,33 +219,55 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         });
     }
 
-    private void setFragmentTitle() {
-        int position = mViewPager.getCurrentItem();
-        if((mDevices.size() > 0) && (position < mDevices.size())) {
-            Device device = mDevices.get(position);
-            if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
-                mTvTitle.setText(device.getName());
-            }
-            return;
-        }
-        mTvTitle.setText("未知设备");
-    }
-
-    class DevicePagerAdapter extends FragmentPagerAdapter {
+    class DevicePagerAdapter extends FragmentStatePagerAdapter {
         public DevicePagerAdapter(FragmentManager fm) {
             super(fm);
         }
-
+        @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
         }
-
+        @Override
         public int getItemPosition(Object object) {
             return POSITION_NONE;
         }
-
+        @Override
         public int getCount() {
             return mFragmentList.size();
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch(v.getId()) {
+            case R.id.iv_personal:
+                startActivityForResult(new Intent(this, PersonalMainActivity.class), 1);
+                break;
+
+            case R.id.iv_mall:
+                startActivity(new Intent(this, ShopActivity.class));
+                break;
+
+            case R.id.tv_history:
+                startActivity(new Intent(this, HistoryActivity.class));
+                break;
+
+            case R.id.tv_devicemanager:
+                startActivity(new Intent(this, DeviceManagerActivity.class));
+                break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_CANCELED) {
+            return;
+        }
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                finish();
+            }
         }
     }
 }

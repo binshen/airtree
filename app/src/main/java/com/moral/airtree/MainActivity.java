@@ -3,6 +3,7 @@ package com.moral.airtree;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -49,13 +50,21 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private TextView mTvDeviceManager;
     private TextView mTvHistory;
 
+    private Handler timeHandler = new Handler();
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            addFragments();
+            timeHandler.postDelayed(this, 6000);
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mDevices = new ArrayList<Device>();
-        mFragmentList = new ArrayList<Fragment>();
+        mDevices = new ArrayList<>();
+        mFragmentList = new ArrayList<>();
 
         ImageView ivPersonal = (ImageView)findViewById(R.id.iv_personal);
         ivPersonal.setOnClickListener(this);
@@ -69,7 +78,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mTvHistory.setOnClickListener(this);
 
         mViewPager = (ViewPager)findViewById(R.id.viewPaper);
-        mViewPagerAdapter = new DevicePagerAdapter(this, getSupportFragmentManager());
+        mViewPagerAdapter = new DevicePagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
 
         mPagerIndicator = (CirclePageIndicator)findViewById(R.id.pageindicator);
@@ -83,6 +92,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         super.onStart();
 
         addFragments();
+
+        timeHandler.removeCallbacks(runnable);
+        timeHandler.postDelayed(runnable, 6000);
     }
 
     @Override
@@ -119,6 +131,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 finish();
             }
         }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        timeHandler.removeCallbacks(runnable);
     }
 
     private void addFragments() {
@@ -226,7 +243,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private void setFragmentTitle() {
         int position = mViewPager.getCurrentItem();
         if((mDevices.size() > 0) && (position < mDevices.size())) {
-            Device device = (Device)mDevices.get(position);
+            Device device = mDevices.get(position);
             if((device != null) && (!TextUtils.isEmpty(device.getMac()))) {
                 mTvTitle.setText(device.getName());
             }
@@ -236,16 +253,16 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     }
 
     class DevicePagerAdapter extends FragmentPagerAdapter {
-        public DevicePagerAdapter(MainActivity p1, FragmentManager fm) {
+        public DevicePagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
         public Fragment getItem(int position) {
-            return (Fragment) mFragmentList.get(position);
+            return mFragmentList.get(position);
         }
 
         public int getItemPosition(Object object) {
-            return -0x2;
+            return POSITION_NONE;
         }
 
         public int getCount() {

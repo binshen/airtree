@@ -34,12 +34,9 @@ import com.moral.airtree.widget.LoadDialog;
  */
 public class RoomFragment extends Fragment implements View.OnClickListener {
 
-
-    Context mContext;
     private long mExitTime;
     private ImageView mIvElectric;
     private LinearLayout mLayMainCenter;
-    private LoadDialog mLoadDialog;
     private Monitor mMonitor;
 
     private RelativeLayout mRlltFormaldehyde;
@@ -55,22 +52,20 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private TextView mTvSuggest;
     private TextView mTvTemperature2;
     private View mView;
-    private boolean mHasConnect = false;
 
     private Device mDevice;
 
-    private Handler timeHandler = new Handler();
-    private Runnable runnable = new Runnable() {
-        public void run() {
-            timeHandler.postDelayed(this, 60000);
-        }
-    };
+//    private Handler timeHandler = new Handler();
+//    private Runnable runnable = new Runnable() {
+//        public void run() {
+//            timeHandler.postDelayed(this, 6000);
+//        }
+//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLoadDialog = new LoadDialog(getActivity());
 //        if((savedInstanceState != null) && (savedInstanceState.containsKey("mDevice"))) {
 //            mDevice = (Device)savedInstanceState.get("mDevice");
 //            mMonitor = (Monitor)savedInstanceState.get("monitor");
@@ -93,15 +88,18 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_room, container, false);
         requestMonitorData();
-        if(FlagUtils.flag) {
-            timeHandler.removeCallbacks(runnable);
-            timeHandler.postDelayed(runnable, 60000);
-            FlagUtils.flag = false;
-        }
+//        if(FlagUtils.flag) {
+//            timeHandler.removeCallbacks(runnable);
+//            timeHandler.postDelayed(runnable, 6000);
+//            FlagUtils.flag = false;
+//        }
+
+//        timeHandler.removeCallbacks(runnable);
+//        timeHandler.postDelayed(runnable, 6000);
+
         return mView;
     }
 
@@ -147,15 +145,14 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mContext = getActivity();
-        initView();
 
+        initView();
         initData();
     }
 
     public void onDestroy() {
         super.onDestroy();
-        timeHandler.removeCallbacks(runnable);
+        //timeHandler.removeCallbacks(runnable);
     }
 
     private void initView() {

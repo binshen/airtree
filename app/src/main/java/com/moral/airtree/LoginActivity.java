@@ -38,7 +38,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        checkNetWork();
+        prepare();
 
         mEtUsername = (EditText)findViewById(R.id.et_username);
         mEtPassword = (EditText)findViewById(R.id.et_password);
@@ -56,29 +56,29 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     @Override
     protected void onStart() {
         super.onStart();
-
-        if(application.getLoginUser() != null) {
-            String url = basePath + "/user/" + application.getLoginUserID() + "/online";
-            RequestQueue queue = Volley.newRequestQueue(this);
-            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-                @Override
-                public void onResponse(JSONObject response) {
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                    finish();
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                }
-            });
-            queue.add(jsonRequest);
-        }
     }
 
-    private void checkNetWork() {
+    private void prepare() {
         if(!NetUtils.getNetConnect(this)) {
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
+        } else {
+            if(application.getLoginUser() != null) {
+                String url = basePath + "/user/" + application.getLoginUserID() + "/online";
+                RequestQueue queue = Volley.newRequestQueue(this);
+                JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        finish();
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
+                queue.add(jsonRequest);
+            }
         }
     }
 

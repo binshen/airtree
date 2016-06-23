@@ -89,8 +89,9 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
 
     public void registerUser(String tel, String valid, String pwd) {
         String url = basePath + "/user/register";
+        Log.d("debug", url);
 
-        final Map<String, String> params = new HashMap<String, String>();
+        final Map<String, String> params = new HashMap<>();
         params.put("username", tel);
         params.put("password", pwd);
         params.put("validate", valid);
@@ -100,7 +101,12 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("debug", response.toString());
-                finish();;
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override

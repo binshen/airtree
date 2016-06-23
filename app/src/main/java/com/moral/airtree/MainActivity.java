@@ -76,6 +76,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mPagerIndicator.setViewPager(mViewPager);
 
         setViewPagerChanger();
+
+        notifyUserOnlineStatus();
     }
 
     @Override
@@ -251,5 +253,22 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         public int getCount() {
             return mFragmentList.size();
         }
+    }
+
+    private void notifyUserOnlineStatus() {
+        String url = basePath + "/user/" + application.getLoginUserID() + "/online";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                //boolean success = response.optBoolean("success");
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

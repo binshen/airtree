@@ -34,9 +34,9 @@ import com.moral.airtree.widget.LoadDialog;
  */
 public class RoomFragment extends Fragment implements View.OnClickListener {
 
-    private long mExitTime;
+//    private long mExitTime;
     private ImageView mIvElectric;
-    private LinearLayout mLayMainCenter;
+//    private LinearLayout mLayMainCenter;
     private Monitor mMonitor;
 
     private RelativeLayout mRlltFormaldehyde;
@@ -52,55 +52,30 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private TextView mTvSuggest;
     private TextView mTvTemperature2;
     private View mView;
-
     private Device mDevice;
-
-//    private Handler timeHandler = new Handler();
-//    private Runnable runnable = new Runnable() {
-//        public void run() {
-//            timeHandler.postDelayed(this, 6000);
-//        }
-//    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        if((savedInstanceState != null) && (savedInstanceState.containsKey("mDevice"))) {
-//            mDevice = (Device)savedInstanceState.get("mDevice");
-//            mMonitor = (Monitor)savedInstanceState.get("monitor");
-//        }
-
         this.mDevice = (Device) getArguments().getSerializable("device");
         this.mMonitor = (Monitor) getArguments().getSerializable("monitor");
-    }
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//
-//        outState.putSerializable("mDevice", mDevice);
-//        outState.putSerializable("monitor", mMonitor);
-//        super.onSaveInstanceState(outState);
-//    }
-
-    public void onStart() {
-        super.onStart();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_room, container, false);
-        requestMonitorData();
-//        if(FlagUtils.flag) {
-//            timeHandler.removeCallbacks(runnable);
-//            timeHandler.postDelayed(runnable, 6000);
-//            FlagUtils.flag = false;
-//        }
-
-//        timeHandler.removeCallbacks(runnable);
-//        timeHandler.postDelayed(runnable, 6000);
-
         return mView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -150,11 +125,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         initData();
     }
 
-    public void onDestroy() {
-        super.onDestroy();
-        //timeHandler.removeCallbacks(runnable);
-    }
-
     private void initView() {
         mRlltpm25 = (RelativeLayout)mView.findViewById(R.id.rl_pm25);
         mRlltTemperature = (RelativeLayout)mView.findViewById(R.id.rl_temperature);
@@ -173,27 +143,33 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvFormaldehydeValue = (TextView)mView.findViewById(R.id.tv_formaldehyde_value);
         mTvTemperature2 = (TextView)mView.findViewById(R.id.tv_temperature2_value);
         mIvElectric = (ImageView)mView.findViewById(R.id.iv_electric_value);
-        mLayMainCenter = (LinearLayout)mView.findViewById(R.id.lay_main_center);
-        mLayMainCenter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View arg0) {
-                if((System.currentTimeMillis() - mExitTime) > 1500) {
-                    mExitTime = System.currentTimeMillis();
-                    return;
-                }
-            }
-        });
+//        mLayMainCenter = (LinearLayout)mView.findViewById(R.id.lay_main_center);
+//        mLayMainCenter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View arg0) {
+//                if((System.currentTimeMillis() - mExitTime) > 1500) {
+//                    mExitTime = System.currentTimeMillis();
+//                    return;
+//                }
+//            }
+//        });
     }
 
     private void initData() {
-        mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreate_date());
         if(mMonitor == null) {
             return;
         }
+        int status = mDevice.getStatus();
         if((mMonitor.getPm() != null) && (mMonitor.getPm().getPm_data() != null)) {
+            if(status == 1) {
+                mTvSuggest.setText("");
+                mTvMainLabel.setText("云端在线");
+            } else {
+                mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreate_date());
+                mTvMainLabel.setText("0.3um颗粒物个数");
+            }
             mTvPM25Value.setText(mMonitor.getPm().getPm_data() + "ug/m³");
             mTvMain.setText(String.valueOf(mMonitor.getPm().getPm03p01()));
-            mTvMainLabel.setText("0.3um颗粒物个数");
         } else {
             mTvPM25Value.setText(R.string.airquality_unknow);
             mTvMain.setText(R.string.airquality_unknow);
@@ -230,19 +206,21 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         } else {
             mTvFormaldehydeValue.setText(R.string.airquality_unknow);
         }
-        if(!TextUtils.isEmpty(mMonitor.getElectricQuantity())) {
+        if(!TextUtils.isEmpty(mMonitor.getElectricQuantity()) && mDevice.getType() == 1) {
             int data = Integer.parseInt(mMonitor.getElectricQuantity());
-            if(data >= 80) {
+            if(data == 5) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_5);
-            } else if(data >= 60) {
+            } else if(data == 4) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_4);
-            } else if(data >= 40) {
+            } else if(data == 3) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_3);
-            } else if(data >= 20) {
+            } else if(data == 2) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_2);
             } else {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_1);
             }
+        } else {
+            mIvElectric.setImageResource(R.mipmap.ic_ele_5);
         }
 //滤芯寿命
 //        int chipLife = 0x0;
@@ -282,9 +260,5 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
                 mTvAirQuality.setText(R.string.airquality_poor);
             }
         }
-    }
-
-    private void requestMonitorData() {
-
     }
 }

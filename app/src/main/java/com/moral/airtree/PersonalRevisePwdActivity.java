@@ -85,7 +85,7 @@ public class PersonalRevisePwdActivity extends ABaseActivity implements View.OnC
     }
 
     public void changePassword(String oldPwd, String newPwd) {
-        String url = basePath + "/user/" + application.getLoginUserID() + "/change_pwd";
+        String url = basePath + "/user/" + application.getLoginUserID() + "/change_psw";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final Map<String, String> params = new HashMap<String, String>();

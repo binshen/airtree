@@ -1,8 +1,11 @@
 package com.moral.airtree;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +13,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -22,7 +36,6 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
     private ImageView mIvBack;
     private CountDownTimer mTime;
     private TextView mTvTitle;
-    TextWatcher mVerifyTextWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +53,6 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         mIvBack.setOnClickListener(this);
         mBtnGetvalidate.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
-        mEtPhonenum.addTextChangedListener(mVerifyTextWatcher);
 
         mTime = new CountDownTimer(60000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -57,9 +69,9 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String phonenum = mEtPhonenum.getText().toString().trim();
+        String username = mEtPhonenum.getText().toString().trim();
         String inputvalidate = mEtInputvalidate.getText().toString().trim();
-        String inputpasswd = mEtInputpasswd.getText().toString().trim();
+        String password = mEtInputpasswd.getText().toString().trim();
         switch(v.getId()) {
             case R.id.left_btn:
                 finish();
@@ -70,8 +82,32 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_register:
-                Toast.makeText(getApplicationContext(), "注册账户", Toast.LENGTH_SHORT).show();
+                registerUser(username, inputvalidate, password);
                 break;
         }
+    }
+
+    public void registerUser(String tel, String valid, String pwd) {
+        String url = basePath + "/user/register";
+
+        final Map<String, String> params = new HashMap<String, String>();
+        params.put("username", tel);
+        params.put("password", pwd);
+        params.put("validate", valid);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("debug", response.toString());
+                finish();;
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

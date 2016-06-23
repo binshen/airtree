@@ -58,8 +58,21 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         super.onStart();
 
         if(application.getLoginUser() != null) {
-            startActivity(new Intent(this, MainActivity.class));
-            finish();
+            String url = basePath + "/user/" + application.getLoginUserID() + "/online";
+            RequestQueue queue = Volley.newRequestQueue(this);
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                }
+            });
+            queue.add(jsonRequest);
         }
     }
 
@@ -84,14 +97,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 break;
 
             case R.id.btn_login:
-/*
-                User loginUser = new User();
-                loginUser.setUsername(username);
-                loginUser.setPassword(password);
-                application.setLoginUser(loginUser);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-*/
-
                 if((!TextUtils.isEmpty(username)) && (!TextUtils.isEmpty(password))) {
                     if(!NetUtils.getNetConnect(this)) {
                         Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();

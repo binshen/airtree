@@ -6,9 +6,11 @@
     <item type="id" name="btn_ok">false</item>
     <item type="id" name="tv_bianma">false</item>
     <item type="id" name="rl1">false</item>
+    <item type="id" name="rl4">false</item>
     <item type="id" name="textView2">false</item>
     <item type="id" name="iv">false</item>
     <item type="id" name="tv_where">false</item>
+    <item type="id" name="tv_style">false</item>
     <item type="id" name="tv_mac">false</item>
     <item type="id" name="tv_c2">false</item>
     <item type="id" name="tv_c3">false</item>
@@ -33,6 +35,7 @@
     <item type="id" name="iv_personal">false</item>
     <item type="id" name="tv_title">false</item>
     <item type="id" name="iv_mall">false</item>
+    <item type="id" name="iv_mall_icon">false</item>
     <item type="id" name="viewPaper">false</item>
     <item type="id" name="lay_point">false</item>
     <item type="id" name="pageindicator">false</item>

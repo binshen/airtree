@@ -51,6 +51,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private TextView mTvDeviceManager;
 
     private ImageView ivPersonal;
+    private ImageView ivMallIcon;
     private TextView ivMall;
 
     private long clickTime = 0;
@@ -75,6 +76,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         ivPersonal.setOnClickListener(this);
         ivMall = (TextView)findViewById(R.id.iv_mall);
         ivMall.setOnClickListener(this);
+        ivMallIcon = (ImageView)findViewById(R.id.iv_mall_icon);
+        ivMallIcon.setOnClickListener(this);
 
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mTvDeviceManager = (TextView)findViewById(R.id.tv_devicemanager);
@@ -240,11 +243,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.iv_mall:
+            case R.id.iv_mall_icon:
                 startActivity(new Intent(this, ShopActivity.class));
-                break;
-
-            case R.id.tv_history:
-                startActivity(new Intent(this, HistoryActivity.class));
                 break;
 
             case R.id.tv_devicemanager:

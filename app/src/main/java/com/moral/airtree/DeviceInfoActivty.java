@@ -31,11 +31,13 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
     private int mPosition;
     private ImageView mIvLeft;
     private RelativeLayout mRl1;
+    private RelativeLayout mRl4;
     private TextView mTvBianma;
     private TextView mTvMac;
-//    private TextView mTvParamthree;
+    private TextView mTvStyle;
     private TextView mTvTitle;
     private TextView mTvWhere;
+    private TextView mTvHistory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +53,12 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mTvBianma = (TextView)findViewById(R.id.tv_bianma);
         mTvMac = (TextView)findViewById(R.id.tv_mac);
         mTvWhere = (TextView)findViewById(R.id.tv_where);
-        //mTvParamthree = (TextView)findViewById(R.id.tv);
+        mTvStyle = (TextView)findViewById(R.id.tv_style);
+        mTvHistory = (TextView)findViewById(R.id.tv_history);
         mRl1 = (RelativeLayout)findViewById(R.id.rl1);
         mRl1.setOnClickListener(this);
+        mRl4 = (RelativeLayout)findViewById(R.id.rl4);
+        mRl4.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnRemovebind.setOnClickListener(this);
     }
@@ -76,6 +81,10 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 bundle.putInt("devicePosition", mPosition);
                 intent.putExtras(bundle);
                 startActivity(intent);
+                break;
+
+            case R.id.rl4:
+                startActivity(new Intent(this, HistoryActivity.class));
                 break;
 
             case R.id.left_btn:

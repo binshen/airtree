@@ -47,6 +47,7 @@
     <string name="sendverify_error">验证码发送失败</string>
     <string name="devicedetail">设备名称</string>
     <string name="device_style">设备类型</string>
+    <string name="device_history">历史数据</string>
     <string name="mac">MAC</string>
     <string name="params2">参数2</string>
     <string name="params3">参数3</string>

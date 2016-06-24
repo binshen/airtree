@@ -87,6 +87,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dip"
+            android:text="@string/device_style"
+            android:layout_centerVertical="true" />
+
+        <TextView
+            android:textSize="@dimen/textsize_30px"
+            android:textColor="@color/listtextcolor2"
+            android:id="@id/tv_style"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="32.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+    </RelativeLayout>
+
+    <View
+        android:background="@color/fengeline2"
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dip" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="50.0dip">
+
+        <TextView
+            android:textSize="@dimen/textsize_30px"
+            android:textColor="@color/listtextcolor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15.0dip"
             android:text="@string/mac"
             android:layout_centerVertical="true" />
 
@@ -107,6 +136,7 @@
         android:layout_height="0.5dip" />
 
     <RelativeLayout
+        android:id="@id/rl4"
         android:layout_width="fill_parent"
         android:layout_height="50.0dip">
 
@@ -116,70 +146,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15.0dip"
-            android:text="@string/params2"
+            android:text="@string/device_history"
             android:layout_centerVertical="true" />
         <TextView
             android:textSize="@dimen/textsize_30px"
             android:textColor="@color/listtextcolor2"
-            android:id="@id/tv_c2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="32.0dip"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-
-    <View
-        android:background="@color/fengeline2"
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dip" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip">
-
-        <TextView
-            android:textSize="@dimen/textsize_30px"
-            android:textColor="@color/listtextcolor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15.0dip"
-            android:text="@string/params3"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:textSize="@dimen/textsize_30px"
-            android:textColor="@color/listtextcolor2"
-            android:id="@id/tv_c3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="32.0dip"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true" />
-    </RelativeLayout>
-
-    <View
-        android:background="@color/fengeline2"
-        android:layout_width="fill_parent"
-        android:layout_height="0.5dip" />
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50.0dip">
-
-        <TextView
-            android:textSize="@dimen/textsize_30px"
-            android:textColor="@color/listtextcolor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15.0dip"
-            android:text="@string/params4"
-            android:layout_centerVertical="true" />
-
-        <TextView
-            android:textSize="@dimen/textsize_30px"
-            android:textColor="@color/listtextcolor2"
-            android:id="@id/tv_c4"
+            android:id="@id/tv_history"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="32.0dip"

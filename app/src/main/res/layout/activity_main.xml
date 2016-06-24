@@ -42,9 +42,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true" />
 
-            <!--
             <ImageView
-                android:id="@id/iv_mall"
+                android:id="@id/iv_mall_icon"
                 android:visibility="visible"
                 android:layout_width="50.0dip"
                 android:layout_height="50.0dip"
@@ -53,7 +52,7 @@
                 android:src="@mipmap/ic_shop"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true" />
-            -->
+
         </RelativeLayout>
 
         <android.support.v4.view.ViewPager

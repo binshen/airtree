@@ -3,13 +3,26 @@ package com.moral.airtree;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonalFeedbackActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -48,13 +61,31 @@ public class PersonalFeedbackActivity extends ABaseActivity implements View.OnCl
                 String feedback = mEtFeedback.getText().toString().trim();
                 if(!TextUtils.isEmpty(feedback)) {
                     userFeedback(feedback);
-                    return;
+                } else {
+                    Toast.makeText(getApplicationContext(), "请填写反馈信息", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
     }
 
-    private void userFeedback(String feedBack) {
+    private void userFeedback(String feedback) {
+        String url = basePath + "/user/" + application.getLoginUserID() + "/feedback";
 
+        final Map<String, String> params = new HashMap<>();
+        params.put("feedback", feedback);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                finish();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

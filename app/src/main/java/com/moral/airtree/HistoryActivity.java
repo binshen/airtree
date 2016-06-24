@@ -1,21 +1,37 @@
 package com.moral.airtree;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.bigkoo.pickerview.TimePickerView;
 
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.model.User;
+
+import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HistoryActivity extends ABaseActivity implements View.OnClickListener {
 
-    private String mDeviceId;
+
+    private String mDeviceMac;
+    private String mDeviceName;
     private TextView mFormaldehyde;
     private TextView mHumidity;
     private ImageView mIvLeft;
@@ -31,15 +47,17 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        Bundle bundle = getIntent().getExtras();
+        mDeviceMac = bundle.getString("deviceMac");
+        mDeviceName = bundle.getString("deviceName");
+
         initTitle();
         initView();
     }
 
     private void initTitle() {
-        Bundle bundle = getIntent().getExtras();
-        String deviceName = bundle.getString("deviceName");
         mTvTitle = (TextView)findViewById(R.id.tv_title);
-        mTvTitle.setText(deviceName);
+        mTvTitle.setText(mDeviceName);
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
 
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
@@ -67,13 +85,33 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         super.onStart();
         String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
         mTvHistoryDate.setText(date);
+
         initData(date);
-        //int chipLife = PreferencesUtils.getInt(this, "chiplife", 0x0);
-        //mPb.setProgress(chipLife);
+
+        int chipLife = 25;
+        mPb.setProgress(chipLife);
     }
 
-    private void initData(String time) {
-
+    private void initData(String date) {
+        String url = basePath + "/device/mac/" + mDeviceMac + "/get_history?day=" + date.replaceAll("-", "");
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("HistoryActivity", response.toString());
+                mPm.setText(response.optString("x1"));
+                mTemperature.setText(response.optString("x11"));
+                mHumidity.setText(response.optString("x10"));
+                mFormaldehyde.setText(response.optString("x9"));
+                mPurificationadd.setText(response.optString("x3"));
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 
     @Override
@@ -97,7 +135,7 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 if(date != null) {
                     mTvHistoryDate.setText(format.format(date));
-                    String time = format.format(date);
+                    initData(format.format(date));
                 }
             }
         });

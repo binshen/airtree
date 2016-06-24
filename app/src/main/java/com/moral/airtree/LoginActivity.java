@@ -62,21 +62,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
         } else {
             if(application.getLoginUser() != null) {
-//                String url = basePath + "/user/" + application.getLoginUserID() + "/online";
-//                RequestQueue queue = Volley.newRequestQueue(this);
-//                JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                        finish();
-//                    }
-//                }, new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                queue.add(jsonRequest);
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }

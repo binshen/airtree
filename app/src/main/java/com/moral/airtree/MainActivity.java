@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,6 +50,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private DevicePagerAdapter mViewPagerAdapter;
     private TextView mTvDeviceManager;
     private TextView mTvHistory;
+
+    private long clickTime = 0;
 
     private Handler timeHandler = new Handler();
     private Runnable runnable = new Runnable() {
@@ -161,17 +165,13 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
                 setFragmentTitle();
 
-                mViewPagerAdapter.notifyDataSetChanged();
-                mPagerIndicator.notifyDataSetChanged();
-                mLoadDialog.dismiss();
-
-//                runOnUiThread (new Thread(new Runnable() {
-//                    public void run() {
-//                        mViewPagerAdapter.notifyDataSetChanged();
-//                        mPagerIndicator.notifyDataSetChanged();
-//                        mLoadDialog.dismiss();
-//                    }
-//                }));
+                runOnUiThread (new Thread(new Runnable() {
+                    public void run() {
+                        mViewPagerAdapter.notifyDataSetChanged();
+                        mPagerIndicator.notifyDataSetChanged();
+                        mLoadDialog.dismiss();
+                    }
+                }));
             }
         }, new Response.ErrorListener() {
             @Override
@@ -270,5 +270,19 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 finish();
             }
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - clickTime) > 2000) {
+                Toast.makeText(getApplicationContext(), "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
+                clickTime = System.currentTimeMillis();
+            } else {
+                this.finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

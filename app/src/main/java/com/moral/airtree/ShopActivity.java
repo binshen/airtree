@@ -39,7 +39,7 @@ public class ShopActivity extends ABaseActivity {
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mIvRight = (ImageView)findViewById(R.id.right_btn);
-        mTvTitle.setText("");
+        mTvTitle.setText("在线商城");
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvRight.setVisibility(View.INVISIBLE);
         mIvLeft.setImageResource(R.mipmap.back);

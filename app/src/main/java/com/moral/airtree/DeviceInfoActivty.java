@@ -71,11 +71,11 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
     }
 
     public void onClick(View v) {
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
         switch (v.getId()) {
             case R.id.rl1:
-                Intent intent = new Intent();
                 intent.setClass(this, DeviceDetailReviseActivity.class);
-                Bundle bundle = new Bundle();
                 bundle.putString("deviceID", mDevice.get_id());
                 bundle.putString("deviceName", mDevice.getName());
                 bundle.putInt("devicePosition", mPosition);
@@ -84,7 +84,12 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 break;
 
             case R.id.rl4:
-                startActivity(new Intent(this, HistoryActivity.class));
+                intent.setClass(this, HistoryActivity.class);
+                bundle.putString("deviceMac", mDevice.getMac());
+                bundle.putString("deviceName", mDevice.getName());
+                bundle.putInt("devicePosition", mPosition);
+                intent.putExtras(bundle);
+                startActivity(intent);
                 break;
 
             case R.id.left_btn:

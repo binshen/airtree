@@ -126,6 +126,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                     }
                     device.setStatus(json.optInt("status"));
                     device.set_id(json.optString("_id"));
+                    device.setType(json.optInt("type"));
+                    device.setLast_updated(json.optLong("last_updated"));
                     mDevices.add(device);
 
                     Fragment roomFragment = new RoomFragment();

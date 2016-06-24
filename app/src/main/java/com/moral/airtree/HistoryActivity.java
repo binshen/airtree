@@ -31,18 +31,18 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        if(getIntent() != null) {
-            mDeviceId = getIntent().getStringExtra("device_id");
-        }
         initTitle();
         initView();
     }
 
     private void initTitle() {
+        Bundle bundle = getIntent().getExtras();
+        String deviceName = bundle.getString("deviceName");
         mTvTitle = (TextView)findViewById(R.id.tv_title);
-        mIvLeft = (ImageView)findViewById(R.id.left_btn);
-        mTvTitle.setText("历史数据");
+        mTvTitle.setText(deviceName);
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
+
+        mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mIvLeft.setImageResource(R.mipmap.back);
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override

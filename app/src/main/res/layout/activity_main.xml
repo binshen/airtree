@@ -105,6 +105,7 @@
             android:layout_height="fill_parent">
 
             <LinearLayout
+                android:id="@id/rl_devicemanager"
                 android:gravity="center"
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
@@ -116,6 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/devicemanager"
+                    android:textSize="@dimen/textsize_32px"
                     android:drawableLeft="@mipmap/ic_device"
                     android:drawablePadding="5.0dip" />
             </LinearLayout>
@@ -126,6 +128,7 @@
                 android:layout_height="fill_parent" />
 
             <LinearLayout
+                android:id="@id/rl_mall"
                 android:gravity="center"
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
@@ -137,6 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="fill_parent"
                     android:text="@string/online_shop"
+                    android:textSize="@dimen/textsize_32px"
                     android:drawableLeft="@mipmap/ic_shop_blue"
                     android:drawablePadding="5.0dip" />
             </LinearLayout>

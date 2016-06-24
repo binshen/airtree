@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +56,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private ImageView ivMallIcon;
     private TextView ivMall;
 
+    private LinearLayout rl_devicemanager;
+    private LinearLayout rl_mall;
+
     private long clickTime = 0;
 
     private Handler timeHandler = new Handler();
@@ -75,16 +79,25 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mDevices = new ArrayList<>();
         mFragmentList = new ArrayList<>();
 
+        mTvTitle = (TextView)findViewById(R.id.tv_title);
+
         ivPersonal = (ImageView)findViewById(R.id.iv_personal);
         ivPersonal.setOnClickListener(this);
+
         ivMall = (TextView)findViewById(R.id.iv_mall);
-        ivMall.setOnClickListener(this);
+        //ivMall.setOnClickListener(this);
+
         ivMallIcon = (ImageView)findViewById(R.id.iv_mall_icon);
         ivMallIcon.setOnClickListener(this);
 
-        mTvTitle = (TextView)findViewById(R.id.tv_title);
+        rl_devicemanager = (LinearLayout)findViewById(R.id.rl_devicemanager);
+        rl_devicemanager.setOnClickListener(this);
+
+        rl_mall = (LinearLayout)findViewById(R.id.rl_mall);
+        rl_mall.setOnClickListener(this);
+
         mTvDeviceManager = (TextView)findViewById(R.id.tv_devicemanager);
-        mTvDeviceManager.setOnClickListener(this);
+        //mTvDeviceManager.setOnClickListener(this);
 
         mViewPager = (ViewPager)findViewById(R.id.viewPaper);
         mViewPagerAdapter = new DevicePagerAdapter(getSupportFragmentManager());
@@ -132,21 +145,21 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                application.setDeviceChanged(false);
+                //application.setDeviceChanged(false);
 
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject json = response.optJSONObject(i);
 
                     Device device = new Device();
+                    device.set_id(json.optString("_id"));
                     device.setMac(json.optString("mac"));
                     if(!json.optString("name").isEmpty()) {
                         device.setName(json.optString("name"));
                     } else {
                         device.setName(json.optString("mac"));
                     }
-                    device.setStatus(json.optInt("status"));
-                    device.set_id(json.optString("_id"));
                     device.setType(json.optInt("type"));
+                    device.setStatus(json.optInt("status"));
                     device.setLast_updated(json.optLong("last_updated"));
                     mDevices.add(device);
 
@@ -264,12 +277,14 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 startActivityForResult(new Intent(this, PersonalMainActivity.class), 1);
                 break;
 
-            case R.id.iv_mall:
+            //case R.id.iv_mall:
+            case R.id.rl_mall:
             case R.id.iv_mall_icon:
                 startActivity(new Intent(this, ShopActivity.class));
                 break;
 
-            case R.id.tv_devicemanager:
+            //case R.id.tv_devicemanager:
+            case R.id.rl_devicemanager:
                 startActivity(new Intent(this, DeviceManagerActivity.class));
                 break;
         }

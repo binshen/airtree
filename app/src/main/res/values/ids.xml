@@ -41,6 +41,8 @@
     <item type="id" name="pageindicator">false</item>
     <item type="id" name="tv_history">false</item>
     <item type="id" name="tv_devicemanager">false</item>
+    <item type="id" name="rl_devicemanager">false</item>
+    <item type="id" name="rl_mall">false</item>
     <item type="id" name="rl_main">false</item>
     <item type="id" name="lay_top">false</item>
     <item type="id" name="vp">false</item>

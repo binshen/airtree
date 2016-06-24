@@ -128,6 +128,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         initData();
     }
 
@@ -141,5 +142,12 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mTvMac.setText(mDevice.getMac().toUpperCase());
         mTvBianma.setText(mDevice.get_id());
         mTvWhere.setText(mDevice.getName());
+
+        int type = mDevice.getType();
+        if(type == 1) {
+            mTvStyle.setText("主机");
+        } else {
+            mTvStyle.setText("从机");
+        }
     }
 }

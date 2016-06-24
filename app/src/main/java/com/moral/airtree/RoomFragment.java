@@ -34,9 +34,7 @@ import com.moral.airtree.widget.LoadDialog;
  */
 public class RoomFragment extends Fragment implements View.OnClickListener {
 
-//    private long mExitTime;
     private ImageView mIvElectric;
-//    private LinearLayout mLayMainCenter;
     private Monitor mMonitor;
 
     private RelativeLayout mRlltFormaldehyde;
@@ -143,16 +141,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvFormaldehydeValue = (TextView)mView.findViewById(R.id.tv_formaldehyde_value);
         mTvTemperature2 = (TextView)mView.findViewById(R.id.tv_temperature2_value);
         mIvElectric = (ImageView)mView.findViewById(R.id.iv_electric_value);
-//        mLayMainCenter = (LinearLayout)mView.findViewById(R.id.lay_main_center);
-//        mLayMainCenter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View arg0) {
-//                if((System.currentTimeMillis() - mExitTime) > 1500) {
-//                    mExitTime = System.currentTimeMillis();
-//                    return;
-//                }
-//            }
-//        });
     }
 
     private void initData() {

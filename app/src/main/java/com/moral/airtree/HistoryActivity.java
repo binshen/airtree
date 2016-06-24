@@ -98,20 +98,12 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                if(response != null) {
-                    Log.d("HistoryActivity", response.toString());
-                    mPm.setText(response.optString("x1"));
-                    mTemperature.setText(response.optString("x11"));
-                    mHumidity.setText(response.optString("x10"));
-                    mFormaldehyde.setText(response.optString("x9"));
-                    mPurificationadd.setText(response.optString("x3"));
-                } else {
-                    mPm.setText("");
-                    mTemperature.setText("");
-                    mHumidity.setText("");
-                    mFormaldehyde.setText("");
-                    mPurificationadd.setText("");
-                }
+                Log.d("HistoryActivity", response.toString());
+                mPm.setText(response.optString("x1"));
+                mTemperature.setText(response.optString("x11"));
+                mHumidity.setText(response.optString("x10"));
+                mFormaldehyde.setText(response.optString("x9"));
+                mPurificationadd.setText(response.optString("x3"));
             }
         }, new Response.ErrorListener() {
             @Override

@@ -42,6 +42,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true" />
 
+            <!--
             <ImageView
                 android:id="@id/iv_mall"
                 android:visibility="visible"
@@ -52,6 +53,7 @@
                 android:src="@mipmap/ic_shop"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true" />
+            -->
         </RelativeLayout>
 
         <android.support.v4.view.ViewPager
@@ -111,11 +113,11 @@
 
                 <TextView
                     android:gravity="center_vertical"
-                    android:id="@id/tv_history"
+                    android:id="@id/tv_devicemanager"
                     android:layout_width="wrap_content"
-                    android:layout_height="fill_parent"
-                    android:text="@string/history_data"
-                    android:drawableLeft="@mipmap/ic_history"
+                    android:layout_height="wrap_content"
+                    android:text="@string/devicemanager"
+                    android:drawableLeft="@mipmap/ic_device"
                     android:drawablePadding="5.0dip" />
             </LinearLayout>
 
@@ -132,11 +134,11 @@
 
                 <TextView
                     android:gravity="center_vertical"
-                    android:id="@id/tv_devicemanager"
+                    android:id="@id/iv_mall"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/devicemanager"
-                    android:drawableLeft="@mipmap/ic_device"
+                    android:layout_height="fill_parent"
+                    android:text="@string/online_shop"
+                    android:drawableLeft="@mipmap/ic_shop_blue"
                     android:drawablePadding="5.0dip" />
             </LinearLayout>
         </LinearLayout>

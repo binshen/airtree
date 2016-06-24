@@ -45,7 +45,8 @@
     <string name="resetpasswd_sucess">密码重置成功</string>
     <string name="resetpasswd_error">密码重置失败</string>
     <string name="sendverify_error">验证码发送失败</string>
-    <string name="devicedetail">设备描述</string>
+    <string name="devicedetail">设备名称</string>
+    <string name="device_style">设备类型</string>
     <string name="mac">MAC</string>
     <string name="params2">参数2</string>
     <string name="params3">参数3</string>
@@ -95,6 +96,7 @@
     <string name="check_loading">正在检测中</string>
     <string name="title_shop">商城</string>
     <string name="history_data">历史数据</string>
+    <string name="online_shop">在线商城</string>
     <string name="devicemanager">设备管理</string>
     <string name="monitor_pm">PM2.5</string>
     <string name="monitor_humidity">湿度</string>

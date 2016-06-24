@@ -49,7 +49,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private List<Fragment> mFragmentList;
     private DevicePagerAdapter mViewPagerAdapter;
     private TextView mTvDeviceManager;
-    private TextView mTvHistory;
+
+    private ImageView ivPersonal;
+    private TextView ivMall;
 
     private long clickTime = 0;
 
@@ -69,16 +71,14 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mDevices = new ArrayList<>();
         mFragmentList = new ArrayList<>();
 
-        ImageView ivPersonal = (ImageView)findViewById(R.id.iv_personal);
+        ivPersonal = (ImageView)findViewById(R.id.iv_personal);
         ivPersonal.setOnClickListener(this);
-        ImageView ivMall = (ImageView)findViewById(R.id.iv_mall);
+        ivMall = (TextView)findViewById(R.id.iv_mall);
         ivMall.setOnClickListener(this);
 
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mTvDeviceManager = (TextView)findViewById(R.id.tv_devicemanager);
         mTvDeviceManager.setOnClickListener(this);
-        mTvHistory = (TextView)findViewById(R.id.tv_history);
-        mTvHistory.setOnClickListener(this);
 
         mViewPager = (ViewPager)findViewById(R.id.viewPaper);
         mViewPagerAdapter = new DevicePagerAdapter(getSupportFragmentManager());
@@ -91,14 +91,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         addFragments();
 
-        //timeHandler.removeCallbacks(runnable);
+        timeHandler.removeCallbacks(runnable);
         timeHandler.postDelayed(runnable, 6000);
     }
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//    }
 
     public void onDestroy() {
         super.onDestroy();

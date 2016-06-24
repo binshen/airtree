@@ -157,6 +157,15 @@
             android:layout_marginRight="32.0dip"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true" />
+
+        <ImageView
+            android:id="@id/iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18.0dip"
+            android:src="@mipmap/details_small"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
     </RelativeLayout>
 
     <View

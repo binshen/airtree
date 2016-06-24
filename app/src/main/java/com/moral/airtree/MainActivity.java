@@ -21,6 +21,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
@@ -69,6 +70,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        makeAppOnline();
+
         mDevices = new ArrayList<>();
         mFragmentList = new ArrayList<>();
 
@@ -101,6 +104,23 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     public void onDestroy() {
         super.onDestroy();
         timeHandler.removeCallbacks(runnable);
+    }
+
+    private void makeAppOnline() {
+        String url = basePath + "/user/" + application.getLoginUserID() + "/online";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("MainActivity", response.toString());
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 
     private void addFragments() {

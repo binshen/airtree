@@ -144,7 +144,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     loginUser.setPassword(response.optJSONObject("user").optString("password"));
                     loginUser.set_id(response.optJSONObject("user").optString("_id"));
                     application.setLoginUser(loginUser);
+
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
                 } else {
                     Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
                 }

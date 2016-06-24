@@ -266,6 +266,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         }
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
             }
         }

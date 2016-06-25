@@ -87,18 +87,18 @@ public class MonitorFragment extends ABaseFragment {
         mTvBottomDanwei.setText("mg/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_jiaquan_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
-        if(mMonitor.getFormaldehyde() == null) {
+        if(mMonitor.getFormaldehyde_data() == null) {
             return;
         }
         mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
         float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
         mTvValue.setTextSize(size);
-        if((mMonitor.getFormaldehyde() != null) && (mMonitor.getFormaldehyde().getFormaldehyde_data() != null)) {
-            mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde().getFormaldehyde_data()));
+        if(mMonitor.getFormaldehyde_data() != null) {
+            mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getFormaldehyde().getCreate_date());
+        mTvTime.setText(mMonitor.getCreated());
     }
 
     private void initTemperaturePage() {
@@ -112,15 +112,15 @@ public class MonitorFragment extends ABaseFragment {
         mTvRightDanwei.setTextColor(getResources().getColor(R.color.color_wendu));
         mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
-        if(mMonitor.getTemperature() == null) {
+        if(mMonitor.getTemperature_data() == null) {
             return;
         }
-        if((mMonitor.getTemperature() != null) && (mMonitor.getTemperature().getTemperature_data() != null)) {
-            mTvValue.setText(String.valueOf(mMonitor.getTemperature().getTemperature_data()));
+        if(mMonitor.getTemperature_data() != null) {
+            mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getWindSpeed().getCreate_date());
+        mTvTime.setText(mMonitor.getCreated());
         mLoadDialog.dismiss();
     }
 
@@ -130,23 +130,18 @@ public class MonitorFragment extends ABaseFragment {
         mMyCircleView.setVisibility(View.VISIBLE);
         mTvBottomDanwei.setVisibility(View.INVISIBLE);
         mTvRightDanwei.setText("%");
-        if(mMonitor.getHumidity() == null) {
+        if(mMonitor.getHumidity_data() == null) {
             return;
         }
-        if((mMonitor.getHumidity() != null) && (!TextUtils.isEmpty(mMonitor.getHumidity().getHumidity_data()))) {
-            try {
-                long data = Long.parseLong(mMonitor.getHumidity().getHumidity_data());
-                mTvValue.setText(String.valueOf(data));
-                mTvRightDanwei.setVisibility(View.VISIBLE);
-            } catch(Exception ex) {
-                mTvRightDanwei.setVisibility(View.GONE);
-                mTvValue.setText(R.string.get_none);
-            }
+        if(mMonitor.getHumidity_data() != null) {
+            long data = mMonitor.getHumidity_data();
+            mTvValue.setText(String.valueOf(data));
+            mTvRightDanwei.setVisibility(View.VISIBLE);
         } else {
             mTvRightDanwei.setVisibility(View.GONE);
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getHumidity().getCreate_date());
+        mTvTime.setText(mMonitor.getCreated());
         mLoadDialog.dismiss();
     }
 
@@ -158,15 +153,15 @@ public class MonitorFragment extends ABaseFragment {
         mTvBottomDanwei.setText("ug/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_pm_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
-        if(mMonitor.getPm() == null) {
+        if(mMonitor.getPm_data() == null) {
             return;
         }
         mTvValue.setTextColor(getResources().getColor(R.color.color_pm_value));
-        if((mMonitor.getPm() != null) && (mMonitor.getPm().getPm_data() != null)) {
-            mTvValue.setText(String.valueOf(mMonitor.getPm().getPm_data()));
+        if(mMonitor.getPm_data() != null) {
+            mTvValue.setText(String.valueOf(mMonitor.getPm_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getPm().getCreate_date());
+        mTvTime.setText(mMonitor.getCreated());
     }
 }

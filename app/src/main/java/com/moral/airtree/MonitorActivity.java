@@ -1,6 +1,5 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -88,24 +87,18 @@ public class MonitorActivity extends ABaseActivity {
     }
 
     private void initData() {
-        if(mMonitor.getPm().getPm_data() != null) {
-            long pmData = mMonitor.getPm().getPm_data().longValue();
-            if((pmData > 0x0) && (pmData <= 0x23)) {
+        if(mMonitor.getPm_data() != null) {
+            long pmData = mMonitor.getPm_data().longValue();
+            if(pmData <= 35) {
                 mGifView.setMovieResource(R.raw.good);
                 mTvContent.setText(getResources().getString(R.string.good));
-                return;
-            }
-            if((pmData > 0x23) && (pmData <= 0x4b)) {
+            } else if(pmData <= 75) {
                 mGifView.setMovieResource(R.raw.very);
                 mTvContent.setText(getResources().getString(R.string.very));
-                return;
-            }
-            if((pmData > 0x4b) && (pmData <= 0x96)) {
+            } else if(pmData <= 150) {
                 mGifView.setMovieResource(R.raw.general);
                 mTvContent.setText(getResources().getString(R.string.general));
-                return;
-            }
-            if(pmData > 0x96) {
+            } else {
                 mGifView.setMovieResource(R.raw.poor);
                 mTvContent.setText(getResources().getString(R.string.poor));
             }

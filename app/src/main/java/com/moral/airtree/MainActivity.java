@@ -26,11 +26,6 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
-import com.moral.airtree.model.MonitorFormaldehyde;
-import com.moral.airtree.model.MonitorHumidity;
-import com.moral.airtree.model.MonitorPm;
-import com.moral.airtree.model.MonitorTemperature;
-import com.moral.airtree.model.MonitorWindSpeed;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
 
@@ -167,27 +162,20 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                     Bundle bundle = new Bundle();
                     bundle.putSerializable("device", device);
 
-                    Monitor mMonitor = null;
+                    Monitor mMonitor = new Monitor();
                     JSONObject data = json.optJSONObject("data");
                     if(data != null) {
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String date  = dateFormat.format(new Date(data.optLong("created")));
-
-                        MonitorPm mPm = new MonitorPm(date, data.optLong("x1"), "");
-                        mPm.setPm03p01(data.optInt("x3"));
-                        MonitorWindSpeed mWs = new MonitorWindSpeed(date, data.optLong("x12"), "");
-                        MonitorHumidity mHu = new MonitorHumidity(data.optString("x10"), date, "");
-                        MonitorTemperature mTe = new MonitorTemperature(data.optString("x11"), date, "");
-                        MonitorFormaldehyde mFo = new MonitorFormaldehyde(data.optLong("x9"), date, "");
-                        mMonitor = new Monitor("", data.optString("x13"), "", data.optLong("x14"), "", 1l, "", date, mPm, mWs, mHu, mTe, mFo);
-                    } else {
-                        MonitorPm mPm = new MonitorPm("", 0l, "");
-                        mPm.setPm03p01(0);
-                        MonitorWindSpeed mWs = new MonitorWindSpeed("", 0l, "");
-                        MonitorHumidity mHu = new MonitorHumidity("", "", "");
-                        MonitorTemperature mTe = new MonitorTemperature("", "", "");
-                        MonitorFormaldehyde mFo = new MonitorFormaldehyde(0l, "", "");
-                        mMonitor = new Monitor("", "", "", 0l, "", 0l, "", "", mPm, mWs, mHu, mTe, mFo);
+                        mMonitor.setCreated(date);
+                        mMonitor.setPm_data(data.optLong("x1"));
+                        mMonitor.setPm03p01(data.optLong("x3"));
+                        mMonitor.setFormaldehyde_data(data.optLong("x9"));
+                        mMonitor.setHumidity_data(data.optInt("x10"));
+                        mMonitor.setTemperature_data(data.optInt("x11"));
+                        mMonitor.setWindSpeed_data(data.optLong("x12"));
+                        mMonitor.setElectricQuantity(data.optInt("x13"));
+                        mMonitor.setLight(data.optLong("x14"));
                     }
                     bundle.putSerializable("monitor", mMonitor);
 

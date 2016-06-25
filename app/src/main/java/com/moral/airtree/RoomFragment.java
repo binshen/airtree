@@ -1,10 +1,8 @@
 package com.moral.airtree;
 
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,13 +17,6 @@ import android.widget.Toast;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.model.MonitorEnum;
-import com.moral.airtree.model.MonitorFormaldehyde;
-import com.moral.airtree.model.MonitorHumidity;
-import com.moral.airtree.model.MonitorPm;
-import com.moral.airtree.model.MonitorTemperature;
-import com.moral.airtree.model.MonitorWindSpeed;
-import com.moral.airtree.utils.FlagUtils;
-import com.moral.airtree.widget.LoadDialog;
 
 
 /**
@@ -89,26 +79,25 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("monitor", mMonitor);
         switch(v.getId()) {
             case R.id.rl_pm25:
-                if(mMonitor.getPm() != null) {
-
+                if(mMonitor.getPm_data() != null) {
                     intent.putExtra("monitorType", MonitorEnum.PM);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_temperature:
-                if(mMonitor.getWindSpeed() != null) {
+                if(mMonitor.getWindSpeed_data() != null) {
                     intent.putExtra("monitorType", MonitorEnum.TEMPERATURE);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_humidity:
-                if(mMonitor.getHumidity() != null) {
+                if(mMonitor.getHumidity_data() != null) {
                     intent.putExtra("monitorType", MonitorEnum.HUMIDITY);
                     startActivity(intent);
                 }
                 break;
             case R.id.rl_formaldehyde:
-                if(mMonitor.getFormaldehyde() != null) {
+                if(mMonitor.getFormaldehyde_data() != null) {
                     intent.putExtra("monitorType", MonitorEnum.FORMALDEHYDE);
                     startActivity(intent);
                 }
@@ -148,54 +137,36 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         int status = mDevice.getStatus();
-        if((mMonitor.getPm() != null) && (mMonitor.getPm().getPm_data() != null)) {
+        if(mMonitor.getPm_data() != null) {
             if(status == 1) {
                 mTvSuggest.setText("");
                 mTvMainLabel.setText("云端在线");
             } else {
-                mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreate_date());
+                mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreated());
                 mTvMainLabel.setText("0.3um颗粒物个数");
             }
-            mTvPM25Value.setText(mMonitor.getPm().getPm_data() + "ug/m³");
-            mTvMain.setText(String.valueOf(mMonitor.getPm().getPm03p01()));
+            mTvPM25Value.setText(mMonitor.getPm_data() + "ug/m³");
+            mTvMain.setText(String.valueOf(mMonitor.getPm03p01()));
         } else {
             mTvPM25Value.setText(R.string.airquality_unknow);
             mTvMain.setText(R.string.airquality_unknow);
             mTvMainLabel.setVisibility(View.GONE);
         }
-        if(mMonitor.getHumidity() != null) {
-            if(!TextUtils.isEmpty(mMonitor.getHumidity().getHumidity_data())) {
-                try {
-                    int data = Integer.parseInt(mMonitor.getHumidity().getHumidity_data());
-                    mTvHumidityValue.setText(data + "%");
-                }  catch(Exception ex) {
-                    Log.e("RoomFragment", ex.toString());
-                    mTvHumidityValue.setText(R.string.airquality_unknow);
-                }
-            }
+        if(mMonitor.getHumidity_data() != null) {
+            mTvHumidityValue.setText(mMonitor.getHumidity_data() + "%");
         } else {
             mTvHumidityValue.setText(R.string.airquality_unknow);
         }
-        if(mMonitor.getTemperature() != null) {
-            if(mMonitor.getTemperature().getTemperature_data() != null) {
-                try {
-                    String data = mMonitor.getTemperature().getTemperature_data();
-                    mTvTemperature2.setText(data + "℃");
-                } catch(Exception ex) {
-                    Log.e("RoomFragment", ex.toString());
-                    mTvTemperature2.setText(R.string.airquality_unknow);
-                }
-            }
+        if(mMonitor.getTemperature_data() != null) {
+            mTvTemperature2.setText(mMonitor.getTemperature_data()  + "℃");
         }
-        if(mMonitor.getFormaldehyde() != null) {
-            if(mMonitor.getFormaldehyde().getFormaldehyde_data() != null) {
-                mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde().getFormaldehyde_data()) + "mg/m³");
-            }
+        if(mMonitor.getFormaldehyde_data() != null) {
+            mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()) + "mg/m³");
         } else {
             mTvFormaldehydeValue.setText(R.string.airquality_unknow);
         }
-        if(!TextUtils.isEmpty(mMonitor.getElectricQuantity()) && mDevice.getType() == 1) {
-            int data = Integer.parseInt(mMonitor.getElectricQuantity());
+        if(mDevice.getType() == 1) {
+            int data = mMonitor.getElectricQuantity();
             if(data == 5) {
                 mIvElectric.setImageResource(R.mipmap.ic_ele_5);
             } else if(data == 4) {
@@ -233,8 +204,8 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initAirQuality() {
-        if(mMonitor.getPm().getPm_data() != null) {
-            long pmData = mMonitor.getPm().getPm_data().longValue();
+        if(mMonitor.getPm_data() != null) {
+            long pmData = mMonitor.getPm_data().longValue();
             if(pmData <= 35) {
                 mTvAirQuality.setText(R.string.airquality_good);
                 return;

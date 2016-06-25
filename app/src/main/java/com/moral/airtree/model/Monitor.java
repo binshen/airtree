@@ -3,101 +3,34 @@ package com.moral.airtree.model;
 import java.io.Serializable;
 
 /**
- * Created by bin.shen on 5/24/16.
+ * Created by bin.shen on 6/25/16.
  */
 public class Monitor implements Serializable {
-    private String chipLife;
-    private String create_date;
-    private String dataId;
-    private String deviceId;
-    private Long deviceStatus;
-    private String electricQuantity;
-    private MonitorFormaldehyde formaldehyde;
-    private MonitorHumidity humidity;
+
+    private String created;
+    private Integer electricQuantity;
     private Long light;
-    private MonitorPm pm;
-    private String purification;
-    private MonitorTemperature temperature;
-    private MonitorWindSpeed windSpeed;
+    private Long pm03p01;
+    private Long pm_data;
+    private Integer temperature_data;
+    private Long windSpeed_data;
+    private Integer humidity_data;
+    private Long formaldehyde_data;
 
-    public Monitor(String dataId, String electricQuantity, String chipLife, Long light, String deviceId, Long deviceStatus, String purification, String create_date, MonitorPm pm, MonitorWindSpeed windSpeed, MonitorHumidity humidity, MonitorTemperature temperature, MonitorFormaldehyde formaldehyde) {
-        this.dataId = dataId;
-        this.electricQuantity = electricQuantity;
-        this.chipLife = chipLife;
-        this.light = light;
-        this.deviceId = deviceId;
-        this.deviceStatus = deviceStatus;
-        this.purification = purification;
-        this.create_date = create_date;
-        this.pm = pm;
-        this.windSpeed = windSpeed;
-        this.humidity = humidity;
-        this.temperature = temperature;
-        this.formaldehyde = formaldehyde;
+    public String getCreated() {
+        return created;
     }
 
-    public String getChipLife() {
-        return chipLife;
+    public void setCreated(String created) {
+        this.created = created;
     }
 
-    public void setChipLife(String chipLife) {
-        this.chipLife = chipLife;
-    }
-
-    public String getCreate_date() {
-        return create_date;
-    }
-
-    public void setCreate_date(String create_date) {
-        this.create_date = create_date;
-    }
-
-    public String getDataId() {
-        return dataId;
-    }
-
-    public void setDataId(String dataId) {
-        this.dataId = dataId;
-    }
-
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
-
-    public Long getDeviceStatus() {
-        return deviceStatus;
-    }
-
-    public void setDeviceStatus(Long deviceStatus) {
-        this.deviceStatus = deviceStatus;
-    }
-
-    public String getElectricQuantity() {
+    public Integer getElectricQuantity() {
         return electricQuantity;
     }
 
-    public void setElectricQuantity(String electricQuantity) {
+    public void setElectricQuantity(Integer electricQuantity) {
         this.electricQuantity = electricQuantity;
-    }
-
-    public MonitorFormaldehyde getFormaldehyde() {
-        return formaldehyde;
-    }
-
-    public void setFormaldehyde(MonitorFormaldehyde formaldehyde) {
-        this.formaldehyde = formaldehyde;
-    }
-
-    public MonitorHumidity getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(MonitorHumidity humidity) {
-        this.humidity = humidity;
     }
 
     public Long getLight() {
@@ -108,35 +41,51 @@ public class Monitor implements Serializable {
         this.light = light;
     }
 
-    public MonitorPm getPm() {
-        return pm;
+    public Long getPm03p01() {
+        return pm03p01;
     }
 
-    public void setPm(MonitorPm pm) {
-        this.pm = pm;
+    public void setPm03p01(Long pm03p01) {
+        this.pm03p01 = pm03p01;
     }
 
-    public String getPurification() {
-        return purification;
+    public Long getPm_data() {
+        return pm_data;
     }
 
-    public void setPurification(String purification) {
-        this.purification = purification;
+    public void setPm_data(Long pm_data) {
+        this.pm_data = pm_data;
     }
 
-    public MonitorTemperature getTemperature() {
-        return temperature;
+    public Integer getTemperature_data() {
+        return temperature_data;
     }
 
-    public void setTemperature(MonitorTemperature temperature) {
-        this.temperature = temperature;
+    public void setTemperature_data(Integer temperature_data) {
+        this.temperature_data = temperature_data;
     }
 
-    public MonitorWindSpeed getWindSpeed() {
-        return windSpeed;
+    public Long getWindSpeed_data() {
+        return windSpeed_data;
     }
 
-    public void setWindSpeed(MonitorWindSpeed windSpeed) {
-        this.windSpeed = windSpeed;
+    public void setWindSpeed_data(Long windSpeed_data) {
+        this.windSpeed_data = windSpeed_data;
+    }
+
+    public Integer getHumidity_data() {
+        return humidity_data;
+    }
+
+    public void setHumidity_data(Integer humidity_data) {
+        this.humidity_data = humidity_data;
+    }
+
+    public Long getFormaldehyde_data() {
+        return formaldehyde_data;
+    }
+
+    public void setFormaldehyde_data(Long formaldehyde_data) {
+        this.formaldehyde_data = formaldehyde_data;
     }
 }

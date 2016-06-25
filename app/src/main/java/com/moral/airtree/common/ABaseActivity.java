@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 public abstract class ABaseActivity extends FragmentActivity {
 
-    protected String basePath = AConstants.MORAL_CLOUD_SERVER_BASE_PATH;
+    protected String basePath = AConstants.MORAL_API_BASE_PATH;
 
     //public Handler mHandler;
     protected LoadDialog mLoadDialog;

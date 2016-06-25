@@ -81,7 +81,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             Looper.prepare();
             // 检查软件更新
             UpdateManager manager = new UpdateManager(LoginActivity.this);
-            manager.checkUpdate(basePath);
+            manager.checkUpdate();
 
             Looper.loop();
             return null;

@@ -14,10 +14,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 /**
  * Created by bin.shen on 6/25/16.
  */
-public class ParseXmlService
-{
-    public HashMap<String, String> parseXml(String uri) throws Exception
-    {
+public class ParseXmlService {
+
+    public HashMap<String, String> parseXml(String uri) throws Exception {
         HashMap<String, String> hashMap = new HashMap<String, String>();
 
         // 实例化一个文档构建器工厂
@@ -30,26 +29,16 @@ public class ParseXmlService
         Element root = document.getDocumentElement();
         //获得所有子节点
         NodeList childNodes = root.getChildNodes();
-        for (int j = 0; j < childNodes.getLength(); j++)
-        {
+        for (int j = 0; j < childNodes.getLength(); j++) {
             //遍历子节点
             Node childNode = (Node) childNodes.item(j);
-            if (childNode.getNodeType() == Node.ELEMENT_NODE)
-            {
+            if (childNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element childElement = (Element) childNode;
-                //版本号
-                if ("version".equals(childElement.getNodeName()))
-                {
+                if ("version".equals(childElement.getNodeName())) { //版本号
                     hashMap.put("version",childElement.getFirstChild().getNodeValue());
-                }
-                //软件名称
-                else if (("name".equals(childElement.getNodeName())))
-                {
+                } else if (("name".equals(childElement.getNodeName()))) { //软件名称
                     hashMap.put("name",childElement.getFirstChild().getNodeValue());
-                }
-                //下载地址
-                else if (("url".equals(childElement.getNodeName())))
-                {
+                } else if (("url".equals(childElement.getNodeName()))) { //下载地址
                     hashMap.put("url",childElement.getFirstChild().getNodeValue());
                 }
             }

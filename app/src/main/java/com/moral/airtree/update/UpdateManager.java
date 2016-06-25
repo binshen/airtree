@@ -27,18 +27,11 @@ import android.os.Message;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.moral.airtree.R;
+import com.moral.airtree.common.AConstants;
 
-/**
- *@author coolszy
- *@date 2012-4-26
- *@blog http://blog.92coding.com
- */
-
-public class UpdateManager
-{
+public class UpdateManager {
     /* 下载中 */
     private static final int DOWNLOAD = 1;
     /* 下载结束 */
@@ -57,12 +50,9 @@ public class UpdateManager
     private ProgressBar mProgress;
     private Dialog mDownloadDialog;
 
-    private Handler mHandler = new Handler()
-    {
-        public void handleMessage(Message msg)
-        {
-            switch (msg.what)
-            {
+    private Handler mHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
                 // 正在下载
                 case DOWNLOAD:
                     // 设置进度条位置
@@ -75,26 +65,22 @@ public class UpdateManager
                 default:
                     break;
             }
-        };
+        }
     };
 
-    public UpdateManager(Context context)
-    {
+    public UpdateManager(Context context) {
         this.mContext = context;
     }
 
     /**
      * 检测软件更新
      */
-    public void checkUpdate(String basePath)
-    {
-        if (isUpdate(basePath))
-        {
+    public void checkUpdate() {
+        if (isUpdate()) {
             // 显示提示对话框
             showNoticeDialog();
-        } else
-        {
-            Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
+        } else {
+//            Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -103,25 +89,20 @@ public class UpdateManager
      *
      * @return
      */
-    private boolean isUpdate(String basePath)
-    {
+    private boolean isUpdate() {
         // 获取当前软件版本
         int versionCode = getVersionCode(mContext);
         // 解析XML文件。 由于XML文件比较小，因此使用DOM方式进行解析
         ParseXmlService service = new ParseXmlService();
-        try
-        {
-            mHashMap = service.parseXml(basePath + "/upgrade");
-        } catch (Exception e)
-        {
+        try {
+            mHashMap = service.parseXml(AConstants.MORAL_API_BASE_PATH + "/upgrade");
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        if (null != mHashMap)
-        {
+        if (null != mHashMap) {
             int serviceCode = Integer.valueOf(mHashMap.get("version"));
             // 版本判断
-            if (serviceCode > versionCode)
-            {
+            if (serviceCode > versionCode) {
                 return true;
             }
         }
@@ -134,15 +115,12 @@ public class UpdateManager
      * @param context
      * @return
      */
-    private int getVersionCode(Context context)
-    {
+    private int getVersionCode(Context context) {
         int versionCode = 0;
-        try
-        {
+        try {
             // 获取软件版本号，对应AndroidManifest.xml下android:versionCode
             versionCode = context.getPackageManager().getPackageInfo("com.moral.airtree", 0).versionCode;
-        } catch (NameNotFoundException e)
-        {
+        } catch (NameNotFoundException e) {
             e.printStackTrace();
         }
         return versionCode;
@@ -227,16 +205,12 @@ public class UpdateManager
      *@date 2012-4-26
      *@blog http://blog.92coding.com
      */
-    private class downloadApkThread extends Thread
-    {
+    private class downloadApkThread extends Thread {
         @Override
-        public void run()
-        {
-            try
-            {
+        public void run() {
+            try {
                 // 判断SD卡是否存在，并且是否具有读写权限
-                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
-                {
+                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     // 获得存储卡的路径
                     String sdpath = Environment.getExternalStorageDirectory() + "/";
                     mSavePath = sdpath + "download";
@@ -251,8 +225,7 @@ public class UpdateManager
 
                     File file = new File(mSavePath);
                     // 判断文件目录是否存在
-                    if (!file.exists())
-                    {
+                    if (!file.exists()) {
                         file.mkdir();
                     }
                     File apkFile = new File(mSavePath, mHashMap.get("name"));
@@ -261,16 +234,14 @@ public class UpdateManager
                     // 缓存
                     byte buf[] = new byte[1024];
                     // 写入到文件中
-                    do
-                    {
+                    do {
                         int numread = is.read(buf);
                         count += numread;
                         // 计算进度条位置
                         progress = (int) (((float) count / length) * 100);
                         // 更新进度
                         mHandler.sendEmptyMessage(DOWNLOAD);
-                        if (numread <= 0)
-                        {
+                        if (numread <= 0) {
                             // 下载完成
                             mHandler.sendEmptyMessage(DOWNLOAD_FINISH);
                             break;
@@ -281,11 +252,9 @@ public class UpdateManager
                     fos.close();
                     is.close();
                 }
-            } catch (MalformedURLException e)
-            {
+            } catch (MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e)
-            {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
             // 取消下载对话框显示
@@ -296,11 +265,9 @@ public class UpdateManager
     /**
      * 安装APK文件
      */
-    private void installApk()
-    {
+    private void installApk() {
         File apkfile = new File(mSavePath, mHashMap.get("name"));
-        if (!apkfile.exists())
-        {
+        if (!apkfile.exists()) {
             return;
         }
         // 通过Intent安装APK文件

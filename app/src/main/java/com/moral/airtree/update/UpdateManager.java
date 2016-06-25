@@ -76,9 +76,17 @@ public class UpdateManager {
      * 检测软件更新
      */
     public void checkUpdate() {
+        // 解析XML文件。 由于XML文件比较小，因此使用DOM方式进行解析
+        ParseXmlService service = new ParseXmlService();
+        try {
+            mHashMap = service.parseXml(AConstants.MORAL_API_BASE_PATH + "/upgrade");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String message = mHashMap.get("message");
         if (isUpdate()) {
             // 显示提示对话框
-            showNoticeDialog();
+            showNoticeDialog(message);
         } else {
 //            Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
         }
@@ -92,13 +100,6 @@ public class UpdateManager {
     private boolean isUpdate() {
         // 获取当前软件版本
         int versionCode = getVersionCode(mContext);
-        // 解析XML文件。 由于XML文件比较小，因此使用DOM方式进行解析
-        ParseXmlService service = new ParseXmlService();
-        try {
-            mHashMap = service.parseXml(AConstants.MORAL_API_BASE_PATH + "/upgrade");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         if (null != mHashMap) {
             int serviceCode = Integer.valueOf(mHashMap.get("version"));
             // 版本判断
@@ -129,29 +130,30 @@ public class UpdateManager {
     /**
      * 显示软件更新对话框
      */
-    private void showNoticeDialog()
-    {
+    private void showNoticeDialog(String message) {
         // 构造对话框
         AlertDialog.Builder builder = new Builder(mContext);
         builder.setTitle(R.string.soft_update_title);
-        builder.setMessage(R.string.soft_update_info);
+        if(message == null || message.isEmpty()) {
+            builder.setMessage(R.string.soft_update_info);
+        } else {
+            builder.setMessage(message);
+        }
+
         // 更新
-        builder.setPositiveButton(R.string.soft_update_updatebtn, new OnClickListener()
-        {
+        builder.setPositiveButton(R.string.soft_update_updatebtn, new OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 // 显示下载对话框
                 showDownloadDialog();
             }
         });
+
         // 稍后更新
-        builder.setNegativeButton(R.string.soft_update_later, new OnClickListener()
-        {
+        builder.setNegativeButton(R.string.soft_update_later, new OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which)
-            {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });

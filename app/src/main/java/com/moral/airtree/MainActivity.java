@@ -140,7 +140,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                //application.setDeviceChanged(false);
+                Log.d("MainActivity", response.toString());
+                application.setDeviceChanged(false);
 
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject json = response.optJSONObject(i);
@@ -164,8 +165,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
                     Monitor mMonitor = new Monitor();
                     JSONObject data = json.optJSONObject("data");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     if(data != null) {
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         String date  = dateFormat.format(new Date(data.optLong("created")));
                         mMonitor.setCreated(date);
                         mMonitor.setPm_data(data.optLong("x1"));
@@ -176,6 +177,17 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setWindSpeed_data(data.optLong("x12"));
                         mMonitor.setElectricQuantity(data.optInt("x13"));
                         mMonitor.setLight(data.optLong("x14"));
+                    } else {
+                        String date  = dateFormat.format(new Date());
+                        mMonitor.setCreated(date);
+                        mMonitor.setPm_data(0l);
+                        mMonitor.setPm03p01(0l);
+                        mMonitor.setFormaldehyde_data(0l);
+                        mMonitor.setHumidity_data(0);
+                        mMonitor.setTemperature_data(0);
+                        mMonitor.setWindSpeed_data(0l);
+                        mMonitor.setElectricQuantity(0);
+                        mMonitor.setLight(0l);
                     }
                     bundle.putSerializable("monitor", mMonitor);
 

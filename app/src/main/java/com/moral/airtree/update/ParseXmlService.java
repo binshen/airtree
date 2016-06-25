@@ -40,6 +40,8 @@ public class ParseXmlService {
                     hashMap.put("name",childElement.getFirstChild().getNodeValue());
                 } else if (("url".equals(childElement.getNodeName()))) { //下载地址
                     hashMap.put("url",childElement.getFirstChild().getNodeValue());
+                } else if (("message".equals(childElement.getNodeName()))) { //消息内容
+                    hashMap.put("message",childElement.getFirstChild().getNodeValue());
                 }
             }
         }

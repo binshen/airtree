@@ -22,6 +22,7 @@ import com.moral.airtree.model.User;
 
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -99,11 +100,16 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
             @Override
             public void onResponse(JSONObject response) {
                 Log.d("HistoryActivity", response.toString());
-                mPm.setText(response.optString("x1"));
-                mTemperature.setText(response.optString("x11"));
-                mHumidity.setText(response.optString("x10"));
-                mFormaldehyde.setText(response.optString("x9"));
-                mPurificationadd.setText(response.optString("x3"));
+//                mPm.setText(response.optString("x1"));
+//                mTemperature.setText(response.optString("x11"));
+//                mHumidity.setText(response.optString("x10"));
+//                mFormaldehyde.setText(response.optString("x9"));
+//                mPurificationadd.setText(response.optString("x3"));
+                mPm.setText(new BigDecimal(response.optString("x1")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+                mTemperature.setText(new BigDecimal(response.optString("x11")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+                mHumidity.setText(new BigDecimal(response.optString("x10")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+                mFormaldehyde.setText(new BigDecimal(response.optString("x9")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+                mPurificationadd.setText(new BigDecimal(response.optString("x3")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
             }
         }, new Response.ErrorListener() {
             @Override

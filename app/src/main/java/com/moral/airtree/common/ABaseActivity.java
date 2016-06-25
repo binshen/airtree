@@ -10,7 +10,7 @@ import android.os.Bundle;
 
 public abstract class ABaseActivity extends FragmentActivity {
 
-    protected String basePath = "http://121.40.92.176:3000";
+    protected String basePath = AConstants.MORAL_CLOUD_SERVER_BASE_PATH;
 
     //public Handler mHandler;
     protected LoadDialog mLoadDialog;

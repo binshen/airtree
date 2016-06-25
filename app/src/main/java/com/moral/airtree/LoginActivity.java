@@ -1,7 +1,9 @@
 package com.moral.airtree;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -14,9 +16,11 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.User;
+import com.moral.airtree.update.UpdateManager;
 import com.moral.airtree.utils.NetUtils;
 
 import org.json.JSONObject;
@@ -61,12 +65,38 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         if(!NetUtils.getNetConnect(this)) {
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
         } else {
+            new checkUpdateTask().execute();
+
             if(application.getLoginUser() != null) {
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
         }
     }
+
+    private class checkUpdateTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Looper.prepare();
+            // 检查软件更新
+            UpdateManager manager = new UpdateManager(LoginActivity.this);
+            manager.checkUpdate(basePath);
+
+            Looper.loop();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {}
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
 
     @Override
     public void onClick(View v) {
@@ -143,32 +173,5 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             }
         });
         queue.add(jsonRequest);
-
-/*
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-
-                User loginUser = new User();
-                loginUser.setUsername(tel);
-                loginUser.setPassword(pwd);
-                application.setLoginUser(loginUser);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                return params;
-            }
-        };
-        queue.add(stringRequest);
-*/
     }
 }

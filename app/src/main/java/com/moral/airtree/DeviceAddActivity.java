@@ -79,7 +79,6 @@ public class DeviceAddActivity extends ABaseActivity {
             @Override
             public void onReceive(Context context, Intent intent) {
                 ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                //NetworkInfo networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
                 NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
                 if (networkInfo != null && networkInfo.isConnected()) {
                     mTvWifiName.setText(getSSid());

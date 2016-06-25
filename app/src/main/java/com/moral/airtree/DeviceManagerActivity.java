@@ -2,7 +2,6 @@ package com.moral.airtree;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -92,20 +91,25 @@ public class DeviceManagerActivity extends ABaseActivity {
 
                     mDevices.clear();
                     for (int i = 0; i < response.length(); i++) {
-                        JSONObject obj = response.optJSONObject(i);
+                        JSONObject json = response.optJSONObject(i);
 
                         Device device = new Device();
-                        device.setMac(obj.optString("mac"));
-                        if(!obj.optString("name").isEmpty()) {
-                            device.setName(obj.optString("name"));
+                        device.set_id(json.optString("_id"));
+                        device.setMac(json.optString("mac"));
+                        if(!json.optString("name").isEmpty()) {
+                            device.setName(json.optString("name"));
                         } else {
-                            device.setName(obj.optString("mac"));
+                            device.setName(json.optString("mac"));
                         }
-                        device.setStatus(obj.optInt("status"));
-                        device.set_id(obj.optString("_id"));
+                        device.setType(json.optInt("type"));
+                        device.setStatus(json.optInt("status"));
+                        device.setLast_updated(json.optLong("last_updated"));
                         mDevices.add(device);
                     }
                     application.setDevices(mDevices);
+
+                    mDevicesAdapter = new DeviceAdapter(getApplicationContext(), mDevices);
+                    mLv.setAdapter(mDevicesAdapter);
                     mDevicesAdapter.notifyDataSetChanged();
                 }
             }, new Response.ErrorListener() {
@@ -117,6 +121,7 @@ public class DeviceManagerActivity extends ABaseActivity {
             queue.add(jsonRequest);
         } else {
             mDevices = application.getDevices();
+
             mDevicesAdapter = new DeviceAdapter(this, mDevices);
             mLv.setAdapter(mDevicesAdapter);
             mDevicesAdapter.notifyDataSetChanged();

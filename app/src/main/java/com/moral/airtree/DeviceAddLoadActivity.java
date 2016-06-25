@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -37,8 +38,6 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
     private ImageView mIvLeft;
     private String mPwd;
     private String mSSID;
-    private TextView mTvMsg;
-    private TextView mTvPoint;
     private TextView mTvTitle;
 
     protected ISmartLinker mSnifferSmartLinker;
@@ -50,8 +49,6 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device_add_load);
 
-        mTvPoint = (TextView)findViewById(R.id.tv_loading);
-        mTvMsg = (TextView)findViewById(R.id.tv_msg);
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mTvTitle.setText("设备管理");
@@ -110,12 +107,14 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         mViewHandler.post(new Runnable() {
             @Override
             public void run() {
+                Log.d("DeviceAddLoadActivity", module.getMac());
+
                 Device device = new Device();
                 device.setMac(module.getMac());
                 device.setStatus(1);
                 application.getDevices().add(device);
 
-                bindDeviceToUser(module.getMac(), application.getLoginUser().get_id());
+                bindDeviceToUser(module.getMac(), application.getLoginUserID());
             }
         });
     }

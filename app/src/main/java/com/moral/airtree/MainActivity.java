@@ -125,14 +125,15 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private void addFragments() {
         mLoadDialog.show();
-        removeFragments();
 
         String url = basePath + "/user/" + application.getLoginUserID() + "/get_device";
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                //Log.d("MainActivity", response.toString());
+                Log.d("MainActivity", response.toString());
+                removeFragments();
+
                 application.setDeviceChanged(false);
 
                 for (int i = 0; i < response.length(); i++) {

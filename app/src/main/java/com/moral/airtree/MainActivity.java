@@ -1,6 +1,7 @@
 package com.moral.airtree;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
+import com.moral.airtree.service.HeartbeatService;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
 
@@ -69,8 +71,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        makeAppOnline();
-
         mDevices = new ArrayList<>();
         mFragmentList = new ArrayList<>();
 
@@ -108,31 +108,19 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         timeHandler.removeCallbacks(runnable);
         timeHandler.postDelayed(runnable, 6000);
 
-        Intent serviceIntent = new Intent("HeartbeatService");
+        Intent serviceIntent = new Intent();
+        serviceIntent.setClass(this, HeartbeatService.class);
         serviceIntent.putExtra("LoginUserID", application.getLoginUserID());
         startService(serviceIntent);
     }
 
     public void onDestroy() {
-        super.onDestroy();
         timeHandler.removeCallbacks(runnable);
-    }
 
-    private void makeAppOnline() {
-//        String url = basePath + "/user/" + application.getLoginUserID() + "/online";
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-//            @Override
-//            public void onResponse(JSONObject response) {
-//                Log.d("MainActivity", response.toString());
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        queue.add(jsonRequest);
+        Intent serviceIntent = new Intent();
+        serviceIntent.setClass(this, HeartbeatService.class);
+        stopService(serviceIntent);
+        super.onDestroy();
     }
 
     private void addFragments() {

@@ -25,12 +25,13 @@ import java.util.List;
  */
 public class HeartbeatService extends Service implements Runnable {
 
+    private Thread thread;
     private String userID;
-    private int sleepInterval = 10;
-
+    private int sleepInterval = 2;
+    private boolean threadRunning = false;
     @Override
     public void run() {
-        while (true) {
+        while (threadRunning) {
             try {
                 sendHeartbeatPackage(userID);
                 Thread.sleep(1000 * sleepInterval);
@@ -41,10 +42,11 @@ public class HeartbeatService extends Service implements Runnable {
     }
 
     @Override
-    public synchronized int onStartCommand(Intent intent, int flags, int startId) {
+    public int onStartCommand(Intent intent, int flags, int startId) {
         userID = intent.getExtras().getString("LoginUserID");
-        new Thread(this).start();
-
+        thread.start();
+        threadRunning = true;
+        Log.d("HeartbeatService", "onStartCommand");
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -73,11 +75,16 @@ public class HeartbeatService extends Service implements Runnable {
 
     @Override
     public void onCreate() {
+        Log.d("HeartbeatService", "onCreate");
+        thread = new Thread(this);
         super.onCreate();
+
     }
 
     @Override
-    public synchronized void onDestroy() {
+    public void onDestroy() {
+        threadRunning = false;
+        Log.d("HeartbeatService", "onDestroy");
         super.onDestroy();
     }
 }

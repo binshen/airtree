@@ -107,6 +107,10 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         timeHandler.removeCallbacks(runnable);
         timeHandler.postDelayed(runnable, 6000);
+
+        Intent serviceIntent = new Intent("HeartbeatService");
+        serviceIntent.putExtra("LoginUserID", application.getLoginUserID());
+        startService(serviceIntent);
     }
 
     public void onDestroy() {
@@ -115,20 +119,20 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     }
 
     private void makeAppOnline() {
-        String url = basePath + "/user/" + application.getLoginUserID() + "/online";
-        RequestQueue queue = Volley.newRequestQueue(this);
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("MainActivity", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
-        queue.add(jsonRequest);
+//        String url = basePath + "/user/" + application.getLoginUserID() + "/online";
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+//            @Override
+//            public void onResponse(JSONObject response) {
+//                Log.d("MainActivity", response.toString());
+//            }
+//        }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        queue.add(jsonRequest);
     }
 
     private void addFragments() {

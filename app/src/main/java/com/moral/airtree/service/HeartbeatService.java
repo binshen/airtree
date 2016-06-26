@@ -27,7 +27,7 @@ public class HeartbeatService extends Service implements Runnable {
 
     private Thread thread;
     private String userID;
-    private int sleepInterval = 2;
+    private int sleepInterval = 10;
     private boolean threadRunning = false;
     @Override
     public void run() {

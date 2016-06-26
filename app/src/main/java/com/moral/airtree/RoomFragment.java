@@ -25,6 +25,7 @@ import com.moral.airtree.model.MonitorEnum;
 public class RoomFragment extends Fragment implements View.OnClickListener {
 
     private ImageView mIvElectric;
+    private Device mDevice;
     private Monitor mMonitor;
 
     private RelativeLayout mRlltFormaldehyde;
@@ -40,7 +41,15 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private TextView mTvSuggest;
     private TextView mTvTemperature2;
     private View mView;
-    private Device mDevice;
+
+    public static RoomFragment newInstance(Device device, Monitor monitor) {
+        RoomFragment fragment = new RoomFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("device", device);
+        args.putSerializable("monitor", monitor);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

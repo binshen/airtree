@@ -140,28 +140,24 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d("MainActivity", response.toString());
+                //Log.d("MainActivity", response.toString());
                 application.setDeviceChanged(false);
 
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject json = response.optJSONObject(i);
 
-                    Device device = new Device();
-                    device.set_id(json.optString("_id"));
-                    device.setMac(json.optString("mac"));
+                    Device mDevice = new Device();
+                    mDevice.set_id(json.optString("_id"));
+                    mDevice.setMac(json.optString("mac"));
                     if(!json.optString("name").isEmpty()) {
-                        device.setName(json.optString("name"));
+                        mDevice.setName(json.optString("name"));
                     } else {
-                        device.setName(json.optString("mac"));
+                        mDevice.setName(json.optString("mac"));
                     }
-                    device.setType(json.optInt("type"));
-                    device.setStatus(json.optInt("status"));
-                    device.setLast_updated(json.optLong("last_updated"));
-                    mDevices.add(device);
-
-                    Fragment roomFragment = new RoomFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("device", device);
+                    mDevice.setType(json.optInt("type"));
+                    mDevice.setStatus(json.optInt("status"));
+                    mDevice.setLast_updated(json.optLong("last_updated"));
+                    mDevices.add(mDevice);
 
                     Monitor mMonitor = new Monitor();
                     JSONObject data = json.optJSONObject("data");
@@ -189,10 +185,14 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setElectricQuantity(0);
                         mMonitor.setLight(0l);
                     }
-                    bundle.putSerializable("monitor", mMonitor);
+//                    Fragment roomFragment = new RoomFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putSerializable("device", mDevice);
+//                    bundle.putSerializable("monitor", mMonitor);
+//                    roomFragment.setArguments(bundle);
+//                    mFragmentList.add(roomFragment);
 
-                    roomFragment.setArguments(bundle);
-                    mFragmentList.add(roomFragment);
+                    mFragmentList.add(new RoomFragment().newInstance(mDevice, mMonitor));
                 }
                 application.setDevices(mDevices);
 

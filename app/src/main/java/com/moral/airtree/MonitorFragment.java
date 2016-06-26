@@ -31,13 +31,20 @@ public class MonitorFragment extends ABaseFragment {
     public MonitorFragment() {
     }
 
-    public MonitorFragment(MonitorEnum monitorType, Monitor monitor) {
-        mMonitorType = monitorType;
-        mMonitor = monitor;
+    public static MonitorFragment newInstance(MonitorEnum monitorType, Monitor monitor) {
+        MonitorFragment fragment = new MonitorFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("monitor", monitor);
+        args.putSerializable("monitorType", monitorType);
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        this.mMonitor = (Monitor) getArguments().getSerializable("monitor");
+        this.mMonitorType = (MonitorEnum) getArguments().getSerializable("monitorType");
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -160,10 +160,10 @@ public class MonitorActivity extends ABaseActivity {
 //    }
 
     private void initFragments() {
-        mFragmentList.add(new MonitorFragment(MonitorEnum.PM, mMonitor));
-        mFragmentList.add(new MonitorFragment(MonitorEnum.TEMPERATURE, mMonitor));
-        mFragmentList.add(new MonitorFragment(MonitorEnum.HUMIDITY, mMonitor));
-        mFragmentList.add(new MonitorFragment(MonitorEnum.FORMALDEHYDE, mMonitor));
+        mFragmentList.add(new MonitorFragment().newInstance(MonitorEnum.PM, mMonitor));
+        mFragmentList.add(new MonitorFragment().newInstance(MonitorEnum.TEMPERATURE, mMonitor));
+        mFragmentList.add(new MonitorFragment().newInstance(MonitorEnum.HUMIDITY, mMonitor));
+        mFragmentList.add(new MonitorFragment().newInstance(MonitorEnum.FORMALDEHYDE, mMonitor));
     }
 
     class MyPagerAdapter extends FragmentPagerAdapter {

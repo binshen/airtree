@@ -11,7 +11,6 @@ import android.view.View;
 
 import com.moral.airtree.utils.DisplayUtils;
 
-import android.text.TextUtils;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -27,9 +26,6 @@ public class MonitorFragment extends ABaseFragment {
     private TextView mTvTime;
     private TextView mTvValue;
     private View mView;
-
-    public MonitorFragment() {
-    }
 
     public static MonitorFragment newInstance(MonitorEnum monitorType, Monitor monitor) {
         MonitorFragment fragment = new MonitorFragment();
@@ -72,17 +68,11 @@ public class MonitorFragment extends ABaseFragment {
     public void initViewData(MonitorEnum monitorType) {
         if(monitorType == MonitorEnum.PM) {
             initPmPage();
-            return;
-        }
-        if(monitorType == MonitorEnum.TEMPERATURE) {
+        } else if(monitorType == MonitorEnum.TEMPERATURE) {
             initTemperaturePage();
-            return;
-        }
-        if(monitorType == MonitorEnum.HUMIDITY) {
+        } else if(monitorType == MonitorEnum.HUMIDITY) {
             initHumidityPage();
-            return;
-        }
-        if(monitorType == MonitorEnum.FORMALDEHYDE) {
+        } else if(monitorType == MonitorEnum.FORMALDEHYDE) {
             initFormaldehydePage();
         }
     }
@@ -94,9 +84,6 @@ public class MonitorFragment extends ABaseFragment {
         mTvBottomDanwei.setText("mg/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_jiaquan_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
-        if(mMonitor.getFormaldehyde_data() == null) {
-            return;
-        }
         mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
         float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
         mTvValue.setTextSize(size);
@@ -119,9 +106,6 @@ public class MonitorFragment extends ABaseFragment {
         mTvRightDanwei.setTextColor(getResources().getColor(R.color.color_wendu));
         mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
-        if(mMonitor.getTemperature_data() == null) {
-            return;
-        }
         if(mMonitor.getTemperature_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
@@ -137,12 +121,8 @@ public class MonitorFragment extends ABaseFragment {
         mMyCircleView.setVisibility(View.VISIBLE);
         mTvBottomDanwei.setVisibility(View.INVISIBLE);
         mTvRightDanwei.setText("%");
-        if(mMonitor.getHumidity_data() == null) {
-            return;
-        }
         if(mMonitor.getHumidity_data() != null) {
-            long data = mMonitor.getHumidity_data();
-            mTvValue.setText(String.valueOf(data));
+            mTvValue.setText(String.valueOf(mMonitor.getHumidity_data()));
             mTvRightDanwei.setVisibility(View.VISIBLE);
         } else {
             mTvRightDanwei.setVisibility(View.GONE);
@@ -153,16 +133,13 @@ public class MonitorFragment extends ABaseFragment {
     }
 
     private void initPmPage() {
-        mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvMonitortype.setText(R.string.monitor_pm);
-        mMyCircleView.setVisibility(View.GONE);
         mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));
         mTvBottomDanwei.setText("ug/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_pm_danwei));
         mTvBottomDanwei.setVisibility(View.VISIBLE);
-        if(mMonitor.getPm_data() == null) {
-            return;
-        }
+        mMyCircleView.setVisibility(View.GONE);
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvValue.setTextColor(getResources().getColor(R.color.color_pm_value));
         if(mMonitor.getPm_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getPm_data()));

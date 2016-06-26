@@ -178,13 +178,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setElectricQuantity(0);
                         mMonitor.setLight(0l);
                     }
-//                    Fragment roomFragment = new RoomFragment();
-//                    Bundle bundle = new Bundle();
-//                    bundle.putSerializable("device", mDevice);
-//                    bundle.putSerializable("monitor", mMonitor);
-//                    roomFragment.setArguments(bundle);
-//                    mFragmentList.add(roomFragment);
-
                     mFragmentList.add(new RoomFragment().newInstance(mDevice, mMonitor));
                 }
                 application.setDevices(mDevices);

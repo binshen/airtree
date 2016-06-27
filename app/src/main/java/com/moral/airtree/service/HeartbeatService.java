@@ -43,6 +43,9 @@ public class HeartbeatService extends Service implements Runnable {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        if(intent == null || intent.getExtras() == null) {
+            return super.onStartCommand(intent, flags, startId);
+        }
         userID = intent.getExtras().getString("LoginUserID");
 
         if(!thread.isAlive()) {

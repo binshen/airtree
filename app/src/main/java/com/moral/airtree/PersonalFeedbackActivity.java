@@ -2,7 +2,9 @@ package com.moral.airtree;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -44,9 +46,39 @@ public class PersonalFeedbackActivity extends ABaseActivity implements View.OnCl
         mIvLeft.setImageResource(R.mipmap.back);
         mBtnCommit = (Button)findViewById(R.id.btn_commit);
         mTvCount = (TextView)findViewById(R.id.tv_count);
-        mEtFeedback = (EditText)findViewById(R.id.et_feedback);
+
         mIvLeft.setOnClickListener(this);
         mBtnCommit.setOnClickListener(this);
+
+
+        mEtFeedback = (EditText)findViewById(R.id.et_feedback);
+        mEtFeedback.addTextChangedListener(new TextWatcher() {
+
+            private CharSequence chars;
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                this.chars = s;
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                int editStart = mEtFeedback.getSelectionStart();
+                int editEnd = mEtFeedback.getSelectionEnd();
+
+                int restChars = 200 - chars.length();
+                mTvCount.setText(String.valueOf(restChars));
+                if(restChars < 0) {
+                    s.delete(editStart - 1, editEnd);
+                    mEtFeedback.setText(s);
+                }
+            }
+        });
         mTvCount.setText("200");
     }
 

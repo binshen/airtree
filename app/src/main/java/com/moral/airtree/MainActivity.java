@@ -300,7 +300,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                 Toast.makeText(getApplicationContext(), "再按一次后退键退出程序", Toast.LENGTH_SHORT).show();
                 clickTime = System.currentTimeMillis();
             } else {
-                this.finish();
+                finish();
+                android.os.Process.killProcess(android.os.Process.myPid());
+                System.exit(0);
             }
             return true;
         }

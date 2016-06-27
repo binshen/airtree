@@ -23,7 +23,7 @@ public class LoadDialog {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lay_load_dialog, null);
         ImageView loadingImage = (ImageView)view.findViewById(R.id.iv_progress);
-        loadingImage.setImageResource(R.anim.load_dialog_animation);
+        loadingImage.setImageResource(R.drawable.load_dialog_animation);
         mAnimationDrawable = (AnimationDrawable)loadingImage.getDrawable();
         if(mAnimationDrawable != null) {
             mAnimationDrawable.setOneShot(false);

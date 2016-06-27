@@ -11,6 +11,8 @@ public class User {
 
     private String password;
 
+    private String nickname;
+
     public String get_id() {
         return _id;
     }
@@ -33,5 +35,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 }

@@ -57,11 +57,11 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mRlUserfeedback.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnExit.setOnClickListener(this);
+    }
 
-        User loginUser = application.getLoginUser();
-        if(loginUser != null) {
-            mTvUserName.setText(application.getLoginUser().getUsername());
-        }
+    protected void onStart() {
+        super.onStart();
+        mTvUserName.setText(application.getLoginUserNickname());
     }
 
     public void onClick(View v) {

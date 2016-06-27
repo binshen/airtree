@@ -27,6 +27,23 @@ public class ABaseApplication extends Application {
         return loginUser == null ? null : loginUser.get_id();
     }
 
+    public String getLoginUserNickname() {
+        if(loginUser != null) {
+            if(!loginUser.getNickname().isEmpty()) {
+                return loginUser.getNickname();
+            } else if(!loginUser.getUsername().isEmpty()) {
+                return loginUser.getUsername();
+            }
+        }
+        return null;
+    }
+
+    public void setLoginUserNickname(String nickname) {
+        if(loginUser != null) {
+            loginUser.setNickname(nickname);
+        }
+    }
+
     public void setLoginUser(User loginUser) {
         this.loginUser = loginUser;
     }

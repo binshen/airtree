@@ -159,9 +159,10 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 JSONObject user = response.optJSONObject("user");
                 if (success && user != null) {
                     User loginUser = new User();
+                    loginUser.set_id(response.optJSONObject("user").optString("_id"));
                     loginUser.setUsername(response.optJSONObject("user").optString("username"));
                     loginUser.setPassword(response.optJSONObject("user").optString("password"));
-                    loginUser.set_id(response.optJSONObject("user").optString("_id"));
+                    loginUser.setNickname(response.optJSONObject("user").optString("nickname"));
                     application.setLoginUser(loginUser);
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
@@ -183,13 +184,6 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             @Override
             public void onResponse(String response) {
                 Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
-
-                User loginUser = new User();
-                loginUser.setUsername(tel);
-                loginUser.setPassword(pwd);
-                application.setLoginUser(loginUser);
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
             }
         }, new Response.ErrorListener() {
             @Override

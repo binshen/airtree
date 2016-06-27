@@ -45,6 +45,8 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
         mIvLeft.setImageResource(R.mipmap.back);
         mIvLeft.setOnClickListener(this);
         mBtnRevise.setOnClickListener(this);
+
+        mEtNickName.setText(application.getLoginUserNickname());
     }
 
     @Override
@@ -55,22 +57,12 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
                 break;
 
             case R.id.btn_revise:
-                String mUserName = "";
-                String nickName = mEtNickName.getText().toString();
-                if(!TextUtils.isEmpty(nickName)) {
-                    if(!nickName.equals(mUserName)) {
-                        changeNickName(nickName);
-                        return;
-                    }
-                    Toast.makeText(PersonalReviseNickNameActivity.this, "", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Toast.makeText(PersonalReviseNickNameActivity.this, "", Toast.LENGTH_SHORT).show();
+                changeNickName(mEtNickName.getText().toString());
                 break;
         }
     }
 
-    public void changeNickName(String userName) {
+    public void changeNickName(final String userName) {
         if(userName == null || userName.isEmpty()) {
             Toast.makeText(getApplicationContext(), "请输入用户昵称", Toast.LENGTH_LONG).show();
         } else {
@@ -88,6 +80,7 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
                     Log.d("PersonalReviseNickName", response.toString());
                     boolean success = response.optBoolean("success");
                     if (success) {
+                        application.setLoginUserNickname(userName);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

@@ -69,38 +69,62 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        String username = mEtPhonenum.getText().toString().trim();
-        String inputvalidate = mEtInputvalidate.getText().toString().trim();
-        String password = mEtInputpasswd.getText().toString().trim();
+        String username  = mEtPhonenum.getText().toString().trim();
+        String password  = mEtInputpasswd.getText().toString().trim();
+        String input_cd = mEtInputvalidate.getText().toString().trim();
         switch(v.getId()) {
             case R.id.left_btn:
                 finish();
                 break;
 
             case R.id.btn_getvalidate:
-                mTime.start();
+                sendMessage(username);
                 break;
 
             case R.id.btn_register:
-                registerUser(username, inputvalidate, password);
+                registerUser(username, password, input_cd);
                 break;
         }
     }
 
-    public void registerUser(String tel, String valid, String pwd) {
-        String url = basePath + "/user/register";
-        Log.d("debug", url);
-
+    private void sendMessage(String tel) {
+        String url = basePath + "/user/request_code";
         final Map<String, String> params = new HashMap<>();
-        params.put("username", tel);
-        params.put("password", pwd);
-        params.put("validate", valid);
+        params.put("tel", tel);
 
         RequestQueue queue = Volley.newRequestQueue(this);
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("debug", response.toString());
+                Log.d("RegisterActivity", response.toString());
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    mTime.start();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
+    }
+
+    private void registerUser(String tel, String pwd, String code) {
+        String url = basePath + "/user/register";
+        final Map<String, String> params = new HashMap<>();
+        params.put("username", tel);
+        params.put("password", pwd);
+        params.put("code", code);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("RegisterActivity", response.toString());
                 boolean success = response.optBoolean("success");
                 if (success) {
                     finish();

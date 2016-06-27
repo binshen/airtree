@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +12,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ForgetPwdActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -56,21 +68,75 @@ public class ForgetPwdActivity extends ABaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        String phonenum = mEtPhonenum.getText().toString().trim();
-        String inputvalidate = mEtInputvalidate.getText().toString().trim();
-        String inputpasswd = mEtInputnewpasswd.getText().toString().trim();
+        String username  = mEtPhonenum.getText().toString().trim();
+        String password  = mEtInputnewpasswd.getText().toString().trim();
+        String input_cd = mEtInputvalidate.getText().toString().trim();
         switch(v.getId()) {
             case R.id.left_btn:
                 finish();
                 break;
 
             case R.id.btn_getvalidate:
-                mTime.start();
+                sendMessage(username);
                 break;
 
             case R.id.btn_resetpwd:
-                Toast.makeText(getApplicationContext(), "重置密码", Toast.LENGTH_SHORT).show();
+                changePassword(username, password, input_cd);
                 break;
         }
+    }
+
+    private void sendMessage(String tel) {
+        String url = basePath + "/user/request_code";
+        final Map<String, String> params = new HashMap<>();
+        params.put("tel", tel);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ForgetPwdActivity", response.toString());
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    mTime.start();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
+    }
+
+    private void changePassword(String tel, String pwd, String code) {
+        String url = basePath + "/user/forget_psw";
+        final Map<String, String> params = new HashMap<>();
+        params.put("username", tel);
+        params.put("password", pwd);
+        params.put("code", code);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("ForgetPwdActivity", response.toString());
+                boolean success = response.optBoolean("success");
+                if (success) {
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

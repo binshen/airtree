@@ -133,8 +133,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             public void onResponse(JSONArray response) {
                 Log.d("MainActivity", response.toString());
                 removeFragments();
-
                 application.setDeviceChanged(false);
+                if(response.length() < 1) {
+                    mLoadDialog.dismiss();
+                    return;
+                }
 
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject json = response.optJSONObject(i);

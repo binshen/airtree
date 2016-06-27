@@ -44,7 +44,10 @@ public class HeartbeatService extends Service implements Runnable {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         userID = intent.getExtras().getString("LoginUserID");
-        thread.start();
+
+        if(!thread.isAlive()) {
+            thread.start();
+        }
         threadRunning = true;
         Log.d("HeartbeatService", "onStartCommand");
         return super.onStartCommand(intent, flags, startId);
@@ -84,6 +87,7 @@ public class HeartbeatService extends Service implements Runnable {
     @Override
     public void onDestroy() {
         threadRunning = false;
+        stopSelf();
         Log.d("HeartbeatService", "onDestroy");
         super.onDestroy();
     }

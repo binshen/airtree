@@ -3,6 +3,7 @@ package com.moral.airtree;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +11,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PersonalReviseNickNameActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -43,7 +55,7 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
                 break;
 
             case R.id.btn_revise:
-                String mUserName = "";//PreferencesUtils.getString(this, "userName", "");
+                String mUserName = "";
                 String nickName = mEtNickName.getText().toString();
                 if(!TextUtils.isEmpty(nickName)) {
                     if(!nickName.equals(mUserName)) {
@@ -58,7 +70,38 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
         }
     }
 
-    public void changeNickName(String nickName) {
+    public void changeNickName(String userName) {
+        if(userName == null || userName.isEmpty()) {
+            Toast.makeText(getApplicationContext(), "请输入用户昵称", Toast.LENGTH_LONG).show();
+        } else {
+            mLoadDialog.show();
 
+            String url = basePath + "/user/" + application.getLoginUserID() + "/update_name";
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            final Map<String, String> params = new HashMap<String, String>();
+            params.put("nickname", userName);
+
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    Log.d("PersonalReviseNickName", response.toString());
+                    boolean success = response.optBoolean("success");
+                    if (success) {
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();
+                        mLoadDialog.dismiss();
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                    mLoadDialog.dismiss();
+                }
+            });
+            queue.add(jsonRequest);
+        }
     }
 }

@@ -153,11 +153,12 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("mac", mac);
-        params.put("user_id", user_id);
+        params.put("userID", user_id);
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                Log.d("DeviceAddLoadActivity", response.toString());
                 boolean success = response.optBoolean("success");
                 if (success) {
                     int status = response.optInt("status");

@@ -12,6 +12,7 @@ import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -58,6 +59,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
     private long clickTime = 0;
 
+    private long firstClick;
+    private long lastClick;
+    // 计算点击的次数
+    private int count;
+
     private Handler timeHandler = new Handler();
     private Runnable runnable = new Runnable() {
         public void run() {
@@ -97,6 +103,33 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mViewPager = (ViewPager)findViewById(R.id.viewPaper);
         mViewPagerAdapter = new DevicePagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(mViewPagerAdapter);
+        mViewPager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()) {
+                    case MotionEvent.ACTION_DOWN:
+                        if (firstClick != 0 && System.currentTimeMillis() - firstClick > 300) {
+                            count = 0;
+                        }
+                        count++;
+                        if (count == 1) {
+                            firstClick = System.currentTimeMillis();
+                        } else if (count == 2) {
+                            lastClick = System.currentTimeMillis();
+                            if (lastClick - firstClick < 300) {
+                                addFragments();
+                                timeHandler.removeCallbacks(runnable);
+                                timeHandler.postDelayed(runnable, 6000);
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
 
         mPagerIndicator = (CirclePageIndicator)findViewById(R.id.pageindicator);
         mPagerIndicator.setViewPager(mViewPager);
@@ -104,7 +137,6 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         setViewPagerChanger();
 
         addFragments();
-
         timeHandler.removeCallbacks(runnable);
         timeHandler.postDelayed(runnable, 6000);
 

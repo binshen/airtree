@@ -108,13 +108,7 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
             @Override
             public void run() {
                 Log.d("DeviceAddLoadActivity", module.getMac());
-
-                Device device = new Device();
-                device.setMac(module.getMac());
-                device.setStatus(1);
-                application.getDevices().add(device);
-
-                bindDeviceToUser(module.getMac(), application.getLoginUserID());
+                bindDeviceToUser(module.getMac());
             }
         });
     }
@@ -147,13 +141,13 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         });
     }
 
-    private void bindDeviceToUser(String mac, String user_id) {
+    private void bindDeviceToUser(String mac) {
         String url = basePath + "/user/add_device";
         RequestQueue queue = Volley.newRequestQueue(this);
 
         final Map<String, String> params = new HashMap<String, String>();
-        params.put("mac", mac);
-        params.put("userID", user_id);
+        params.put("mac", mac.toLowerCase());
+        params.put("userID", application.getLoginUserID());
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override

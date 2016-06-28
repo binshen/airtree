@@ -5,5 +5,6 @@ package com.moral.airtree.common;
  */
 public interface AConstants {
 
+    public final boolean PRODUCTION_VERSION = false;
     public final String MORAL_API_BASE_PATH = "http://121.40.92.176:3000";
 }

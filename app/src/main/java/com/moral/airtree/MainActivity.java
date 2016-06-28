@@ -136,16 +136,32 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
 
         setViewPagerChanger();
 
-        addFragments();
-        timeHandler.removeCallbacks(runnable);
-        timeHandler.postDelayed(runnable, 6000);
-
         Intent serviceIntent = new Intent();
         serviceIntent.setClass(this, HeartbeatService.class);
         serviceIntent.putExtra("LoginUserID", application.getLoginUserID());
         startService(serviceIntent);
     }
 
+    @Override
+    protected void onStart() {
+        addFragments();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        timeHandler.removeCallbacks(runnable);
+        timeHandler.postDelayed(runnable, 6000);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        timeHandler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    @Override
     public void onDestroy() {
         timeHandler.removeCallbacks(runnable);
 
@@ -165,7 +181,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             public void onResponse(JSONArray response) {
                 Log.d("MainActivity", response.toString());
                 removeFragments();
-                application.setDeviceChanged(false);
+
                 if(response.length() < 1) {
                     mLoadDialog.dismiss();
                     return;

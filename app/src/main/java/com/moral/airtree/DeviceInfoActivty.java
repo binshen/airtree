@@ -113,7 +113,6 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
             public void onResponse(JSONObject response) {
                 boolean success = response.optBoolean("success");
                 if (success) {
-                    application.setDeviceChanged(true);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

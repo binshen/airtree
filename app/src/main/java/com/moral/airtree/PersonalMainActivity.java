@@ -79,7 +79,6 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
                         Log.d("PersonalMainActivity", response.toString());
                         application.setLoginUser(null);
                         application.setDevices(null);
-                        application.setDeviceChanged(true);
                         setResult(Activity.RESULT_OK, new Intent());
                         finish();;
                     }

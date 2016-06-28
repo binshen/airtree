@@ -17,8 +17,6 @@ public class ABaseApplication extends Application {
 
     public List<Device> devices = new ArrayList<Device>();
 
-    public boolean isDeviceChanged = false;
-
     public User getLoginUser() {
         return loginUser;
     }
@@ -54,14 +52,6 @@ public class ABaseApplication extends Application {
 
     public void setDevices(List<Device> devices) {
         this.devices = devices;
-    }
-
-    public boolean isDeviceChanged() {
-        return isDeviceChanged;
-    }
-
-    public void setDeviceChanged(boolean deviceChanged) {
-        isDeviceChanged = deviceChanged;
     }
 
     public void onCreate() {

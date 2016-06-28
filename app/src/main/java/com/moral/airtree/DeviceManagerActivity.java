@@ -2,6 +2,8 @@ package com.moral.airtree;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
@@ -73,58 +75,88 @@ public class DeviceManagerActivity extends ABaseActivity {
         });
     }
 
+    private Handler timeHandler = new Handler();
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            requestDeviceData();
+            timeHandler.postDelayed(this, 6000);
+        }
+    };
+
     @Override
     protected void onStart() {
+        requestDeviceData();
         super.onStart();
-
-        initData();
     }
 
-    private void initData() {
-        if(application.isDeviceChanged) {
-            String url = basePath + "/user/" + application.getLoginUserID() + "/get_device";
-            RequestQueue queue = Volley.newRequestQueue(this);
-            JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
-                @Override
-                public void onResponse(JSONArray response) {
-                    application.setDeviceChanged(false);
+    @Override
+    protected void onResume() {
+        timeHandler.removeCallbacks(runnable);
+        timeHandler.postDelayed(runnable, 6000);
+        super.onResume();
+    }
 
-                    mDevices.clear();
-                    for (int i = 0; i < response.length(); i++) {
-                        JSONObject json = response.optJSONObject(i);
+    @Override
+    protected void onPause() {
+        timeHandler.removeCallbacks(runnable);
+        super.onPause();
+    }
 
-                        Device device = new Device();
-                        device.set_id(json.optString("_id"));
-                        device.setMac(json.optString("mac"));
-                        if(!json.optString("name").isEmpty()) {
-                            device.setName(json.optString("name"));
-                        } else {
-                            device.setName(json.optString("mac"));
-                        }
-                        device.setType(json.optInt("type"));
-                        device.setStatus(json.optInt("status"));
-                        device.setLast_updated(json.optLong("last_updated"));
-                        mDevices.add(device);
+    @Override
+    protected void onDestroy() {
+        timeHandler.removeCallbacks(runnable);
+        super.onDestroy();
+    }
+
+//    private void initData() {
+//        if(application.isDeviceChanged) {
+//            requestDeviceData();
+//        } else {
+//            mDevices = application.getDevices();
+//
+//            mDevicesAdapter = new DeviceAdapter(this, mDevices);
+//            mLv.setAdapter(mDevicesAdapter);
+//            mDevicesAdapter.notifyDataSetChanged();
+//        }
+//    }
+
+    private void requestDeviceData() {
+        String url = basePath + "/user/" + application.getLoginUserID() + "/get_device_info";
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("DeviceManagerActivity", response.toString());
+
+                mDevices.clear();
+                for (int i = 0; i < response.length(); i++) {
+                    JSONObject json = response.optJSONObject(i);
+
+                    Device device = new Device();
+                    device.set_id(json.optString("_id"));
+                    device.setMac(json.optString("mac"));
+                    if(!json.optString("name").isEmpty()) {
+                        device.setName(json.optString("name"));
+                    } else {
+                        device.setName(json.optString("mac"));
                     }
-                    application.setDevices(mDevices);
-
-                    mDevicesAdapter = new DeviceAdapter(getApplicationContext(), mDevices);
-                    mLv.setAdapter(mDevicesAdapter);
-                    mDevicesAdapter.notifyDataSetChanged();
+                    device.setType(json.optInt("type"));
+                    device.setStatus(json.optInt("status"));
+                    device.setLast_updated(json.optLong("last_updated"));
+                    mDevices.add(device);
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                }
-            });
-            queue.add(jsonRequest);
-        } else {
-            mDevices = application.getDevices();
+                application.setDevices(mDevices);
 
-            mDevicesAdapter = new DeviceAdapter(this, mDevices);
-            mLv.setAdapter(mDevicesAdapter);
-            mDevicesAdapter.notifyDataSetChanged();
-        }
+                mDevicesAdapter = new DeviceAdapter(getApplicationContext(), mDevices);
+                mLv.setAdapter(mDevicesAdapter);
+                mDevicesAdapter.notifyDataSetChanged();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

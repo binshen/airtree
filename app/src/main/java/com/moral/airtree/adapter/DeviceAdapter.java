@@ -51,7 +51,7 @@ public class DeviceAdapter extends BaseAdapter {
         Device device = deviceList.get(position);
         String deviceName = device.getName();
         vHolder.tv_name.setText(deviceName == null || deviceName.isEmpty() ? device.getMac() : deviceName);
-        String status = "在线";
+        String status = "云端在线";
         if(device.getStatus() != 1) {
             status = "不在线";
         }

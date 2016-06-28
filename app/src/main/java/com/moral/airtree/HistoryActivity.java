@@ -19,6 +19,7 @@ import com.bigkoo.pickerview.TimePickerView;
 
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.User;
+import com.moral.airtree.utils.StringUtils;
 
 import org.json.JSONObject;
 
@@ -99,17 +100,11 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                Log.d("HistoryActivity", response.toString());
-//                mPm.setText(response.optString("x1"));
-//                mTemperature.setText(response.optString("x11"));
-//                mHumidity.setText(response.optString("x10"));
-//                mFormaldehyde.setText(response.optString("x9"));
-//                mPurificationadd.setText(response.optString("x3"));
-                mPm.setText(new BigDecimal(response.optString("x1")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-                mTemperature.setText(new BigDecimal(response.optString("x11")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-                mHumidity.setText(new BigDecimal(response.optString("x10")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-                mFormaldehyde.setText(new BigDecimal(response.optString("x9")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
-                mPurificationadd.setText(new BigDecimal(response.optString("x3")).setScale(0, BigDecimal.ROUND_HALF_UP).toString());
+                mPm.setText(StringUtils.getFormatData(response.optString("x1")));
+                mTemperature.setText(StringUtils.getFormatData(response.optString("x11")));
+                mHumidity.setText(StringUtils.getFormatData(response.optString("x10")));
+                mFormaldehyde.setText(StringUtils.getFormatData(response.optString("x9")));
+                mPurificationadd.setText(StringUtils.getFormatData(response.optString("x3")));
             }
         }, new Response.ErrorListener() {
             @Override

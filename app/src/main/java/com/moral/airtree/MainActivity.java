@@ -46,11 +46,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     private List<Device> mDevices;
     private List<Fragment> mFragmentList;
     private DevicePagerAdapter mViewPagerAdapter;
-    private TextView mTvDeviceManager;
+    //private TextView mTvDeviceManager;
 
     private ImageView ivPersonal;
     private ImageView ivMallIcon;
-    private TextView ivMall;
+    //private TextView ivMall;
 
     private LinearLayout rl_devicemanager;
     private LinearLayout rl_mall;
@@ -83,7 +83,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         ivPersonal = (ImageView)findViewById(R.id.iv_personal);
         ivPersonal.setOnClickListener(this);
 
-        ivMall = (TextView)findViewById(R.id.iv_mall);
+        //ivMall = (TextView)findViewById(R.id.iv_mall);
         //ivMall.setOnClickListener(this);
 
         ivMallIcon = (ImageView)findViewById(R.id.iv_mall_icon);
@@ -95,7 +95,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         rl_mall = (LinearLayout)findViewById(R.id.rl_mall);
         rl_mall.setOnClickListener(this);
 
-        mTvDeviceManager = (TextView)findViewById(R.id.tv_devicemanager);
+        //mTvDeviceManager = (TextView)findViewById(R.id.tv_devicemanager);
         //mTvDeviceManager.setOnClickListener(this);
 
         mViewPager = (ViewPager)findViewById(R.id.viewPaper);

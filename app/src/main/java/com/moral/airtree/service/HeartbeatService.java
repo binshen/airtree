@@ -14,6 +14,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.moral.airtree.common.ABaseApplication;
 import com.moral.airtree.common.AConstants;
 
 import org.json.JSONObject;
@@ -58,7 +59,7 @@ public class HeartbeatService extends Service implements Runnable {
 
     private void sendHeartbeatPackage(String userID) {
         String url = AConstants.MORAL_API_BASE_PATH + "/user/" + userID + "/online";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = ((ABaseApplication) getApplication()).getRequestQueue();
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

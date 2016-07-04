@@ -116,9 +116,10 @@ public class MonitorFragment extends ABaseFragment {
     }
 
     private void initHumidityPage() {
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_shidu);
         mTvMonitortype.setText(R.string.monitor_humidity);
         mTvRightDanwei.setVisibility(View.VISIBLE);
-        mMyCircleView.setVisibility(View.VISIBLE);
+        mMyCircleView.setVisibility(View.GONE); //mMyCircleView.setVisibility(View.VISIBLE);
         mTvBottomDanwei.setVisibility(View.INVISIBLE);
         mTvRightDanwei.setText("%");
         if(mMonitor.getHumidity_data() != null) {

@@ -38,10 +38,6 @@ public class LoadDialog {
         mDialog.show();
     }
 
-    public void setCanceledOnTouchOutside(boolean cancel) {
-        mDialog.setCanceledOnTouchOutside(cancel);
-    }
-
     public void dismiss() {
         if(mDialog.isShowing()) {
             mDialog.dismiss();

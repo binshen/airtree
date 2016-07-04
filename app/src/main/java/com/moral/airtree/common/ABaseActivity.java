@@ -4,7 +4,6 @@ package com.moral.airtree.common;
  * Created by bin.shen on 5/18/16.
  */
 import android.support.v4.app.FragmentActivity;
-import android.os.Handler;
 import com.moral.airtree.widget.LoadDialog;
 import android.os.Bundle;
 

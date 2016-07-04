@@ -12,7 +12,6 @@ public abstract class ABaseActivity extends FragmentActivity {
 
     protected String basePath = AConstants.MORAL_API_BASE_PATH;
 
-    //public Handler mHandler;
     protected LoadDialog mLoadDialog;
 
     protected ABaseApplication application;

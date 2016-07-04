@@ -1,8 +1,6 @@
 package com.moral.airtree;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -14,20 +12,15 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.bigkoo.pickerview.TimePickerView;
 
 import com.moral.airtree.common.ABaseActivity;
-import com.moral.airtree.model.User;
 import com.moral.airtree.utils.StringUtils;
 
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HistoryActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -96,7 +89,8 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
 
     private void initData(String date) {
         String url = basePath + "/device/mac/" + mDeviceMac + "/get_history?day=" + date.replaceAll("-", "");
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
+
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

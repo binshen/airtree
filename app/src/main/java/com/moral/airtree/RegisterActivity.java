@@ -1,10 +1,7 @@
 package com.moral.airtree;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +15,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 
 import org.json.JSONObject;
@@ -92,7 +88,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         final Map<String, String> params = new HashMap<>();
         params.put("tel", tel);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -120,7 +116,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         params.put("password", pwd);
         params.put("code", code);
 
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {

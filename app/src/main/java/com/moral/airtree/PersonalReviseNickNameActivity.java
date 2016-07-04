@@ -1,8 +1,6 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -16,7 +14,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 
 import org.json.JSONObject;
@@ -69,7 +66,7 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
             mLoadDialog.show();
 
             String url = basePath + "/user/" + application.getLoginUserID() + "/update_name";
-            RequestQueue queue = Volley.newRequestQueue(this);
+            RequestQueue queue = application.getRequestQueue();
 
             final Map<String, String> params = new HashMap<String, String>();
             params.put("nickname", userName);

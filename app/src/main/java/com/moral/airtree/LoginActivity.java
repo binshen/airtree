@@ -17,7 +17,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.User;
 import com.moral.airtree.update.UpdateManager;
@@ -146,7 +145,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         mLoadDialog.show();
 
         String url = basePath + "/user/login";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("username", tel);

@@ -16,7 +16,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.adapter.DeviceAdapter;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Device;
@@ -122,7 +121,7 @@ public class DeviceManagerActivity extends ABaseActivity {
 
     private void requestDeviceData() {
         String url = basePath + "/user/" + application.getLoginUserID() + "/get_device_info";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

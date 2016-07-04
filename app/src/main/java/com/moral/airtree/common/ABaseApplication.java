@@ -2,6 +2,8 @@ package com.moral.airtree.common;
 
 import android.app.Application;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.User;
 
@@ -13,9 +15,17 @@ import java.util.List;
  */
 public class ABaseApplication extends Application {
 
-    public User loginUser = null;
+    private RequestQueue requestQueue;
 
-    public List<Device> devices = new ArrayList<Device>();
+    public RequestQueue getRequestQueue() {
+        if (requestQueue == null) {
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+
+        return requestQueue;
+    }
+
+    private User loginUser = null;
 
     public User getLoginUser() {
         return loginUser;
@@ -45,6 +55,8 @@ public class ABaseApplication extends Application {
     public void setLoginUser(User loginUser) {
         this.loginUser = loginUser;
     }
+
+    private List<Device> devices = new ArrayList<Device>();
 
     public List<Device> getDevices() {
         return devices;

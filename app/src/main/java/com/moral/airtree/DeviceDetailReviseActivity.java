@@ -1,6 +1,5 @@
 package com.moral.airtree;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,11 +13,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Device;
-import com.moral.airtree.model.User;
-
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -78,7 +74,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
             mLoadDialog.show();
 
             String url = basePath + "/user/" + application.getLoginUserID() + "/device/" + deviceId + "/update_name";
-            RequestQueue queue = Volley.newRequestQueue(this);
+            RequestQueue queue = application.getRequestQueue();
 
             final Map<String, String> params = new HashMap<String, String>();
             params.put("name", deviceName);

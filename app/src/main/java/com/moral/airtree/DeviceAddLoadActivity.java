@@ -1,14 +1,12 @@
 package com.moral.airtree;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,16 +15,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.hiflying.smartlink.ISmartLinker;
 import com.hiflying.smartlink.OnSmartLinkListener;
 import com.hiflying.smartlink.SmartLinkedModule;
 import com.hiflying.smartlink.v3.SnifferSmartLinker;
 import com.hiflying.smartlink.v7.MulticastSmartLinker;
 import com.moral.airtree.common.ABaseActivity;
-import com.moral.airtree.common.ABaseApplication;
-import com.moral.airtree.model.Device;
-import com.moral.airtree.model.User;
 
 import org.json.JSONObject;
 
@@ -143,7 +137,7 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
 
     private void bindDeviceToUser(String mac) {
         String url = basePath + "/user/add_device";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("mac", mac.toLowerCase());

@@ -1,7 +1,5 @@
 package com.moral.airtree;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,9 +14,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
-import com.moral.airtree.model.User;
 
 import org.json.JSONObject;
 
@@ -86,7 +82,7 @@ public class PersonalRevisePwdActivity extends ABaseActivity implements View.OnC
 
     public void changePassword(String oldPwd, String newPwd) {
         String url = basePath + "/user/" + application.getLoginUserID() + "/change_psw";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
 
         final Map<String, String> params = new HashMap<String, String>();
         params.put("password", oldPwd);

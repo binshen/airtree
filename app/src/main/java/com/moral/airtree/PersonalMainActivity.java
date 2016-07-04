@@ -16,10 +16,7 @@ import com.android.volley.Response;
 import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
-import com.moral.airtree.model.User;
-import com.moral.airtree.utils.ScreenManager;
 
 import org.json.JSONObject;
 
@@ -33,7 +30,6 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
     private RelativeLayout mRlUserfeedback;
     private TextView mTvTitle;
     private TextView mTvUserName;
-    private String mUserName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +68,8 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
 
             case R.id.btn_exit:
                 String url = basePath + "/user/" + application.getLoginUserID() + "/offline";
-                RequestQueue queue = Volley.newRequestQueue(this);
+                RequestQueue queue = application.getRequestQueue();
+
                 JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -80,7 +77,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
                         application.setLoginUser(null);
                         application.setDevices(null);
                         setResult(Activity.RESULT_OK, new Intent());
-                        finish();;
+                        finish();
                     }
                 }, new Response.ErrorListener() {
                     @Override

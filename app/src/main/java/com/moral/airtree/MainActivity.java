@@ -1,7 +1,6 @@
 package com.moral.airtree;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,8 +23,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.service.HeartbeatService;
@@ -175,7 +173,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         mLoadDialog.show();
 
         String url = basePath + "/user/" + application.getLoginUserID() + "/get_device";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
         JsonArrayRequest jsonRequest = new JsonArrayRequest(Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

@@ -1,6 +1,5 @@
 package com.moral.airtree;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -15,14 +14,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Device;
 
 import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class DeviceInfoActivty extends ABaseActivity implements View.OnClickListener {
 
@@ -106,7 +101,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mLoadDialog.show();
 
         String url = basePath + "/user/" + application.getLoginUserID() + "/device/" + mDevice.get_id() + "/unbind";
-        RequestQueue queue = Volley.newRequestQueue(this);
+        RequestQueue queue = application.getRequestQueue();
 
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
             @Override

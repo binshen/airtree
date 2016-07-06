@@ -74,7 +74,9 @@ public class MonitorFragment extends ABaseFragment {
         mTvTime.setText(mMonitor.getCreated());
         float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
         mTvValue.setTextSize(size);
-
+        mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
+        //mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
+        //mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));
         if(monitorType == MonitorEnum.PM) {
             initPmPage();
         } else if(monitorType == MonitorEnum.TEMPERATURE) {
@@ -91,8 +93,6 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_jiaquan);
         mTvMonitortype.setText(R.string.monitor_formaldehyde);
         mTvBottomDanwei.setText("mg/m³");
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_jiaquan_danwei));
-        mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
         if(mMonitor.getFormaldehyde_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
         } else {
@@ -104,8 +104,6 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_wendu);
         mTvMonitortype.setText(R.string.monitor_temperature);
         mTvBottomDanwei.setText("℃");
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
-        mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
         if(mMonitor.getTemperature_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
@@ -127,10 +125,7 @@ public class MonitorFragment extends ABaseFragment {
     private void initPmPage() {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvMonitortype.setText(R.string.monitor_pm);
-        mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));
         mTvBottomDanwei.setText("ug/m³");
-        mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_pm_danwei));
-        mTvValue.setTextColor(getResources().getColor(R.color.color_pm_value));
         if(mMonitor.getPm_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getPm_data()));
         } else {

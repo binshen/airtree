@@ -66,6 +66,15 @@ public class MonitorFragment extends ABaseFragment {
     }
 
     public void initViewData(MonitorEnum monitorType) {
+
+        mMyCircleView.setVisibility(View.GONE);
+        mTvRightDanwei.setVisibility(View.GONE);
+        mTvBottomDanwei.setVisibility(View.VISIBLE);
+
+        mTvTime.setText(mMonitor.getCreated());
+        float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
+        mTvValue.setTextSize(size);
+
         if(monitorType == MonitorEnum.PM) {
             initPmPage();
         } else if(monitorType == MonitorEnum.TEMPERATURE) {
@@ -75,78 +84,57 @@ public class MonitorFragment extends ABaseFragment {
         } else if(monitorType == MonitorEnum.FORMALDEHYDE) {
             initFormaldehydePage();
         }
+        mLoadDialog.dismiss();
     }
 
     private void initFormaldehydePage() {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_jiaquan);
-        mTvMonitortype.setVisibility(View.GONE);
-        mMyCircleView.setVisibility(View.GONE);
+        mTvMonitortype.setText(R.string.monitor_formaldehyde);
         mTvBottomDanwei.setText("mg/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_jiaquan_danwei));
-        mTvBottomDanwei.setVisibility(View.VISIBLE);
         mTvValue.setTextColor(getResources().getColor(R.color.color_jiaquan_value));
-        float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
-        mTvValue.setTextSize(size);
         if(mMonitor.getFormaldehyde_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getCreated());
     }
 
     private void initTemperaturePage() {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_wendu);
-        mTvMonitortype.setVisibility(View.GONE);
-        mMyCircleView.setVisibility(View.GONE);
-        mTvRightDanwei.setVisibility(View.VISIBLE);
-        mTvBottomDanwei.setVisibility(View.VISIBLE);
-        mTvBottomDanwei.setText("当前温度");
-        mTvRightDanwei.setText("℃");
-        mTvRightDanwei.setTextColor(getResources().getColor(R.color.color_wendu));
-        mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
+        mTvMonitortype.setText(R.string.monitor_temperature);
+        mTvBottomDanwei.setText("℃");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
+        mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
         if(mMonitor.getTemperature_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getCreated());
-        mLoadDialog.dismiss();
     }
 
     private void initHumidityPage() {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_shidu);
         mTvMonitortype.setText(R.string.monitor_humidity);
-        mTvRightDanwei.setVisibility(View.VISIBLE);
-        mMyCircleView.setVisibility(View.GONE); //mMyCircleView.setVisibility(View.VISIBLE);
-        mTvBottomDanwei.setVisibility(View.INVISIBLE);
-        mTvRightDanwei.setText("%");
+        mTvBottomDanwei.setText("%");
         if(mMonitor.getHumidity_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getHumidity_data()));
-            mTvRightDanwei.setVisibility(View.VISIBLE);
         } else {
-            mTvRightDanwei.setVisibility(View.GONE);
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getCreated());
-        mLoadDialog.dismiss();
     }
 
     private void initPmPage() {
+        mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvMonitortype.setText(R.string.monitor_pm);
         mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));
         mTvBottomDanwei.setText("ug/m³");
         mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_pm_danwei));
-        mTvBottomDanwei.setVisibility(View.VISIBLE);
-        mMyCircleView.setVisibility(View.GONE);
-        mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvValue.setTextColor(getResources().getColor(R.color.color_pm_value));
         if(mMonitor.getPm_data() != null) {
             mTvValue.setText(String.valueOf(mMonitor.getPm_data()));
         } else {
             mTvValue.setText(R.string.get_none);
         }
-        mTvTime.setText(mMonitor.getCreated());
     }
 }

@@ -24,6 +24,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
+import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.service.HeartbeatService;
@@ -244,7 +245,10 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                if(AConstants.IS_DEBUG_MODE){
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    mLoadDialog.dismiss();
+                }
             }
         });
         queue.add(jsonRequest);

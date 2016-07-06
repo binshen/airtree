@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.common.AConstants;
 
 import org.json.JSONObject;
 
@@ -112,7 +113,10 @@ public class PersonalFeedbackActivity extends ABaseActivity implements View.OnCl
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                if(AConstants.IS_DEBUG_MODE){
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    mLoadDialog.dismiss();
+                }
             }
         });
         queue.add(jsonRequest);

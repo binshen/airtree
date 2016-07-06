@@ -15,6 +15,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bigkoo.pickerview.TimePickerView;
 
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.common.AConstants;
 import com.moral.airtree.utils.StringUtils;
 
 import org.json.JSONObject;
@@ -103,7 +104,10 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                if(AConstants.IS_DEBUG_MODE){
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    mLoadDialog.dismiss();
+                }
             }
         });
         queue.add(jsonRequest);

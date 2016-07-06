@@ -21,6 +21,7 @@ import com.hiflying.smartlink.SmartLinkedModule;
 import com.hiflying.smartlink.v3.SnifferSmartLinker;
 import com.hiflying.smartlink.v7.MulticastSmartLinker;
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.common.AConstants;
 
 import org.json.JSONObject;
 
@@ -160,7 +161,10 @@ public class DeviceAddLoadActivity extends ABaseActivity implements OnSmartLinkL
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                if(AConstants.IS_DEBUG_MODE){
+                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                    mLoadDialog.dismiss();
+                }
             }
         });
         queue.add(jsonRequest);

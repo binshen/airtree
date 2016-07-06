@@ -2,6 +2,7 @@ package com.moral.airtree;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -74,10 +75,26 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
                 break;
 
             case R.id.btn_getvalidate:
+                if(TextUtils.isEmpty(username)) {
+                    Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 sendMessage(username);
                 break;
 
             case R.id.btn_register:
+                if(TextUtils.isEmpty(username)) {
+                    Toast.makeText(getApplicationContext(), "请输入手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(input_cd)) {
+                    Toast.makeText(getApplicationContext(), "请输入验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 registerUser(username, password, input_cd);
                 break;
         }

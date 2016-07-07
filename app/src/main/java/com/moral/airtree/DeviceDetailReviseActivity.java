@@ -98,9 +98,8 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
                 public void onErrorResponse(VolleyError error) {
                     if(AConstants.IS_DEBUG_MODE){
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                        mLoadDialog.dismiss();
                     }
-
+                    mLoadDialog.dismiss();
                 }
             });
             queue.add(jsonRequest);

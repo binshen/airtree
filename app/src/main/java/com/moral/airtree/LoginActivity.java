@@ -177,8 +177,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
             public void onErrorResponse(VolleyError error) {
                 if(AConstants.IS_DEBUG_MODE){
                     Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    mLoadDialog.dismiss();
                 }
+                mLoadDialog.dismiss();
             }
         });
 //        jsonRequest.setRetryPolicy(new RetryPolicy() {

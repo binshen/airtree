@@ -106,8 +106,8 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
             public void onErrorResponse(VolleyError error) {
                 if(AConstants.IS_DEBUG_MODE){
                     Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                    mLoadDialog.dismiss();
                 }
+                mLoadDialog.dismiss();
             }
         });
         queue.add(jsonRequest);

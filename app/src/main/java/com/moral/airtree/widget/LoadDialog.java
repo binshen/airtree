@@ -35,12 +35,17 @@ public class LoadDialog {
     }
 
     public void show() {
+        if(!mAnimationDrawable.isRunning()) {
+            mAnimationDrawable.start();
+        }
         mDialog.show();
     }
 
     public void dismiss() {
         if(mDialog.isShowing()) {
             mDialog.dismiss();
+        }
+        if(mAnimationDrawable.isRunning()) {
             mAnimationDrawable.stop();
         }
     }

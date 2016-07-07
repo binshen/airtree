@@ -57,6 +57,8 @@
     <item type="id" name="tv_username">false</item>
     <item type="id" name="rl_revisepwd">false</item>
     <item type="id" name="rl_check">false</item>
+    <item type="id" name="rl_check_line">false</item>
+    <item type="id" name="tv_check_status">false</item>
     <item type="id" name="rl_feedback">false</item>
     <item type="id" name="btn_exit">false</item>
     <item type="id" name="et_nickname">false</item>

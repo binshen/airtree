@@ -25,7 +25,6 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
 
     private Button mBtnExit;
     private ImageView mIvLeft;
-    private RelativeLayout mRlCheck;
     private RelativeLayout mRlNickname;
     private RelativeLayout mRlRevisepwd;
     private RelativeLayout mRlUserfeedback;
@@ -41,7 +40,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mTvTitle.setText("用户信息");
         mRlNickname = (RelativeLayout)findViewById(R.id.rl_nickname);
         mRlRevisepwd = (RelativeLayout)findViewById(R.id.rl_revisepwd);
-        mRlCheck = (RelativeLayout)findViewById(R.id.rl_check);
+        //mRlCheck = (RelativeLayout)findViewById(R.id.rl_check);
         mRlUserfeedback = (RelativeLayout)findViewById(R.id.rl_feedback);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mTvUserName = (TextView)findViewById(R.id.tv_username);
@@ -50,7 +49,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mIvLeft.setImageResource(R.mipmap.back);
         mRlNickname.setOnClickListener(this);
         mRlRevisepwd.setOnClickListener(this);
-        mRlCheck.setOnClickListener(this);
+        //mRlCheck.setOnClickListener(this);
         mRlUserfeedback.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnExit.setOnClickListener(this);

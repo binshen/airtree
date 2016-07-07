@@ -33,7 +33,9 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
     private TextView mTvStyle;
     private TextView mTvTitle;
     private TextView mTvWhere;
-    private TextView mTvHistory;
+    private TextView mTvCheckStatus;
+    private RelativeLayout mRlCheck;
+    private View rl_check_line;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,13 +52,15 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mTvMac = (TextView)findViewById(R.id.tv_mac);
         mTvWhere = (TextView)findViewById(R.id.tv_where);
         mTvStyle = (TextView)findViewById(R.id.tv_style);
-        mTvHistory = (TextView)findViewById(R.id.tv_history);
+        mTvCheckStatus = (TextView)findViewById(R.id.tv_check_status);
         mRl1 = (RelativeLayout)findViewById(R.id.rl1);
         mRl1.setOnClickListener(this);
         mRl4 = (RelativeLayout)findViewById(R.id.rl4);
         mRl4.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnRemovebind.setOnClickListener(this);
+        mRlCheck = (RelativeLayout) findViewById(R.id.rl_check);
+        rl_check_line = findViewById(R.id.rl_check_line);
     }
 
     @Override
@@ -145,11 +149,17 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mTvBianma.setText(mDevice.get_id());
         mTvWhere.setText(mDevice.getName());
 
+        mTvCheckStatus.setText("检测达标");
+
         int type = mDevice.getType();
         if(type == 1) {
             mTvStyle.setText("主机");
+            mRlCheck.setVisibility(View.VISIBLE);
+            rl_check_line.setVisibility(View.VISIBLE);
         } else {
             mTvStyle.setText("从机");
+            mRlCheck.setVisibility(View.GONE);
+            rl_check_line.setVisibility(View.GONE);
         }
     }
 }

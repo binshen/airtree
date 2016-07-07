@@ -5,6 +5,6 @@ package com.moral.airtree.common;
  */
 public interface AConstants {
 
-    public final boolean IS_DEBUG_MODE = true;
+    public final boolean IS_DEBUG_MODE = false;
     public final String MORAL_API_BASE_PATH = "http://121.40.92.176:3000";
 }

@@ -71,6 +71,10 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         }
     };
 
+    protected Integer getDialogThemeResId() {
+        return R.style.load_dialog2;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

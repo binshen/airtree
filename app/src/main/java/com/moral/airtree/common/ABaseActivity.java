@@ -4,6 +4,8 @@ package com.moral.airtree.common;
  * Created by bin.shen on 5/18/16.
  */
 import android.support.v4.app.FragmentActivity;
+
+import com.moral.airtree.R;
 import com.moral.airtree.widget.LoadDialog;
 import android.os.Bundle;
 
@@ -17,7 +19,8 @@ public abstract class ABaseActivity extends FragmentActivity {
 
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-        mLoadDialog = new LoadDialog(this);
+
+        mLoadDialog = new LoadDialog(this, getDialogThemeResId());
         application = (ABaseApplication) getApplication();
     }
 
@@ -28,5 +31,9 @@ public abstract class ABaseActivity extends FragmentActivity {
     protected void onPause() {
         mLoadDialog.dismiss();
         super.onPause();
+    }
+
+    protected Integer getDialogThemeResId() {
+        return R.style.load_dialog;
     }
 }

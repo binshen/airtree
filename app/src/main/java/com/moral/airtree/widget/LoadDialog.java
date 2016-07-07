@@ -19,7 +19,7 @@ public class LoadDialog {
     public Dialog mDialog;
     private AnimationDrawable mAnimationDrawable = null;
 
-    public LoadDialog(Context context) {
+    public LoadDialog(Context context, int themeResId) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lay_load_dialog, null);
         ImageView loadingImage = (ImageView)view.findViewById(R.id.iv_progress);
@@ -29,7 +29,7 @@ public class LoadDialog {
             mAnimationDrawable.setOneShot(false);
             mAnimationDrawable.start();
         }
-        mDialog = new Dialog(context, R.style.load_dialog);
+        mDialog = new Dialog(context, themeResId);
         mDialog.setContentView(view);
         mDialog.setCanceledOnTouchOutside(false);
     }

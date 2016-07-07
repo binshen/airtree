@@ -2,6 +2,8 @@ package com.moral.airtree.common;
 
 
 import android.support.v4.app.Fragment;
+
+import com.moral.airtree.R;
 import com.moral.airtree.widget.LoadDialog;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -59,7 +61,11 @@ public abstract class ABaseFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLoadDialog = new LoadDialog(getActivity());
+        mLoadDialog = new LoadDialog(getActivity(), getDialogThemeResId());
+    }
+
+    protected Integer getDialogThemeResId() {
+        return R.style.load_dialog;
     }
 
     public void onResume() {

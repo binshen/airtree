@@ -80,15 +80,15 @@ public class UpdateManager {
         ParseXmlService service = new ParseXmlService();
         try {
             mHashMap = service.parseXml(AConstants.MORAL_API_BASE_PATH + "/upgrade");
+            String message = mHashMap.get("message");
+            if (isUpdate()) {
+                // 显示提示对话框
+                showNoticeDialog(message);
+            } else {
+//              Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
+            }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        String message = mHashMap.get("message");
-        if (isUpdate()) {
-            // 显示提示对话框
-            showNoticeDialog(message);
-        } else {
-//            Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
         }
     }
 

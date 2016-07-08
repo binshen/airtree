@@ -224,6 +224,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setWindSpeed_data(data.optLong("x12"));
                         mMonitor.setElectricQuantity(data.optInt("x13"));
                         mMonitor.setLight(data.optLong("x14"));
+                        mMonitor.setPriority1(data.optInt("p1"));
+                        mMonitor.setPriority2(data.optInt("p2"));
+                        mMonitor.setPriority3(data.optInt("p3"));
+                        mMonitor.setPriority4(data.optInt("p4"));
+                        mMonitor.setFeiLevel(data.optInt("fei"));
                     } else {
                         String date  = dateFormat.format(new Date());
                         mMonitor.setCreated(date);
@@ -235,6 +240,11 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setWindSpeed_data(0l);
                         mMonitor.setElectricQuantity(0);
                         mMonitor.setLight(0l);
+                        mMonitor.setPriority1(0);
+                        mMonitor.setPriority2(0);
+                        mMonitor.setPriority3(0);
+                        mMonitor.setPriority4(0);
+                        mMonitor.setFeiLevel(0);
                     }
                     mFragmentList.add(new RoomFragment().newInstance(mDevice, mMonitor));
                 }

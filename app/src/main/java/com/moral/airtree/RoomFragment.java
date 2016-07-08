@@ -146,22 +146,44 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         int status = mDevice.getStatus();
-        if(mMonitor.getPm_data() != null) {
-            //long last_updated = mDevice.getLast_updated();
-            //if(status == 1 && new Date().getTime() - last_updated <= 60000) {
-            if(status == 1) {
-                mTvSuggest.setText("");
-                mTvMainLabel.setText("云端在线");
+        //if(status == 1 && new Date().getTime() - mDevice.getLast_updated() <= 60000) {
+        if(status == 1) {
+            mTvSuggest.setText("云端在线");
+        } else {
+            mTvSuggest.setText("上次检测时间：\n" + mMonitor.getCreated());
+        }
+        int priority1 = mMonitor.getPriority1();
+        if(priority1 == 3) {//甲醛
+            if(mMonitor.getFormaldehyde_data() != null) {
+                mTvMainLabel.setText("当前甲醛浓度mg/m³");
+                mTvMain.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
             } else {
-                mTvSuggest.setText("上次检测时间：\n" + mMonitor.getCreated());
-                mTvMainLabel.setText("0.3um颗粒物个数");
+                mTvMainLabel.setVisibility(View.GONE);
+                mTvMain.setText(R.string.airquality_unknow);
             }
+        } else if(priority1 == 4) {//温度
+            if(mMonitor.getTemperature_data() != null) {
+                mTvMainLabel.setText("当前温度℃");
+                mTvMain.setText(String.valueOf(mMonitor.getTemperature_data()));
+            } else {
+                mTvMainLabel.setVisibility(View.GONE);
+                mTvMain.setText(R.string.airquality_unknow);
+            }
+        } else {
+            if(mMonitor.getPm_data() != null) {
+                mTvMainLabel.setText("0.3um颗粒物个数");
+                mTvMain.setText(String.valueOf(mMonitor.getPm03p01()));
+            } else {
+                mTvMainLabel.setVisibility(View.GONE);
+                mTvMain.setText(R.string.airquality_unknow);
+            }
+        }
+        initAirQuality(priority1);
+
+        if(mMonitor.getPm_data() != null) {
             mTvPM25Value.setText(mMonitor.getPm_data() + "ug/m³");
-            mTvMain.setText(String.valueOf(mMonitor.getPm03p01()));
         } else {
             mTvPM25Value.setText(R.string.airquality_unknow);
-            mTvMain.setText(R.string.airquality_unknow);
-            mTvMainLabel.setVisibility(View.GONE);
         }
         if(mMonitor.getHumidity_data() != null) {
             mTvHumidityValue.setText(mMonitor.getHumidity_data() + "%");
@@ -192,17 +214,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         } else {
             mIvElectric.setImageResource(R.mipmap.ic_ele_5);
         }
-//滤芯寿命
-//        int chipLife = 0x0;
-//        try {
-//            chipLife = Integer.parseInt(mMonitor.getChipLife());
-//        } catch(Exception ex) {
-//            chipLife = 0x0;
-//        }
-//        if(getActivity() != null) {
-//            //PreferencesUtils.putInt(getActivity(), "chiplife", chipLife);
-//        }
-        initAirQuality();
     }
 
     private void clearData() {
@@ -214,20 +225,37 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvAirQuality.setText(R.string.airquality_unknow);
     }
 
-    private void initAirQuality() {
-        if(mMonitor.getPm_data() != null) {
-            long pmData = mMonitor.getPm_data().longValue();
-            if(pmData <= 35) {
+    private void initAirQuality(int priority) {
+        if(priority > 0) {
+            int feiLevel = mMonitor.getFeiLevel();
+            if(feiLevel == 1) {
                 mTvAirQuality.setText(R.string.airquality_good);
-                return;
-            } else if(pmData <= 75) {
+            } else if(feiLevel == 2) {
                 mTvAirQuality.setText(R.string.airquality_very);
-                return;
-            } else if(pmData <= 150) {
+            } else if(feiLevel == 3) {
                 mTvAirQuality.setText(R.string.airquality_general);
-                return;
-            } else {
+            } else if(feiLevel == 4) {
                 mTvAirQuality.setText(R.string.airquality_poor);
+            } else {
+                mTvAirQuality.setText(R.string.airquality_unknow);
+            }
+        } else {
+            if(mMonitor.getPm_data() != null) {
+                long pmData = mMonitor.getPm_data().longValue();
+                if(pmData <= 35) {
+                    mTvAirQuality.setText(R.string.airquality_good);
+                    return;
+                } else if(pmData <= 75) {
+                    mTvAirQuality.setText(R.string.airquality_very);
+                    return;
+                } else if(pmData <= 150) {
+                    mTvAirQuality.setText(R.string.airquality_general);
+                    return;
+                } else {
+                    mTvAirQuality.setText(R.string.airquality_poor);
+                }
+            } else {
+                mTvAirQuality.setText(R.string.airquality_unknow);
             }
         }
     }

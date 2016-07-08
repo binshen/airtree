@@ -25,4 +25,15 @@ public class NetUtils {
         }
         return false;
     }
+
+    public static boolean getWifiConnect(Context context) {
+        ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager != null) {
+            NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+            if(activeNetworkInfo.getType()==ConnectivityManager.TYPE_WIFI){ //WIFI网
+                return true;
+            }
+        }
+        return false;
+    }
 }

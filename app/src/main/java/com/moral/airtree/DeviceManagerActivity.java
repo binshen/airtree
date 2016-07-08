@@ -20,6 +20,7 @@ import com.moral.airtree.adapter.DeviceAdapter;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
+import com.moral.airtree.utils.NetUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -70,7 +71,11 @@ public class DeviceManagerActivity extends ABaseActivity {
         mIvRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), DeviceAddActivity.class));
+                if(NetUtils.getWifiConnect(getApplicationContext())) {
+                    startActivity(new Intent(getApplicationContext(), DeviceAddActivity.class));
+                } else {
+                    Toast.makeText(getApplicationContext(), "请先连接WIFI网络", Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

@@ -146,9 +146,10 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         int status = mDevice.getStatus();
-        long last_updated = mDevice.getLast_updated();
         if(mMonitor.getPm_data() != null) {
-            if(status == 1 && new Date().getTime() - last_updated <= 60000) {
+            //long last_updated = mDevice.getLast_updated();
+            //if(status == 1 && new Date().getTime() - last_updated <= 60000) {
+            if(status == 1) {
                 mTvSuggest.setText("");
                 mTvMainLabel.setText("云端在线");
             } else {

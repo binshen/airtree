@@ -230,8 +230,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setPriority4(data.optInt("p4"));
                         mMonitor.setFeiLevel(data.optInt("fei"));
                     } else {
-                        String date  = dateFormat.format(new Date());
-                        mMonitor.setCreated(date);
+                        mMonitor.setCreated(null);
                         mMonitor.setPm_data(0l);
                         mMonitor.setPm03p01(0l);
                         mMonitor.setFormaldehyde_data(0l);

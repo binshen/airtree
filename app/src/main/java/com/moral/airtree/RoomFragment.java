@@ -150,7 +150,12 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         if(status == 1) {
             mTvSuggest.setText("云端在线");
         } else {
-            mTvSuggest.setText("上次检测时间：\n" + mMonitor.getCreated());
+            String created = mMonitor.getCreated();
+            if(created != null) {
+                mTvSuggest.setText("上次检测时间：\n" + created);
+            } else {
+                mTvSuggest.setText("无法获取最新数据");
+            }
         }
         int priority1 = mMonitor.getPriority1();
         if(priority1 == 3) {//甲醛

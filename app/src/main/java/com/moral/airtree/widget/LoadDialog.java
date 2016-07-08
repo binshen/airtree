@@ -1,5 +1,6 @@
 package com.moral.airtree.widget;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.app.Dialog;
@@ -18,9 +19,12 @@ import com.moral.airtree.R;
 public class LoadDialog {
 
     public Dialog mDialog;
+    private Context context;
     private AnimationDrawable mAnimationDrawable = null;
 
     public LoadDialog(Context context, int themeResId, boolean canceledOnTouch) {
+        this.context = context;
+
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lay_load_dialog, null);
         ImageView loadingImage = (ImageView)view.findViewById(R.id.iv_progress);
@@ -44,7 +48,9 @@ public class LoadDialog {
         if(!mAnimationDrawable.isRunning()) {
             mAnimationDrawable.start();
         }
-        mDialog.show();
+        if(!((Activity)context).isFinishing()) {
+            mDialog.show();
+        }
     }
 
     public void dismiss() {

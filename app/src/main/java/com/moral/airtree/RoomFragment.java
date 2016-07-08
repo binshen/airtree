@@ -16,6 +16,8 @@ import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.model.MonitorEnum;
 
+import java.util.Date;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -144,12 +146,13 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         int status = mDevice.getStatus();
+        long last_updated = mDevice.getLast_updated();
         if(mMonitor.getPm_data() != null) {
-            if(status == 1) {
+            if(status == 1 && new Date().getTime() - last_updated <= 60000) {
                 mTvSuggest.setText("");
                 mTvMainLabel.setText("云端在线");
             } else {
-                mTvSuggest.setText("上次时间检测时间：\n" + mMonitor.getCreated());
+                mTvSuggest.setText("上次检测时间：\n" + mMonitor.getCreated());
                 mTvMainLabel.setText("0.3um颗粒物个数");
             }
             mTvPM25Value.setText(mMonitor.getPm_data() + "ug/m³");

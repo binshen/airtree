@@ -82,6 +82,7 @@
     <string name="ok">确 定</string>
     <string name="commit">提 交</string>
     <string name="nickname">昵称</string>
+    <string name="start_connect">开始连接</string>
     <string name="lwcheck">滤网检测</string>
     <string name="lvcheck1">请先将空气树放在空气净化</string>
     <string name="lvcheck2">器出风口</string>

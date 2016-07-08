@@ -1,5 +1,6 @@
 package com.moral.airtree.widget;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.AnimationDrawable;
 import android.app.Dialog;
 import android.content.Context;
@@ -19,7 +20,7 @@ public class LoadDialog {
     public Dialog mDialog;
     private AnimationDrawable mAnimationDrawable = null;
 
-    public LoadDialog(Context context, int themeResId) {
+    public LoadDialog(Context context, int themeResId, boolean canceledOnTouch) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.lay_load_dialog, null);
         ImageView loadingImage = (ImageView)view.findViewById(R.id.iv_progress);
@@ -31,7 +32,13 @@ public class LoadDialog {
         }
         mDialog = new Dialog(context, themeResId);
         mDialog.setContentView(view);
-        mDialog.setCanceledOnTouchOutside(false);
+        mDialog.setCanceledOnTouchOutside(canceledOnTouch);
+        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                System.out.println("++++++++++++++++++++");
+            }
+        });
     }
 
     public void show() {

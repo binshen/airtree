@@ -75,6 +75,10 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         return R.style.load_dialog2;
     }
 
+    protected boolean getCanceledOnTouch() {
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

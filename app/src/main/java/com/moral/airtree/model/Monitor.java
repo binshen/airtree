@@ -17,6 +17,22 @@ public class Monitor implements Serializable {
     private Integer humidity_data;
     private Long formaldehyde_data;
 
+    private Integer priority1;
+    private Integer priority2;
+    private Integer priority3;
+    private Integer priority4;
+    private Integer feiLevel;
+
+    private Integer rank;
+
+    public Integer getRank() {
+        return rank;
+    }
+
+    public void setRank(Integer rank) {
+        this.rank = rank;
+    }
+
     public String getCreated() {
         return created;
     }
@@ -87,5 +103,45 @@ public class Monitor implements Serializable {
 
     public void setFormaldehyde_data(Long formaldehyde_data) {
         this.formaldehyde_data = formaldehyde_data;
+    }
+
+    public Integer getPriority1() {
+        return priority1;
+    }
+
+    public void setPriority1(Integer priority1) {
+        this.priority1 = priority1;
+    }
+
+    public Integer getPriority2() {
+        return priority2;
+    }
+
+    public void setPriority2(Integer priority2) {
+        this.priority2 = priority2;
+    }
+
+    public Integer getPriority3() {
+        return priority3;
+    }
+
+    public void setPriority3(Integer priority3) {
+        this.priority3 = priority3;
+    }
+
+    public Integer getPriority4() {
+        return priority4;
+    }
+
+    public void setPriority4(Integer priority4) {
+        this.priority4 = priority4;
+    }
+
+    public Integer getFeiLevel() {
+        return feiLevel;
+    }
+
+    public void setFeiLevel(Integer feiLevel) {
+        this.feiLevel = feiLevel;
     }
 }

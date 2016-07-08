@@ -20,7 +20,7 @@ public abstract class ABaseActivity extends FragmentActivity {
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
 
-        mLoadDialog = new LoadDialog(this, getDialogThemeResId());
+        mLoadDialog = new LoadDialog(this, getDialogThemeResId(), getCanceledOnTouch());
         application = (ABaseApplication) getApplication();
     }
 
@@ -35,5 +35,9 @@ public abstract class ABaseActivity extends FragmentActivity {
 
     protected Integer getDialogThemeResId() {
         return R.style.load_dialog;
+    }
+
+    protected boolean getCanceledOnTouch() {
+        return false;
     }
 }

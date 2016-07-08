@@ -61,11 +61,15 @@ public abstract class ABaseFragment extends Fragment {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mLoadDialog = new LoadDialog(getActivity(), getDialogThemeResId());
+        mLoadDialog = new LoadDialog(getActivity(), getDialogThemeResId(), getCanceledOnTouch());
     }
 
     protected Integer getDialogThemeResId() {
         return R.style.load_dialog;
+    }
+
+    protected boolean getCanceledOnTouch() {
+        return false;
     }
 
     public void onResume() {

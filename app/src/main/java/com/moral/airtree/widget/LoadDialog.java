@@ -33,12 +33,11 @@ public class LoadDialog {
         mDialog = new Dialog(context, themeResId);
         mDialog.setContentView(view);
         mDialog.setCanceledOnTouchOutside(canceledOnTouch);
-        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                System.out.println("++++++++++++++++++++");
-            }
-        });
+//        mDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+//            @Override
+//            public void onCancel(DialogInterface dialog) {
+//            }
+//        });
     }
 
     public void show() {

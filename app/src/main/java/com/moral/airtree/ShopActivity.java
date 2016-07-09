@@ -19,6 +19,10 @@ public class ShopActivity extends ABaseActivity {
     private TextView mTvTitle;
     private WebView mWebView;
 
+    protected boolean getCanceledOnTouch() {
+        return true;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

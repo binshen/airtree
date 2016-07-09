@@ -175,10 +175,10 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                if(AConstants.IS_DEBUG_MODE){
-                    Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), AConstants.IS_DEBUG_MODE ? error.toString() : "网络故障，请稍候重试", Toast.LENGTH_SHORT).show();
+                if (mLoadDialog.isShowing()) {
+                    mLoadDialog.dismiss();
                 }
-                mLoadDialog.dismiss();
             }
         });
 //        jsonRequest.setRetryPolicy(new RetryPolicy() {

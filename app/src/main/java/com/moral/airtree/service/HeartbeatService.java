@@ -68,7 +68,7 @@ public class HeartbeatService extends Service implements Runnable {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                Log.e("HeartbeatService", error.toString());
             }
         });
         queue.add(jsonRequest);

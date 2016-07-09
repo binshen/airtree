@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.moral.airtree.common.ABaseActivity;
+import com.moral.airtree.common.AConstants;
 
 public class DeviceAddActivity extends ABaseActivity {
 
@@ -40,7 +41,9 @@ public class DeviceAddActivity extends ABaseActivity {
         mIvLeft.setImageResource(R.mipmap.back);
         mTvWifiName = (TextView)findViewById(R.id.tv_wifiname);
         mEtWifiPwd = (EditText)findViewById(R.id.et_wifipwd);
-        mEtWifiPwd.setText("asdfasdf");
+        if(AConstants.IS_DEBUG_MODE) {
+            mEtWifiPwd.setText("asdfasdf");
+        }
         mBtnOk = (Button)findViewById(R.id.btn_ok);
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override

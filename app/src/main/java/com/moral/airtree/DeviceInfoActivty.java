@@ -2,6 +2,8 @@ package com.moral.airtree;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,7 +20,12 @@ import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class DeviceInfoActivty extends ABaseActivity implements View.OnClickListener {
 
@@ -61,34 +68,56 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mBtnRemovebind.setOnClickListener(this);
         mRlCheck = (RelativeLayout) findViewById(R.id.rl_check);
         rl_check_line = findViewById(R.id.rl_check_line);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
 
         initData();
     }
 
+    private Handler timeHandler = new Handler();
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            requestDeviceData();
+            timeHandler.postDelayed(this, 6000);
+        }
+    };
+
+    @Override
+    protected void onStart() {
+
+        mTvWhere.setText(application.getDevice().getName());
+
+        requestDeviceData();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        timeHandler.removeCallbacks(runnable);
+        timeHandler.postDelayed(runnable, 6000);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        timeHandler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        timeHandler.removeCallbacks(runnable);
+        super.onDestroy();
+    }
+
     public void onClick(View v) {
         Intent intent = new Intent();
-        Bundle bundle = new Bundle();
         switch (v.getId()) {
             case R.id.rl1:
                 intent.setClass(this, DeviceDetailReviseActivity.class);
-                bundle.putString("deviceID", mDevice.get_id());
-                bundle.putString("deviceName", mDevice.getName());
-                bundle.putInt("devicePosition", mPosition);
-                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
             case R.id.rl4:
                 intent.setClass(this, HistoryActivity.class);
-                bundle.putString("deviceMac", mDevice.getMac());
-                bundle.putString("deviceName", mDevice.getName());
-                bundle.putInt("devicePosition", mPosition);
-                intent.putExtras(bundle);
                 startActivity(intent);
                 break;
 
@@ -139,17 +168,10 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
     }
 
     private void initData() {
-        Bundle bundle = getIntent().getExtras();
-        if(bundle == null) {
-            return;
-        }
-        mPosition = bundle.getInt("devicePosition");
-        mDevice = application.getDevices().get(mPosition);
+        mDevice = application.getDevice();
         mTvMac.setText(mDevice.getMac().toUpperCase());
         mTvBianma.setText(mDevice.get_id());
         mTvWhere.setText(mDevice.getName());
-
-        mTvCheckStatus.setText("需要更换");
 
         int type = mDevice.getType();
         if(type == 1) {
@@ -161,5 +183,32 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
             mRlCheck.setVisibility(View.GONE);
             rl_check_line.setVisibility(View.GONE);
         }
+
+        requestDeviceData();
+    }
+
+    private void requestDeviceData() {
+        String url = basePath + "/device/mac/" + mDevice.getMac() + "/get_test";
+        RequestQueue queue = application.getRequestQueue();
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d("DeviceInfoActivty", response.toString());
+                if(!response.isNull("mac")) {
+                    int test = response.optInt("test");
+                    String created = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(response.optLong("created")));
+                    String content = test == 1 ? "需要更换" : "无需更换";
+                    mTvCheckStatus.setText(content + "(" + created + ")");
+                } else {
+                    mTvCheckStatus.setText("");
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), AConstants.IS_DEBUG_MODE ? error.toString() : "网络故障，请稍候重试。", Toast.LENGTH_SHORT).show();
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

@@ -18,17 +18,13 @@ import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DeviceDetailReviseActivity extends ABaseActivity {
 
-    private static final int MAX_COUNT = 0x14;
     private Button mBtnOk;
     private String mDeviceId;
-    private int mPosition;
-    ArrayList<Device> mDevises;
     private EditText mEtDeviceDetail;
     private ImageView mIvLeft;
     private TextView mTvTitle;
@@ -46,10 +42,9 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
         mEtDeviceDetail = (EditText)findViewById(R.id.et_devicedetail);
         mBtnOk = (Button)findViewById(R.id.btn_ok);
 
-        Bundle bundle = getIntent().getExtras();
-        mPosition = bundle.getInt("devicePosition");
-        mDeviceId = bundle.getString("deviceID");
-        mEtDeviceDetail.setText(bundle.getString("deviceName"));
+        Device mDevice = application.getDevice();
+        mDeviceId = application.getDevice().get_id();
+        mEtDeviceDetail.setText(mDevice.getName());
         mIvLeft.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,8 +80,7 @@ public class DeviceDetailReviseActivity extends ABaseActivity {
                 public void onResponse(JSONObject response) {
                     boolean success = response.optBoolean("success");
                     if (success) {
-                        application.getDevices().get(mPosition).setName(deviceName);
-                        //application.setDeviceChanged(true);
+                        application.getDevice().setName(deviceName);
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

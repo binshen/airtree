@@ -62,9 +62,7 @@ public class DeviceManagerActivity extends ABaseActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 Intent intent = new Intent();
                 intent.setClass(getApplicationContext(), DeviceInfoActivty.class);
-                Bundle bundle = new Bundle();
-                bundle.putInt("devicePosition", position);
-                intent.putExtras(bundle);
+                application.setDevice(mDevices.get(position));
                 startActivity(intent);
             }
         });
@@ -113,18 +111,6 @@ public class DeviceManagerActivity extends ABaseActivity {
         super.onDestroy();
     }
 
-//    private void initData() {
-//        if(application.isDeviceChanged) {
-//            requestDeviceData();
-//        } else {
-//            mDevices = application.getDevices();
-//
-//            mDevicesAdapter = new DeviceAdapter(this, mDevices);
-//            mLv.setAdapter(mDevicesAdapter);
-//            mDevicesAdapter.notifyDataSetChanged();
-//        }
-//    }
-
     private void requestDeviceData() {
         String url = basePath + "/user/" + application.getLoginUserID() + "/get_device_info";
         RequestQueue queue = application.getRequestQueue();
@@ -150,7 +136,6 @@ public class DeviceManagerActivity extends ABaseActivity {
                     device.setLast_updated(json.optLong("last_updated"));
                     mDevices.add(device);
                 }
-                application.setDevices(mDevices);
 
                 mDevicesAdapter = new DeviceAdapter(getApplicationContext(), mDevices);
                 mLv.setAdapter(mDevicesAdapter);

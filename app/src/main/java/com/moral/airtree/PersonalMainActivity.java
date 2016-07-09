@@ -75,7 +75,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
                     public void onResponse(JSONObject response) {
                         Log.d("PersonalMainActivity", response.toString());
                         application.setLoginUser(null);
-                        application.setDevices(null);
+                        application.setDevice(null);
                         setResult(Activity.RESULT_OK, new Intent());
                         finish();
                     }

@@ -43,9 +43,8 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        Bundle bundle = getIntent().getExtras();
-        mDeviceMac = bundle.getString("deviceMac");
-        mDeviceName = bundle.getString("deviceName");
+        mDeviceMac = application.getDevice().getMac();
+        mDeviceName = application.getDevice().getName();
 
         initTitle();
         initView();

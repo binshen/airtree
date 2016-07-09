@@ -7,9 +7,6 @@ import com.android.volley.toolbox.Volley;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.User;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by bin.shen on 5/20/16.
  */
@@ -56,14 +53,14 @@ public class ABaseApplication extends Application {
         this.loginUser = loginUser;
     }
 
-    private List<Device> devices = new ArrayList<Device>();
+    private Device device;
 
-    public List<Device> getDevices() {
-        return devices;
+    public Device getDevice() {
+        return device;
     }
 
-    public void setDevices(List<Device> devices) {
-        this.devices = devices;
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     public void onCreate() {

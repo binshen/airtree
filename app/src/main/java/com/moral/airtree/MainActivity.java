@@ -247,7 +247,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                     }
                     mFragmentList.add(new RoomFragment().newInstance(mDevice, mMonitor));
                 }
-                application.setDevices(mDevices);
+                //application.setDevices(mDevices);
 
                 setFragmentTitle();
 

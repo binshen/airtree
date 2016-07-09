@@ -128,7 +128,7 @@
     <string name="getlist_error">获取列表失败</string>
     <string name="airquality_good">优</string>
     <string name="airquality_very">良</string>
-    <string name="airquality_general">一般</string>
+    <string name="airquality_general">中</string>
     <string name="airquality_poor">差</string>
     <string name="airquality_unknow">未知</string>
     <string name="sug_trunon">建议打开空气净化器</string>

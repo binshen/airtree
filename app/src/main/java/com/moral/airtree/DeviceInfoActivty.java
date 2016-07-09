@@ -149,7 +149,7 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
         mTvBianma.setText(mDevice.get_id());
         mTvWhere.setText(mDevice.getName());
 
-        mTvCheckStatus.setText("检测达标");
+        mTvCheckStatus.setText("需要更换");
 
         int type = mDevice.getType();
         if(type == 1) {

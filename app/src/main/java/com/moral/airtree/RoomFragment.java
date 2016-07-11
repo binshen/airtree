@@ -160,7 +160,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         int priority1 = mMonitor.getPriority1();
         if(priority1 == 3) {//甲醛
             if(mMonitor.getFormaldehyde_data() != null) {
-                mTvMainLabel.setText("当前甲醛浓度mg/m³");
+                mTvMainLabel.setText("当前甲醛浓度（mg/m³）");
                 mTvMain.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
             } else {
                 mTvMainLabel.setVisibility(View.GONE);
@@ -168,7 +168,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             }
         } else if(priority1 == 4) {//温度
             if(mMonitor.getTemperature_data() != null) {
-                mTvMainLabel.setText("当前温度℃");
+                mTvMainLabel.setText("当前温度（℃）");
                 mTvMain.setText(String.valueOf(mMonitor.getTemperature_data()));
             } else {
                 mTvMainLabel.setVisibility(View.GONE);

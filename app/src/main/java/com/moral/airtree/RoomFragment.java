@@ -149,6 +149,24 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         //if(status == 1 && new Date().getTime() - mDevice.getLast_updated() <= 60000) {
         if(status == 1) {
             mTvSuggest.setText("云端在线");
+
+            mIvElectric.setVisibility(View.VISIBLE);
+            if(mDevice.getType() == 1) {
+                int data = mMonitor.getElectricQuantity();
+                if(data == 5) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_5);
+                } else if(data == 4) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_4);
+                } else if(data == 3) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_3);
+                } else if(data == 2) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_2);
+                } else {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_1);
+                }
+            } else {
+                mIvElectric.setImageResource(R.mipmap.ic_ele_5);
+            }
         } else {
             String created = mMonitor.getCreated();
             if(created != null) {
@@ -156,6 +174,8 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             } else {
                 mTvSuggest.setText("");
             }
+
+            mIvElectric.setVisibility(View.INVISIBLE);
         }
         int priority1 = mMonitor.getPriority1();
         if(priority1 == 3) {//甲醛
@@ -202,22 +222,6 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()) + "mg/m³");
         } else {
             mTvFormaldehydeValue.setText(R.string.airquality_unknow);
-        }
-        if(mDevice.getType() == 1) {
-            int data = mMonitor.getElectricQuantity();
-            if(data == 5) {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_5);
-            } else if(data == 4) {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_4);
-            } else if(data == 3) {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_3);
-            } else if(data == 2) {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_2);
-            } else {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_1);
-            }
-        } else {
-            mIvElectric.setImageResource(R.mipmap.ic_ele_5);
         }
     }
 

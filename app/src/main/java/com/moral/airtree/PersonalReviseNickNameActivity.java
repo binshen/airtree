@@ -1,5 +1,7 @@
 package com.moral.airtree;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,6 +81,10 @@ public class PersonalReviseNickNameActivity extends ABaseActivity implements Vie
                     boolean success = response.optBoolean("success");
                     if (success) {
                         application.setLoginUserNickname(userName);
+
+                        SharedPreferences sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
+                        sp.edit().putString("nickname", userName).commit();
+
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), response.optString("error"), Toast.LENGTH_SHORT).show();

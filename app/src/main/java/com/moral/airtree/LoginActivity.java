@@ -1,6 +1,8 @@
 package com.moral.airtree;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -37,6 +39,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
     private TextView mTvForgetpwd;
     private TextView mTvRegister;
 
+    private SharedPreferences sp;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +76,15 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 new checkUpdateTask().execute();
             }
 
-            if(application.getLoginUser() != null) {
+            sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
+            if(!sp.getString("user_id", "").equals("")) {
+                User loginUser = new User();
+                loginUser.set_id(sp.getString("user_id", ""));
+                loginUser.setUsername(sp.getString("username", ""));
+                loginUser.setPassword(sp.getString("password", ""));
+                loginUser.setNickname(sp.getString("nickname", ""));
+                application.setLoginUser(loginUser);
+
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
@@ -165,6 +177,11 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     loginUser.setPassword(response.optJSONObject("user").optString("password"));
                     loginUser.setNickname(response.optJSONObject("user").optString("nickname"));
                     application.setLoginUser(loginUser);
+
+                    sp.edit().putString("user_id", loginUser.get_id()).commit();
+                    sp.edit().putString("username", loginUser.getUsername()).commit();
+                    sp.edit().putString("password", loginUser.getPassword()).commit();
+                    sp.edit().putString("nickname", loginUser.getNickname()).commit();
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();

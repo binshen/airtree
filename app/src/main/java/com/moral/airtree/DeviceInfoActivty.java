@@ -1,5 +1,7 @@
 package com.moral.airtree;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -126,7 +128,23 @@ public class DeviceInfoActivty extends ABaseActivity implements View.OnClickList
                 break;
 
             case R.id.btn_removebind:
-                unbindDeviceWithUser();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage("确认要解除绑定吗？");
+                builder.setTitle("提示");
+                builder.setPositiveButton("确认", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        unbindDeviceWithUser();
+                        dialog.dismiss();
+                    }
+                });
+                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                       dialog.dismiss();
+                    }
+                });
+                builder.create().show();
                 break;
         }
     }

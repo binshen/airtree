@@ -154,7 +154,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             if(created != null) {
                 mTvSuggest.setText("上次检测时间：\n" + created);
             } else {
-                mTvSuggest.setText("无法获取最新数据");
+                mTvSuggest.setText("");
             }
         }
         int priority1 = mMonitor.getPriority1();

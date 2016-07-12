@@ -1,7 +1,9 @@
 package com.moral.airtree;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -76,6 +78,10 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
                         Log.d("PersonalMainActivity", response.toString());
                         application.setLoginUser(null);
                         application.setDevice(null);
+
+                        SharedPreferences sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
+                        sp.edit().putString("user_id", "").commit();
+
                         setResult(Activity.RESULT_OK, new Intent());
                         finish();
                     }

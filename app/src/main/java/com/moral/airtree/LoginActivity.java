@@ -186,6 +186,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                     finish();
                 } else {
+                    SharedPreferences sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
+                    sp.edit().putString("user_id", "").commit();
+
                     Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_SHORT).show();
                 }
             }

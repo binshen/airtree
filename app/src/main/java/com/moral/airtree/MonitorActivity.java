@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.model.MonitorEnum;
-import com.moral.airtree.widget.GifView;
 import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;

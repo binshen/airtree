@@ -147,6 +147,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         serviceIntent.setClass(this, HeartbeatService.class);
         serviceIntent.putExtra("LoginUserID", application.getLoginUserID());
         startService(serviceIntent);
+
+        ivMallIcon.setVisibility(View.INVISIBLE);
     }
 
     @Override

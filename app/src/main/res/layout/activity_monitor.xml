@@ -39,10 +39,18 @@
             android:layout_height="80.0dip"
             android:layout_alignParentTop="true">
 
+            <!--
             <com.moral.airtree.widget.GifView
                 android:enabled="false"
                 android:layout_gravity="center_vertical"
                 android:id="@id/gifview"
+                android:layout_width="80.0dip"
+                android:layout_height="80.0dip" />
+            -->
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@id/gifview"
+                android:enabled="false"
+                android:layout_gravity="center_vertical"
                 android:layout_width="80.0dip"
                 android:layout_height="80.0dip" />
 

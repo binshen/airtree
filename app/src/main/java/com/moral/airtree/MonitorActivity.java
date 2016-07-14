@@ -18,11 +18,13 @@ import com.viewpagerindicator.CirclePageIndicator;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class MonitorActivity extends ABaseActivity {
 
     private int mCurIndex = 0;
     private List<MonitorFragment> mFragmentList;
-    private GifView mGifView;
+    private GifImageView mGifView;
     private ImageView mIvLeft;
     private Monitor mMonitor;
     private MonitorEnum mMonitorType;
@@ -83,23 +85,23 @@ public class MonitorActivity extends ABaseActivity {
         setViewPagerChanger();
         setFragmentTitleAndTip(0);
         mViewPager.setCurrentItem(mCurIndex);
-        mGifView = (GifView)findViewById(R.id.gifview);
+        mGifView = (GifImageView)findViewById(R.id.gifview);
     }
 
     private void initData() {
         if(mMonitor.getPm_data() != null) {
             long pmData = mMonitor.getPm_data().longValue();
             if(pmData <= 35) {
-                mGifView.setMovieResource(R.raw.good);
+                mGifView.setImageResource(R.drawable.good);
                 mTvContent.setText(getResources().getString(R.string.good));
             } else if(pmData <= 75) {
-                mGifView.setMovieResource(R.raw.very);
+                mGifView.setImageResource(R.drawable.very);
                 mTvContent.setText(getResources().getString(R.string.very));
             } else if(pmData <= 150) {
-                mGifView.setMovieResource(R.raw.general);
+                mGifView.setImageResource(R.drawable.general);
                 mTvContent.setText(getResources().getString(R.string.general));
             } else {
-                mGifView.setMovieResource(R.raw.poor);
+                mGifView.setImageResource(R.drawable.poor);
                 mTvContent.setText(getResources().getString(R.string.poor));
             }
         }

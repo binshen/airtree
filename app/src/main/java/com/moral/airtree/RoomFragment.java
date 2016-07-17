@@ -18,6 +18,8 @@ import com.moral.airtree.model.MonitorEnum;
 
 import java.util.Date;
 
+import pl.droidsonroids.gif.GifImageView;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +43,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private TextView mTvSuggest;
     private TextView mTvTemperature2;
     private View mView;
+    private GifImageView mTvMainImage;
 
     public static RoomFragment newInstance(Device device, Monitor monitor) {
         RoomFragment fragment = new RoomFragment();
@@ -139,6 +142,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvFormaldehydeValue = (TextView)mView.findViewById(R.id.tv_formaldehyde_value);
         mTvTemperature2 = (TextView)mView.findViewById(R.id.tv_temperature2_value);
         mIvElectric = (ImageView)mView.findViewById(R.id.iv_electric_value);
+        mTvMainImage = (GifImageView)mView.findViewById(R.id.iv_main_image);
     }
 
     private void initData() {
@@ -239,12 +243,16 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             int feiLevel = mMonitor.getFeiLevel();
             if(feiLevel == 1) {
                 mTvAirQuality.setText(R.string.airquality_good);
+                mTvMainImage.setImageResource(R.drawable.rank_1);
             } else if(feiLevel == 2) {
                 mTvAirQuality.setText(R.string.airquality_very);
+                mTvMainImage.setImageResource(R.drawable.rank_2);
             } else if(feiLevel == 3) {
                 mTvAirQuality.setText(R.string.airquality_general);
+                mTvMainImage.setImageResource(R.drawable.rank_3);
             } else if(feiLevel == 4) {
                 mTvAirQuality.setText(R.string.airquality_poor);
+                mTvMainImage.setImageResource(R.drawable.rank_4);
             } else {
                 mTvAirQuality.setText(R.string.airquality_unknow);
             }
@@ -253,15 +261,16 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
                 long pmData = mMonitor.getPm_data().longValue();
                 if(pmData <= 35) {
                     mTvAirQuality.setText(R.string.airquality_good);
-                    return;
+                    mTvMainImage.setImageResource(R.drawable.rank_1);
                 } else if(pmData <= 75) {
                     mTvAirQuality.setText(R.string.airquality_very);
-                    return;
+                    mTvMainImage.setImageResource(R.drawable.rank_2);
                 } else if(pmData <= 150) {
                     mTvAirQuality.setText(R.string.airquality_general);
-                    return;
+                    mTvMainImage.setImageResource(R.drawable.rank_3);
                 } else {
                     mTvAirQuality.setText(R.string.airquality_poor);
+                    mTvMainImage.setImageResource(R.drawable.rank_4);
                 }
             } else {
                 mTvAirQuality.setText(R.string.airquality_unknow);

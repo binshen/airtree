@@ -157,19 +157,19 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             mIvElectric.setVisibility(View.VISIBLE);
             if(mDevice.getType() == 1) {
                 int data = mMonitor.getElectricQuantity();
-                if(data == 5) {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_5);
-                } else if(data == 4) {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_4);
+                if(data == 4) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_n4);
                 } else if(data == 3) {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_3);
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_n3);
                 } else if(data == 2) {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_2);
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_n2);
+                } else if(data == 1) {
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_n1);
                 } else {
-                    mIvElectric.setImageResource(R.mipmap.ic_ele_1);
+                    mIvElectric.setImageResource(R.mipmap.ic_ele_n0);
                 }
             } else {
-                mIvElectric.setImageResource(R.mipmap.ic_ele_5);
+                mIvElectric.setImageResource(R.mipmap.ic_ele_n4);
             }
         } else {
             String created = mMonitor.getCreated();

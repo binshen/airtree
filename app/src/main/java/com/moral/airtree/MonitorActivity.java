@@ -88,8 +88,8 @@ public class MonitorActivity extends ABaseActivity {
     }
 
     private void initData() {
-        if(mMonitor.getPm_data() != null) {
-            long pmData = mMonitor.getPm_data().longValue();
+        if(mMonitor.getPm_data() > 0) {
+            long pmData = mMonitor.getPm_data();
             if(pmData <= 35) {
                 mGifView.setImageResource(R.drawable.good);
                 mTvContent.setText(getResources().getString(R.string.good));

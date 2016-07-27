@@ -93,7 +93,7 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_jiaquan);
         mTvMonitortype.setText(R.string.monitor_formaldehyde);
         mTvBottomDanwei.setText("mg/m³");
-        if(mMonitor.getFormaldehyde_data() != null) {
+        if(mMonitor.getFormaldehyde_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
         } else {
             mTvValue.setText(R.string.get_none);
@@ -104,7 +104,7 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_wendu);
         mTvMonitortype.setText(R.string.monitor_temperature);
         mTvBottomDanwei.setText("℃");
-        if(mMonitor.getTemperature_data() != null) {
+        if(mMonitor.getTemperature_data() > -274) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
             mTvValue.setText(R.string.get_none);
@@ -115,7 +115,7 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_shidu);
         mTvMonitortype.setText(R.string.monitor_humidity);
         mTvBottomDanwei.setText("%");
-        if(mMonitor.getHumidity_data() != null) {
+        if(mMonitor.getHumidity_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getHumidity_data()));
         } else {
             mTvValue.setText(R.string.get_none);
@@ -126,7 +126,7 @@ public class MonitorFragment extends ABaseFragment {
         mRlatMonitor.setBackgroundResource(R.mipmap.bg_pm);
         mTvMonitortype.setText(R.string.monitor_pm);
         mTvBottomDanwei.setText("ug/m³");
-        if(mMonitor.getPm_data() != null) {
+        if(mMonitor.getPm_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getPm_data()));
         } else {
             mTvValue.setText(R.string.get_none);

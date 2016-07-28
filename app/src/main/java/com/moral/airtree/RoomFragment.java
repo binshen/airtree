@@ -44,6 +44,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     private TextView mTvTemperature2;
     private View mView;
     private GifImageView mTvMainImage;
+    private ImageView mTvLightImage;
 
     public static RoomFragment newInstance(Device device, Monitor monitor) {
         RoomFragment fragment = new RoomFragment();
@@ -143,6 +144,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvTemperature2 = (TextView)mView.findViewById(R.id.tv_temperature2_value);
         mIvElectric = (ImageView)mView.findViewById(R.id.iv_electric_value);
         mTvMainImage = (GifImageView)mView.findViewById(R.id.iv_main_image);
+        mTvLightImage = (ImageView)mView.findViewById(R.id.iv_light_image);
     }
 
     private void initData() {
@@ -206,12 +208,28 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
                 mTvMain.setText("0");
             }
         }
+
+        initLight();
         initAirQuality(priority1);
 
         mTvPM25Value.setText(mMonitor.getPm_data() + "ug/m³");
         mTvHumidityValue.setText(mMonitor.getHumidity_data() + "%");
         mTvTemperature2.setText(mMonitor.getTemperature_data()  + "℃");
         mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()) + "mg/m³");
+    }
+
+    private void initLight() {
+        long light = mMonitor.getLight();
+        if(light <= 0) {
+            return;
+        }
+        if(light > 500) {
+            mTvLightImage.setImageResource(R.mipmap.light_01);
+        } else if(light < 100) {
+            mTvLightImage.setImageResource(R.mipmap.light_03);
+        } else {
+            mTvLightImage.setImageResource(R.mipmap.light_02);
+        }
     }
 
     private void initAirQuality(int priority) {

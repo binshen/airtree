@@ -96,7 +96,7 @@ public class MonitorFragment extends ABaseFragment {
         if(mMonitor.getFormaldehyde_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()));
         } else {
-            mTvValue.setText(R.string.get_none);
+            mTvValue.setText("0");
         }
     }
 
@@ -107,7 +107,7 @@ public class MonitorFragment extends ABaseFragment {
         if(mMonitor.getTemperature_data() > -274) {
             mTvValue.setText(String.valueOf(mMonitor.getTemperature_data()));
         } else {
-            mTvValue.setText(R.string.get_none);
+            mTvValue.setText("0");
         }
     }
 
@@ -118,7 +118,7 @@ public class MonitorFragment extends ABaseFragment {
         if(mMonitor.getHumidity_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getHumidity_data()));
         } else {
-            mTvValue.setText(R.string.get_none);
+            mTvValue.setText("0");
         }
     }
 
@@ -129,7 +129,7 @@ public class MonitorFragment extends ABaseFragment {
         if(mMonitor.getPm_data() > 0) {
             mTvValue.setText(String.valueOf(mMonitor.getPm_data()));
         } else {
-            mTvValue.setText(R.string.get_none);
+            mTvValue.setText("0");
         }
     }
 }

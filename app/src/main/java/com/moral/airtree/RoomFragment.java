@@ -92,28 +92,20 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         intent.putExtra("monitor", mMonitor);
         switch(v.getId()) {
             case R.id.rl_pm25:
-                if(mMonitor.getPm_data() > 0) {
-                    intent.putExtra("monitorType", MonitorEnum.PM);
-                    startActivity(intent);
-                }
+                intent.putExtra("monitorType", MonitorEnum.PM);
+                startActivity(intent);
                 break;
             case R.id.rl_temperature:
-                if(mMonitor.getWindSpeed_data() > 0) {
-                    intent.putExtra("monitorType", MonitorEnum.TEMPERATURE);
-                    startActivity(intent);
-                }
+                intent.putExtra("monitorType", MonitorEnum.TEMPERATURE);
+                startActivity(intent);
                 break;
             case R.id.rl_humidity:
-                if(mMonitor.getHumidity_data() > 0) {
-                    intent.putExtra("monitorType", MonitorEnum.HUMIDITY);
-                    startActivity(intent);
-                }
+                intent.putExtra("monitorType", MonitorEnum.HUMIDITY);
+                startActivity(intent);
                 break;
             case R.id.rl_formaldehyde:
-                if(mMonitor.getFormaldehyde_data() > 0) {
-                    intent.putExtra("monitorType", MonitorEnum.FORMALDEHYDE);
-                    startActivity(intent);
-                }
+                intent.putExtra("monitorType", MonitorEnum.FORMALDEHYDE);
+                startActivity(intent);
                 break;
         }
     }
@@ -225,7 +217,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         }
         if(light > 500) {
             mTvLightImage.setImageResource(R.mipmap.light_01);
-        } else if(light < 100) {
+        } else if(light < 240) {
             mTvLightImage.setImageResource(R.mipmap.light_03);
         } else {
             mTvLightImage.setImageResource(R.mipmap.light_02);

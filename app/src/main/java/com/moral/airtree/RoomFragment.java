@@ -85,7 +85,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
             return;
         }
         if(mDevice.getStatus() != 1) {
-            Toast.makeText(getActivity(), "请启动空气树设备", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "请启动空气数设备", Toast.LENGTH_SHORT).show();
             return;
         }
         Intent intent = new Intent(getActivity(), MonitorActivity.class);

@@ -31,7 +31,7 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
     private TextView mFormaldehyde;
     private TextView mHumidity;
     private ImageView mIvLeft;
-    private ProgressBar mPb;
+    //private ProgressBar mPb;
     private TextView mPm;
     private TextView mPurificationadd;
     private TextView mTemperature;
@@ -67,7 +67,7 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
 
     private void initView() {
         mTvHistoryDate = (TextView)findViewById(R.id.tv_history_date);
-        mPb = (ProgressBar)findViewById(R.id.pb);
+        //mPb = (ProgressBar)findViewById(R.id.pb);
         mPurificationadd = (TextView)findViewById(R.id.tv_purificationadd);
         mPm = (TextView)findViewById(R.id.tv_pm);
         mTemperature = (TextView)findViewById(R.id.tv_temperature);
@@ -83,8 +83,8 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
 
         initData(date);
 
-        int chipLife = 25;
-        mPb.setProgress(chipLife);
+        //int chipLife = 25;
+        //mPb.setProgress(chipLife);
     }
 
     private void initData(String date) {
@@ -94,10 +94,10 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
         JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
-                mPm.setText(StringUtils.getFormatData(response.optString("x1")));
-                mTemperature.setText(StringUtils.getFormatData(response.optString("x11")));
-                mHumidity.setText(StringUtils.getFormatData(response.optString("x10")));
-                mFormaldehyde.setText(StringUtils.getFormatData(response.optString("x9")));
+                mPm.setText(StringUtils.getFormatData(response.optString("x1")) + "ug/m³");
+                mTemperature.setText(StringUtils.getFormatData(response.optString("x11")) + "℃");
+                mHumidity.setText(StringUtils.getFormatData(response.optString("x10")) + "%");
+                mFormaldehyde.setText(StringUtils.getFormatData(response.optString("x9")) + "mg/m³");
                 mPurificationadd.setText(StringUtils.getFormatData(response.optString("x3")));
             }
         }, new Response.ErrorListener() {

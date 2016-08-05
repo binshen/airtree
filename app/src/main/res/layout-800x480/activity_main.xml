@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:orientation="vertical"
+    android:background="@null"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:background="@mipmap/room_bg"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/lay_bottom">
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:id="@id/rlty_title"
+            android:background="@null"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <ImageView
+                android:id="@id/iv_personal"
+                android:visibility="visible"
+                android:layout_width="50.0dip"
+                android:layout_height="50.0dip"
+                android:layout_marginLeft="5.0dip"
+                android:layout_marginTop="30.0dip"
+                android:src="@mipmap/ic_personal_white"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:textSize="@dimen/textsize_36px"
+                android:textColor="@color/white"
+                android:id="@id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="房间"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true" />
+
+            <ImageView
+                android:id="@id/iv_mall_icon"
+                android:visibility="visible"
+                android:layout_width="50.0dip"
+                android:layout_height="50.0dip"
+                android:layout_marginTop="30.0dip"
+                android:layout_marginRight="5.0dip"
+                android:src="@mipmap/ic_shop"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+
+        </RelativeLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_gravity="center"
+            android:id="@id/viewPaper"
+            android:background="@null"
+            android:persistentDrawingCache="animation"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:flipInterval="1000"
+            android:layout_below="@id/rlty_title" />
+
+        <LinearLayout
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:id="@id/lay_point"
+            android:background="@null"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30.0dip"
+            android:layout_alignParentBottom="true">
+
+            <com.viewpagerindicator.CirclePageIndicator
+                android:id="@id/pageindicator"
+                android:paddingTop="10.0dip"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5.0dip"
+                android:layout_marginBottom="15.0dip"
+                app:strokeWidth="0.0dip"
+                app:fillColor="@color/dotsselect"
+                app:pageColor="@color/dotsnormal"
+                app:radius="4.0dip" />
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@id/lay_bottom"
+        android:layout_width="fill_parent"
+        android:layout_height="65.0dip"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:paddingTop="20.0dip"
+            android:paddingBottom="20.0dip"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@id/rl_devicemanager"
+                android:gravity="center"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@id/tv_devicemanager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/devicemanager"
+                    android:textSize="@dimen/textsize_32px"
+                    android:drawableLeft="@mipmap/ic_device"
+                    android:drawablePadding="5.0dip" />
+            </LinearLayout>
+
+            <View
+                android:background="@mipmap/line_icon"
+                android:layout_width="0.5dip"
+                android:layout_height="fill_parent" />
+
+            <LinearLayout
+                android:id="@id/rl_mall"
+                android:gravity="center"
+                android:layout_width="0.0dip"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@id/iv_mall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:text="@string/online_shop"
+                    android:textSize="@dimen/textsize_32px"
+                    android:drawableLeft="@mipmap/ic_shop_blue"
+                    android:drawablePadding="5.0dip" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

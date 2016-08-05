@@ -178,6 +178,10 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     loginUser.setNickname(response.optJSONObject("user").optString("nickname"));
                     application.setLoginUser(loginUser);
 
+                    if(sp == null) {
+                        sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
+                    }
+
                     sp.edit().putString("user_id", loginUser.get_id()).commit();
                     sp.edit().putString("username", loginUser.getUsername()).commit();
                     sp.edit().putString("password", loginUser.getPassword()).commit();

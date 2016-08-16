@@ -220,7 +220,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setCreated(date);
                         mMonitor.setPm_data(data.optLong("x1"));
                         mMonitor.setPm03p01(data.optLong("x3"));
-                        mMonitor.setFormaldehyde_data(data.optLong("x9"));
+                        mMonitor.setFormaldehyde_data(data.optDouble("x9"));
                         mMonitor.setHumidity_data(data.optInt("x10"));
                         mMonitor.setTemperature_data(data.optInt("x11"));
                         mMonitor.setWindSpeed_data(data.optLong("x12"));
@@ -235,7 +235,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                         mMonitor.setCreated(null);
                         mMonitor.setPm_data(0l);
                         mMonitor.setPm03p01(0l);
-                        mMonitor.setFormaldehyde_data(0l);
+                        mMonitor.setFormaldehyde_data(0d);
                         mMonitor.setHumidity_data(0);
                         mMonitor.setTemperature_data(0);
                         mMonitor.setWindSpeed_data(0l);

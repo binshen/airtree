@@ -20,4 +20,9 @@ public class StringUtils {
         }
         return new BigDecimal(val).setScale(0, BigDecimal.ROUND_HALF_UP).toString();
     }
+
+    public static String getFormaldehyde(double d) {
+        if(d == 0) return "0.00";
+        return new BigDecimal(d).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
+    }
 }

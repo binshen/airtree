@@ -15,7 +15,7 @@ public class Monitor implements Serializable {
     private int temperature_data;
     private long windSpeed_data;
     private int humidity_data;
-    private long formaldehyde_data;
+    private double formaldehyde_data;
 
     private int priority1;
     private int priority2;
@@ -87,11 +87,11 @@ public class Monitor implements Serializable {
         this.humidity_data = humidity_data;
     }
 
-    public long getFormaldehyde_data() {
+    public double getFormaldehyde_data() {
         return formaldehyde_data;
     }
 
-    public void setFormaldehyde_data(long formaldehyde_data) {
+    public void setFormaldehyde_data(double formaldehyde_data) {
         this.formaldehyde_data = formaldehyde_data;
     }
 

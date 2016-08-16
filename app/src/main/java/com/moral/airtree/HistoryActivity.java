@@ -97,7 +97,7 @@ public class HistoryActivity extends ABaseActivity implements View.OnClickListen
                 mPm.setText(StringUtils.getFormatData(response.optString("x1")) + "ug/m³");
                 mTemperature.setText(StringUtils.getFormatData(response.optString("x11")) + "℃");
                 mHumidity.setText(StringUtils.getFormatData(response.optString("x10")) + "%");
-                mFormaldehyde.setText(StringUtils.getFormatData(response.optString("x9")) + "mg/m³");
+                mFormaldehyde.setText(StringUtils.getFormaldehyde(response.optDouble("x9")) + "mg/m³");
                 mPurificationadd.setText(StringUtils.getFormatData(response.optString("x3")));
             }
         }, new Response.ErrorListener() {

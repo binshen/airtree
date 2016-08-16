@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.model.MonitorEnum;
+import com.moral.airtree.utils.StringUtils;
 
 import java.util.Date;
 
@@ -207,7 +208,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         mTvPM25Value.setText(mMonitor.getPm_data() + "ug/m³");
         mTvHumidityValue.setText(mMonitor.getHumidity_data() + "%");
         mTvTemperature2.setText(mMonitor.getTemperature_data()  + "℃");
-        mTvFormaldehydeValue.setText(String.valueOf(mMonitor.getFormaldehyde_data()) + "mg/m³");
+        mTvFormaldehydeValue.setText(StringUtils.getFormaldehyde(mMonitor.getFormaldehyde_data()) + "mg/m³");
     }
 
     private void initLight() {

@@ -85,8 +85,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 loginUser.setNickname(sp.getString("nickname", ""));
                 application.setLoginUser(loginUser);
 
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.putExtra("LoginFlag", true);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("LoginFlag", false);
                 startActivity(intent);
                 finish();
             }
@@ -189,7 +189,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     sp.edit().putString("password", loginUser.getPassword()).commit();
                     sp.edit().putString("nickname", loginUser.getNickname()).commit();
 
-                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("LoginFlag", true);
+                    startActivity(intent);
                     finish();
                 } else {
                     SharedPreferences sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);

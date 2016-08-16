@@ -163,7 +163,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
         } else {
             boolean loginFlag = getIntent().getBooleanExtra("LoginFlag", false);
-            if(loginFlag) {
+            if(!loginFlag) {
                 if (Build.VERSION.SDK_INT >= 11) {
                     new checkUpdateTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {

@@ -2,8 +2,11 @@ package com.moral.airtree;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -28,6 +31,8 @@ import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
 import com.moral.airtree.service.HeartbeatService;
+import com.moral.airtree.update.UpdateManager;
+import com.moral.airtree.utils.NetUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.moral.airtree.common.ABaseActivity;
 
@@ -83,6 +88,8 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        prepare();
 
         mDevices = new ArrayList<>();
         mFragmentList = new ArrayList<>();
@@ -149,6 +156,44 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         startService(serviceIntent);
 
         ivMallIcon.setVisibility(View.INVISIBLE);
+    }
+
+    private void prepare() {
+        if (!NetUtils.getNetConnect(this)) {
+            Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
+        } else {
+            boolean loginFlag = getIntent().getBooleanExtra("LoginFlag", false);
+            if(loginFlag) {
+                if (Build.VERSION.SDK_INT >= 11) {
+                    new checkUpdateTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+                } else {
+                    new checkUpdateTask().execute();
+                }
+            }
+        }
+    }
+
+    private class checkUpdateTask extends AsyncTask<String, Void, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            Looper.prepare();
+            // 检查软件更新
+            UpdateManager manager = new UpdateManager(MainActivity.this);
+            manager.checkUpdate();
+
+            Looper.loop();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String result) {}
+
+        @Override
+        protected void onPreExecute() {}
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 
     @Override

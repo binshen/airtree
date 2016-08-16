@@ -12,6 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
+import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.AlertDialog.Builder;
@@ -19,11 +21,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -45,7 +49,8 @@ public class UpdateManager {
     /* 是否取消更新 */
     private boolean cancelUpdate = false;
 
-    private Context mContext;
+    private Activity mActivity;
+
     /* 更新进度条 */
     private ProgressBar mProgress;
     private Dialog mDownloadDialog;
@@ -68,8 +73,28 @@ public class UpdateManager {
         }
     };
 
-    public UpdateManager(Context context) {
-        this.mContext = context;
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+    };
+
+    public void verifyStoragePermissions() {
+        // Check if we have write permission
+        int permission = ActivityCompat.checkSelfPermission(this.mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    this.mActivity,
+                    PERMISSIONS_STORAGE,
+                    REQUEST_EXTERNAL_STORAGE
+            );
+        }
+    }
+
+    public UpdateManager(Activity activity) {
+        this.mActivity = activity;
     }
 
     /**
@@ -99,7 +124,7 @@ public class UpdateManager {
      */
     private boolean isUpdate() {
         // 获取当前软件版本
-        int versionCode = getVersionCode(mContext);
+        int versionCode = getVersionCode(mActivity);
         if (null != mHashMap) {
             int serviceCode = Integer.valueOf(mHashMap.get("version"));
             // 版本判断
@@ -132,7 +157,7 @@ public class UpdateManager {
      */
     private void showNoticeDialog(String message) {
         // 构造对话框
-        AlertDialog.Builder builder = new Builder(mContext);
+        AlertDialog.Builder builder = new Builder(mActivity);
         builder.setTitle(R.string.soft_update_title);
         if(message == null || message.isEmpty()) {
             builder.setMessage(R.string.soft_update_info);
@@ -144,6 +169,8 @@ public class UpdateManager {
         builder.setPositiveButton(R.string.soft_update_updatebtn, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                verifyStoragePermissions();
+
                 dialog.dismiss();
                 // 显示下载对话框
                 showDownloadDialog();
@@ -167,10 +194,10 @@ public class UpdateManager {
     private void showDownloadDialog()
     {
         // 构造软件下载对话框
-        AlertDialog.Builder builder = new Builder(mContext);
+        AlertDialog.Builder builder = new Builder(mActivity);
         builder.setTitle(R.string.soft_updating);
         // 给下载对话框增加进度条
-        final LayoutInflater inflater = LayoutInflater.from(mContext);
+        final LayoutInflater inflater = LayoutInflater.from(mActivity);
         View v = inflater.inflate(R.layout.softupdate_progress, null);
         mProgress = (ProgressBar) v.findViewById(R.id.update_progress);
         builder.setView(v);
@@ -212,10 +239,13 @@ public class UpdateManager {
         public void run() {
             try {
                 // 判断SD卡是否存在，并且是否具有读写权限
-                if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+                //if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
                     // 获得存储卡的路径
-                    String sdpath = Environment.getExternalStorageDirectory() + "/";
-                    mSavePath = sdpath + "download";
+                    //String sdpath = Environment.getExternalStorageDirectory() + "/";
+                    //mSavePath = sdpath + "download";
+
+                    mSavePath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/";
+
                     URL url = new URL(mHashMap.get("url"));
                     // 创建连接
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -253,7 +283,7 @@ public class UpdateManager {
                     } while (!cancelUpdate);// 点击取消就停止下载.
                     fos.close();
                     is.close();
-                }
+                //}
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -275,6 +305,6 @@ public class UpdateManager {
         // 通过Intent安装APK文件
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
-        mContext.startActivity(i);
+        mActivity.startActivity(i);
     }
 }

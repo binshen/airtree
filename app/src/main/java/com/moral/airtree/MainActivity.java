@@ -162,14 +162,14 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         if (!NetUtils.getNetConnect(this)) {
             Toast.makeText(this, R.string.net_error, Toast.LENGTH_SHORT).show();
         } else {
-            boolean loginFlag = getIntent().getBooleanExtra("LoginFlag", false);
-            if(!loginFlag) {
+            //boolean loginFlag = getIntent().getBooleanExtra("LoginFlag", false);
+            //if(!loginFlag) {
                 if (Build.VERSION.SDK_INT >= 11) {
                     new checkUpdateTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
                 } else {
                     new checkUpdateTask().execute();
                 }
-            }
+            //}
         }
     }
 

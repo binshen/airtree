@@ -86,7 +86,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 application.setLoginUser(loginUser);
 
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("LoginFlag", false);
+                //intent.putExtra("LoginFlag", false);
                 startActivity(intent);
                 finish();
             }
@@ -190,7 +190,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     sp.edit().putString("nickname", loginUser.getNickname()).commit();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                    intent.putExtra("LoginFlag", true);
+                    //intent.putExtra("LoginFlag", true);
                     startActivity(intent);
                     finish();
                 } else {

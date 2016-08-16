@@ -22,7 +22,7 @@ public class StringUtils {
     }
 
     public static String getFormaldehyde(double d) {
-        if(d == 0) return "0.00";
+        if(d == 0) return "0";
         return new BigDecimal(d).setScale(2, BigDecimal.ROUND_HALF_UP).toString();
     }
 }

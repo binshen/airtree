@@ -85,7 +85,9 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 loginUser.setNickname(sp.getString("nickname", ""));
                 application.setLoginUser(loginUser);
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.putExtra("LoginFlag", true);
+                startActivity(intent);
                 finish();
             }
         }

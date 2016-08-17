@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8.0dip"
         android:layout_marginBottom="47.0dip"
-        android:text="空 气 数" />
+        android:text="FEI环境数" />
 
     <LinearLayout
         android:orientation="vertical"

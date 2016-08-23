@@ -99,7 +99,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         protected String doInBackground(String... params) {
             Looper.prepare();
             // 检查软件更新
-            UpdateManager manager = new UpdateManager(LoginActivity.this);
+            //UpdateManager manager = new UpdateManager(LoginActivity.this);
             manager.checkUpdate();
 
             Looper.loop();

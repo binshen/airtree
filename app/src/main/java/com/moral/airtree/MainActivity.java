@@ -179,7 +179,7 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
         protected String doInBackground(String... params) {
             Looper.prepare();
             // 检查软件更新
-            UpdateManager manager = new UpdateManager(MainActivity.this);
+            //UpdateManager manager = new UpdateManager(MainActivity.this);
             manager.checkUpdate();
 
             Looper.loop();

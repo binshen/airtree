@@ -12,8 +12,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.AlertDialog.Builder;
@@ -21,18 +19,18 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.DialogInterface.OnClickListener;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.moral.airtree.R;
+import com.moral.airtree.common.ABaseActivity;
 import com.moral.airtree.common.AConstants;
 
 public class UpdateManager {
@@ -49,7 +47,7 @@ public class UpdateManager {
     /* 是否取消更新 */
     private boolean cancelUpdate = false;
 
-    private Activity mActivity;
+    private ABaseActivity mActivity;
 
     /* 更新进度条 */
     private ProgressBar mProgress;
@@ -73,27 +71,7 @@ public class UpdateManager {
         }
     };
 
-    private static final int REQUEST_EXTERNAL_STORAGE = 1;
-    private static String[] PERMISSIONS_STORAGE = {
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-
-    public void verifyStoragePermissions() {
-        // Check if we have write permission
-        int permission = ActivityCompat.checkSelfPermission(this.mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            // We don't have permission so prompt the user
-            ActivityCompat.requestPermissions(
-                    this.mActivity,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_EXTERNAL_STORAGE
-            );
-        }
-    }
-
-    public UpdateManager(Activity activity) {
+    public UpdateManager(ABaseActivity activity) {
         this.mActivity = activity;
     }
 
@@ -105,10 +83,14 @@ public class UpdateManager {
         ParseXmlService service = new ParseXmlService();
         try {
             mHashMap = service.parseXml(AConstants.MORAL_API_BASE_PATH + "/upgrade");
-            String message = mHashMap.get("message");
             if (isUpdate()) {
-                // 显示提示对话框
-                showNoticeDialog(message);
+//                if (Build.VERSION.SDK_INT >= 23) {
+//                    mActivity.verifyStoragePermissions();
+//                } else {
+//                    // 显示提示对话框
+//                    showNoticeDialog();
+//                }
+                showNoticeDialog();
             } else {
 //              Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
             }
@@ -155,7 +137,8 @@ public class UpdateManager {
     /**
      * 显示软件更新对话框
      */
-    private void showNoticeDialog(String message) {
+    public void showNoticeDialog() {
+        String message = mHashMap.get("message");
         // 构造对话框
         AlertDialog.Builder builder = new Builder(mActivity);
         builder.setTitle(R.string.soft_update_title);
@@ -169,8 +152,6 @@ public class UpdateManager {
         builder.setPositiveButton(R.string.soft_update_updatebtn, new OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                verifyStoragePermissions();
-
                 dialog.dismiss();
                 // 显示下载对话框
                 showDownloadDialog();

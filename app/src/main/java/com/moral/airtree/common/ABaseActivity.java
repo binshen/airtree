@@ -61,7 +61,10 @@ public abstract class ABaseActivity extends FragmentActivity implements Activity
         switch (requestCode) {
             case REQUEST_EXTERNAL_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    manager.showNoticeDialog();
+                    //http://stackoverflow.com/questions/32699129/android-6-0-needs-restart-after-granting-user-permission-at-runtime?rq=1
+                    //http://stackoverflow.com/questions/33062006/cant-write-to-external-storage-unless-app-is-restarted-after-granting-permissio
+                    //manager.showNoticeDialog();
+                    android.os.Process.killProcess(android.os.Process.myPid());
                 } else if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     //TODO
                 } else {
@@ -71,14 +74,12 @@ public abstract class ABaseActivity extends FragmentActivity implements Activity
     }
 
     public void verifyStoragePermissions() {
-        int permission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        //int permission = PermissionChecker.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if (permission != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            //int permission = PermissionChecker.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             //ActivityCompat.requestPermissions(this, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
-            }
-        } else {
+            requestPermissions(PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+        }  else {
             manager.showNoticeDialog();
         }
     }

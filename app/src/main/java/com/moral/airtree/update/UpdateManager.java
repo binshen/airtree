@@ -90,7 +90,7 @@ public class UpdateManager {
 //                    // 显示提示对话框
 //                    showNoticeDialog();
 //                }
-                showNoticeDialog();
+                mActivity.verifyStoragePermissions();
             } else {
 //              Toast.makeText(mContext, R.string.soft_update_no, Toast.LENGTH_LONG).show();
             }

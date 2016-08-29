@@ -9,5 +9,5 @@ public interface AConstants {
 
     public final String SP_LOGIN_USER_KEY = "airtree_login_user";
 
-    public final String MORAL_API_BASE_PATH = "http://121.40.92.176:3000";
+    public final String MORAL_API_BASE_PATH = "http://api.7drlb.com";
 }

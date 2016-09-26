@@ -57,8 +57,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
         mTvRegister.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
 
-        mEtUsername.setText("13999999999");
-        mEtPassword.setText("888888");
+        //mEtUsername.setText("13999999999");
+        //mEtPassword.setText("888888");
     }
 
     @Override

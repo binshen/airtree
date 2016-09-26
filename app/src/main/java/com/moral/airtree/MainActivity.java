@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
@@ -88,6 +89,9 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DisplayMetrics dm = getResources().getDisplayMetrics();
+        Log.d("MainActivity", dm.widthPixels + " | " + dm.heightPixels + " | " + dm.density + " | " + dm.densityDpi);
 
         prepare();
 

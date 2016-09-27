@@ -22,7 +22,7 @@
             android:layout_centerVertical="true" />
 
         <TextView
-            android:textSize="@dimen/textsize_30px"
+            android:textSize="@dimen/textsize_28px"
             android:textColor="@color/listtextcolor2"
             android:id="@id/tv_bianma"
             android:layout_width="wrap_content"
@@ -189,7 +189,7 @@
             android:layout_centerVertical="true" />
 
         <TextView
-            android:textSize="@dimen/textsize_30px"
+            android:textSize="@dimen/textsize_28px"
             android:textColor="@color/listtextcolor2"
             android:id="@id/tv_check_status"
             android:layout_width="wrap_content"

@@ -72,8 +72,8 @@ public class MonitorFragment extends ABaseFragment {
         mTvBottomDanwei.setVisibility(View.VISIBLE);
 
         mTvTime.setText(mMonitor.getCreated());
-        float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
-        mTvValue.setTextSize(size);
+        //float size = (float) DisplayUtils.sp2px(getActivity(), 30.0f);
+        //mTvValue.setTextSize(size);
         mTvValue.setTextColor(getResources().getColor(R.color.color_wendu));
         //mTvBottomDanwei.setTextColor(getResources().getColor(R.color.color_wendu_type));
         //mTvMonitortype.setTextColor(getResources().getColor(R.color.color_pm_type));

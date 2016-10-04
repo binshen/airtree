@@ -60,6 +60,9 @@
     <item type="id" name="rl_check_line">false</item>
     <item type="id" name="tv_check_status">false</item>
     <item type="id" name="rl_feedback">false</item>
+    <item type="id" name="rl_avg_number">false</item>
+    <item type="id" name="tv_avg_label">false</item>
+    <item type="id" name="tv_avg_number">false</item>
     <item type="id" name="btn_exit">false</item>
     <item type="id" name="et_nickname">false</item>
     <item type="id" name="btn_revise">false</item>
@@ -71,7 +74,7 @@
     <item type="id" name="tv_checkresult">false</item>
     <item type="id" name="btn_complete">false</item>
     <item type="id" name="btn_startcheck">false</item>
-    <item type="id" name="webView">false</item>
+    <item type="id" name="webView">false</item>tv_avg_number
     <item type="id" name="tv_history_date">false</item>
     <item type="id" name="tv_purificationadd">false</item>
     <item type="id" name="tv_purificationadd_lable">false</item>

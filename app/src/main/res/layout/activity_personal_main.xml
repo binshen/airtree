@@ -26,7 +26,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15.0dip"
-                android:text="@string/nickname" android:layout_centerVertical="true" />
+                android:text="@string/nickname"
+                android:layout_centerVertical="true" />
 
             <ImageView
                 android:id="@id/iv"
@@ -84,11 +85,45 @@
             android:layout_width="fill_parent"
             android:layout_height="0.5dip" />
 
+<!--
         <View
             android:background="@color/fengeline2"
             android:layout_width="fill_parent"
             android:layout_height="0.5dip"
             android:layout_marginTop="48.0dip" />
+-->
+
+        <RelativeLayout
+            android:id="@id/rl_avg_number"
+            android:layout_width="fill_parent"
+            android:layout_height="50.0dip">
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor"
+                android:id="@id/tv_avg_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15.0dip"
+                android:text="@string/avg_number_label"
+                android:layout_centerVertical="true" />
+
+            <TextView
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/listtextcolor2"
+                android:id="@id/tv_avg_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16.0dip"
+                android:text="0"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <View
+            android:background="@color/fengeline2"
+            android:layout_width="fill_parent"
+            android:layout_height="0.5dip" />
 
         <RelativeLayout
             android:id="@id/rl_feedback"

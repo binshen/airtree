@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
     private RelativeLayout mRlUserfeedback;
     private TextView mTvTitle;
     private TextView mTvUserName;
+    private TextView mAvgNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mRlUserfeedback = (RelativeLayout)findViewById(R.id.rl_feedback);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mTvUserName = (TextView)findViewById(R.id.tv_username);
+        mAvgNumber = (TextView)findViewById(R.id.tv_avg_number);
         mBtnExit = (Button)findViewById(R.id.btn_exit);
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
@@ -57,10 +60,40 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mBtnExit.setOnClickListener(this);
     }
 
+    private Handler timeHandler = new Handler();
+    private Runnable runnable = new Runnable() {
+        public void run() {
+            requestDeviceData();
+            timeHandler.postDelayed(this, 30000);
+        }
+    };
+
+    @Override
     protected void onStart() {
+        requestDeviceData();
         super.onStart();
         mTvUserName.setText(application.getLoginUserNickname());
     }
+
+    @Override
+    protected void onResume() {
+        timeHandler.removeCallbacks(runnable);
+        timeHandler.postDelayed(runnable, 30000);
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        timeHandler.removeCallbacks(runnable);
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        timeHandler.removeCallbacks(runnable);
+        super.onDestroy();
+    }
+
 
     public void onClick(View v) {
         switch (v.getId()) {
@@ -109,5 +142,26 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
                 startActivity(new Intent(getApplicationContext(), PersonalFeedbackActivity.class));
                 break;
         }
+    }
+
+    private void requestDeviceData() {
+        String url = basePath + "/user/" + application.getLoginUserID() + "/get_avg_data";
+        RequestQueue queue = application.getRequestQueue();
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String avgNum = response.optString("avg");
+                mAvgNumber.setText(avgNum);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), AConstants.IS_DEBUG_MODE ? error.toString() : "网络故障，请稍候重试", Toast.LENGTH_SHORT).show();
+                if (mLoadDialog.isShowing()) {
+                    mLoadDialog.dismiss();
+                }
+            }
+        });
+        queue.add(jsonRequest);
     }
 }

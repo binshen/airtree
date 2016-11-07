@@ -74,7 +74,7 @@
     <string name="revisenickname">修改昵称</string>
     <string name="revisepwd">修改密码</string>
     <string name="register">注 册</string>
-    <string name="avg_number_label">综合指数</string>
+    <string name="avg_number_label">家庭综合指数</string>
     <string name="register_sucess">注册成功</string>
     <string name="register_error">注册失败</string>
     <string name="login">登 录</string>

@@ -197,7 +197,7 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     SharedPreferences sp = getSharedPreferences(AConstants.SP_LOGIN_USER_KEY, Context.MODE_PRIVATE);
                     sp.edit().putString("user_id", "").commit();
 
-                    Toast.makeText(getApplicationContext(), "输入的用户名或密码错误.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "输入的手机号或密码错误.", Toast.LENGTH_SHORT).show();
                 }
             }
         }, new Response.ErrorListener() {

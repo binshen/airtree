@@ -28,9 +28,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.moral.airtree.common.AConstants;
 import com.moral.airtree.model.Device;
 import com.moral.airtree.model.Monitor;
+import com.moral.airtree.model.User;
 import com.moral.airtree.service.HeartbeatService;
 import com.moral.airtree.update.UpdateManager;
 import com.moral.airtree.utils.NetUtils;
@@ -174,6 +176,34 @@ public class MainActivity extends ABaseActivity implements View.OnClickListener 
                     new checkUpdateTask().execute();
                 }
             //}
+
+            if(getIntent().getBooleanExtra("LoginFlag", true)) return;
+
+            String url = basePath + "/user/" + application.getLoginUserID() + "/get_info";
+            RequestQueue queue = application.getRequestQueue();
+            JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    JSONObject user = response.optJSONObject("user");
+                    if (user != null) {
+                        User loginUser = new User();
+                        loginUser.set_id(response.optJSONObject("user").optString("_id"));
+                        loginUser.setUsername(response.optJSONObject("user").optString("username"));
+                        loginUser.setPassword(response.optJSONObject("user").optString("password"));
+                        loginUser.setNickname(response.optJSONObject("user").optString("nickname"));
+                        application.setLoginUser(loginUser);
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), AConstants.IS_DEBUG_MODE ? error.toString() : "网络故障，请稍候重试", Toast.LENGTH_SHORT).show();
+                    if (mLoadDialog.isShowing()) {
+                        mLoadDialog.dismiss();
+                    }
+                }
+            });
+            queue.add(jsonRequest);
         }
     }
 

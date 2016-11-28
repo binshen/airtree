@@ -43,7 +43,7 @@
                         android:layout_marginLeft="14.0dip"
                         android:layout_marginRight="10.0dip"
                         android:hint="@string/input_phonenum"
-                        android:singleLine="true"
+                        android:maxLines="1"
                         android:maxLength="11"
                         android:inputType="phone" />
                 </LinearLayout>
@@ -85,7 +85,7 @@
                 android:layout_marginLeft="14.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_validate"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:inputType="number" />
         </LinearLayout>
 
@@ -108,7 +108,7 @@
                 android:layout_marginLeft="14.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_pwd"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxLength="20"
                 android:inputType="textPassword" />
         </LinearLayout>

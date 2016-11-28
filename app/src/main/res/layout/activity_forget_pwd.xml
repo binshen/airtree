@@ -85,7 +85,8 @@
                 android:layout_marginLeft="14.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_validate"
-                android:singleLine="true" android:inputType="number" />
+                android:maxLines="1"
+                android:inputType="number" />
         </LinearLayout>
 
         <LinearLayout
@@ -107,7 +108,7 @@
                 android:layout_marginLeft="14.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_newpwd"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxLength="20"
                 android:inputType="textPassword" />
         </LinearLayout>

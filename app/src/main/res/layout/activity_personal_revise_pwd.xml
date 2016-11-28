@@ -34,7 +34,7 @@
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_oldpwd"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxLength="20" />
         </LinearLayout>
 
@@ -57,7 +57,7 @@
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_newpwd"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxLength="20"
                 android:inputType="textPassword" />
         </LinearLayout>
@@ -81,7 +81,7 @@
                 android:layout_marginLeft="10.0dip"
                 android:layout_marginRight="10.0dip"
                 android:hint="@string/input_aginnewpwd"
-                android:singleLine="true"
+                android:maxLines="1"
                 android:maxLength="20"
                 android:inputType="textPassword" />
         </LinearLayout>

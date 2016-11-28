@@ -90,6 +90,7 @@
     <string name="lvcheck2">器出风口</string>
     <string name="startcheck">开始检测</string>
     <string name="feedback">用户反馈</string>
+    <string name="email">邮箱</string>
     <string name="checkversion">检查更新</string>
     <string name="exit_user">退出当前账号</string>
     <string name="complete">完 成</string>

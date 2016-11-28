@@ -31,9 +31,11 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
     private RelativeLayout mRlNickname;
     private RelativeLayout mRlRevisepwd;
     private RelativeLayout mRlUserfeedback;
+    private RelativeLayout mRlUseremail;
     private TextView mTvTitle;
     private TextView mTvUserName;
     private TextView mAvgNumber;
+    private TextView mTvEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +48,11 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mRlRevisepwd = (RelativeLayout)findViewById(R.id.rl_revisepwd);
         //mRlCheck = (RelativeLayout)findViewById(R.id.rl_check);
         mRlUserfeedback = (RelativeLayout)findViewById(R.id.rl_feedback);
+        mRlUseremail = (RelativeLayout)findViewById(R.id.rl_email);
         mIvLeft = (ImageView)findViewById(R.id.left_btn);
         mTvUserName = (TextView)findViewById(R.id.tv_username);
         mAvgNumber = (TextView)findViewById(R.id.tv_avg_number);
+        mTvEmail = (TextView)findViewById(R.id.tv_email);
         mBtnExit = (Button)findViewById(R.id.btn_exit);
         mTvTitle.setTextColor(getResources().getColor(R.color.bg_title));
         mIvLeft.setImageResource(R.mipmap.back);
@@ -56,6 +60,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         mRlRevisepwd.setOnClickListener(this);
         //mRlCheck.setOnClickListener(this);
         mRlUserfeedback.setOnClickListener(this);
+        mRlUseremail.setOnClickListener(this);
         mIvLeft.setOnClickListener(this);
         mBtnExit.setOnClickListener(this);
     }
@@ -73,6 +78,7 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
         requestDeviceData();
         super.onStart();
         mTvUserName.setText(application.getLoginUserNickname());
+        mTvEmail.setText(application.getLoginUser().getEmail());
     }
 
     @Override
@@ -140,6 +146,10 @@ public class PersonalMainActivity extends ABaseActivity implements View.OnClickL
 
             case R.id.rl_feedback:
                 startActivity(new Intent(getApplicationContext(), PersonalFeedbackActivity.class));
+                break;
+
+            case R.id.rl_email:
+                startActivity(new Intent(getApplicationContext(), PersonalReviseEmailActivity.class));
                 break;
         }
     }

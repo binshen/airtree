@@ -9,6 +9,7 @@
     <item type="id" name="rl4">false</item>
     <item type="id" name="textView2">false</item>
     <item type="id" name="iv">false</item>
+    <item type="id" name="iv_email">false</item>
     <item type="id" name="tv_where">false</item>
     <item type="id" name="tv_style">false</item>
     <item type="id" name="tv_mac">false</item>
@@ -54,6 +55,8 @@
     <item type="id" name="btn_commit">false</item>
     <item type="id" name="rl_nickname">false</item>
     <item type="id" name="tv_nick">false</item>
+    <item type="id" name="tv_email">false</item>
+    <item type="id" name="tv_email_label">false</item>
     <item type="id" name="tv_username">false</item>
     <item type="id" name="rl_revisepwd">false</item>
     <item type="id" name="rl_check">false</item>
@@ -61,10 +64,12 @@
     <item type="id" name="tv_check_status">false</item>
     <item type="id" name="rl_feedback">false</item>
     <item type="id" name="rl_avg_number">false</item>
+    <item type="id" name="rl_email">false</item>
     <item type="id" name="tv_avg_label">false</item>
     <item type="id" name="tv_avg_number">false</item>
     <item type="id" name="btn_exit">false</item>
     <item type="id" name="et_nickname">false</item>
+    <item type="id" name="et_email">false</item>
     <item type="id" name="btn_revise">false</item>
     <item type="id" name="et_oldpwd">false</item>
     <item type="id" name="et_newpwd">false</item>

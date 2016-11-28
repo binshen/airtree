@@ -83,6 +83,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                 loginUser.setUsername(sp.getString("username", ""));
                 loginUser.setPassword(sp.getString("password", ""));
                 loginUser.setNickname(sp.getString("nickname", ""));
+                loginUser.setEmail(sp.getString("email", ""));
+                loginUser.setToken(sp.getString("token", ""));
                 application.setLoginUser(loginUser);
 
                 Intent intent = new Intent(this, MainActivity.class);
@@ -178,6 +180,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     loginUser.setUsername(response.optJSONObject("user").optString("username"));
                     loginUser.setPassword(response.optJSONObject("user").optString("password"));
                     loginUser.setNickname(response.optJSONObject("user").optString("nickname"));
+                    loginUser.setEmail(response.optJSONObject("user").optString("email"));
+                    loginUser.setToken(response.optJSONObject("user").optString("token"));
                     application.setLoginUser(loginUser);
 
                     if(sp == null) {
@@ -188,6 +192,8 @@ public class LoginActivity extends ABaseActivity implements View.OnClickListener
                     sp.edit().putString("username", loginUser.getUsername()).commit();
                     sp.edit().putString("password", loginUser.getPassword()).commit();
                     sp.edit().putString("nickname", loginUser.getNickname()).commit();
+                    sp.edit().putString("email", loginUser.getEmail()).commit();
+                    sp.edit().putString("token", loginUser.getToken()).commit();
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     intent.putExtra("LoginFlag", true);

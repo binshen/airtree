@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".common.ABaseApplication"
@@ -27,29 +27,68 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:screenOrientation="portrait" />
-        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ForgetPwdActivity" android:screenOrientation="portrait" />
-        <activity android:name=".RegisterActivity" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceManagerActivity" android:screenOrientation="portrait" />
-        <activity android:name=".HistoryActivity" android:screenOrientation="portrait" />
-        <activity android:name=".ShopActivity" android:screenOrientation="portrait" />
-        <activity android:name=".PersonalMainActivity" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceAddActivity" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceAddErrorActivity" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceInfoActivty" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceAddLoadActivity" android:screenOrientation="portrait" />
-        <activity android:name=".PersonalRevisePwdActivity" android:screenOrientation="portrait" />
-        <activity android:name=".PersonalReviseNickNameActivity" android:screenOrientation="portrait" />
-        <activity android:name=".PersonalFeedbackActivity" android:screenOrientation="portrait" />
-        <activity android:name=".DeviceDetailReviseActivity" android:screenOrientation="portrait" />
-        <activity android:name=".MonitorActivity" android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgetPwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".HistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ShopActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PersonalMainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceAddActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceAddErrorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceInfoActivty"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceAddLoadActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PersonalRevisePwdActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PersonalReviseNickNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".PersonalFeedbackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DeviceDetailReviseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MonitorActivity"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".service.HeartbeatService" android:label="HeartbeatService" android:persistent="true" >
+        <service
+            android:name=".service.HeartbeatService"
+            android:label="HeartbeatService"
+            android:persistent="true">
             <intent-filter>
                 <action android:name="HeartbeatService" />
             </intent-filter>
         </service>
+
+        <activity android:name=".PersonalReviseEmailActivity"></activity>
     </application>
 
 </manifest>

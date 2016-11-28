@@ -26,7 +26,7 @@
                 android:textSize="@dimen/textsize_28px"
                 android:textColor="@color/etcolor"
                 android:textColorHint="@color/hintcolor"
-                android:id="@id/et_nickname"
+                android:id="@id/et_email"
                 android:background="@null"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"

@@ -64,6 +64,7 @@
     <string name="input_phonenum">请输入注册手机号</string>
     <string name="input_username">请输入手机号</string>
     <string name="input_pwd">请输入密码</string>
+    <string name="input_email">请填写邮箱用于接收统计报表</string>
     <string name="input_validate">请输入验证码</string>
     <string name="input_newpwd">请输入新密码</string>
     <string name="input_oldpwd">请输入原密码</string>

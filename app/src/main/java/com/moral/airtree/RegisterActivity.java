@@ -31,6 +31,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
     private EditText mEtInputpasswd;
     private EditText mEtInputvalidate;
     private EditText mEtPhonenum;
+    private EditText mEtInputemail;
     private ImageView mIvBack;
     private CountDownTimer mTime;
     private TextView mTvTitle;
@@ -43,6 +44,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         mEtPhonenum = (EditText)findViewById(R.id.et_phonenum);
         mEtInputpasswd = (EditText)findViewById(R.id.et_inputpasswd);
         mEtInputvalidate = (EditText)findViewById(R.id.et_inputvalidate);
+        mEtInputemail = (EditText)findViewById(R.id.et_inputemail);
         mIvBack = (ImageView)findViewById(R.id.left_btn);
         mTvTitle = (TextView)findViewById(R.id.tv_title);
         mTvTitle.setText("注 册");
@@ -70,6 +72,7 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         String username  = mEtPhonenum.getText().toString().trim();
         String password  = mEtInputpasswd.getText().toString().trim();
         String input_cd = mEtInputvalidate.getText().toString().trim();
+        String email = mEtInputemail.getText().toString().trim();
         switch(v.getId()) {
             case R.id.left_btn:
                 finish();
@@ -96,7 +99,11 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "请输入密码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                registerUser(username, password, input_cd);
+                if(TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "请输入邮箱", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                registerUser(username, password, input_cd, email);
                 break;
         }
     }
@@ -130,11 +137,12 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
         queue.add(jsonRequest);
     }
 
-    private void registerUser(String tel, String pwd, String code) {
+    private void registerUser(String tel, String pwd, String code, String email) {
         String url = basePath + "/user/register";
         final Map<String, String> params = new HashMap<>();
         params.put("username", tel);
         params.put("password", pwd);
+        params.put("email", email);
         params.put("code", code);
 
         RequestQueue queue = application.getRequestQueue();

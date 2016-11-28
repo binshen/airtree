@@ -113,6 +113,30 @@
                 android:inputType="textPassword" />
         </LinearLayout>
 
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_width="fill_parent"
+            android:layout_height="48.0dip"
+            android:layout_marginTop="10.0dip">
+
+            <EditText
+                android:textSize="@dimen/textsize_30px"
+                android:textColor="@color/etcolor"
+                android:textColorHint="@color/hintcolor"
+                android:id="@id/et_inputemail"
+                android:background="@null"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="14.0dip"
+                android:layout_marginRight="10.0dip"
+                android:hint="@string/input_email"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:inputType="textPassword" />
+        </LinearLayout>
+
         <Button
             android:textSize="@dimen/textsize_36px"
             android:textColor="@color/btntextnormal"

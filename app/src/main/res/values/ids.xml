@@ -70,6 +70,7 @@
     <item type="id" name="et_newpwd">false</item>
     <item type="id" name="et_aginnewpwd">false</item>
     <item type="id" name="et_inputpasswd">false</item>
+    <item type="id" name="et_inputemail">false</item>
     <item type="id" name="btn_register">false</item>
     <item type="id" name="tv_checkresult">false</item>
     <item type="id" name="btn_complete">false</item>

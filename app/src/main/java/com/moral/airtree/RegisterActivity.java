@@ -23,6 +23,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class RegisterActivity extends ABaseActivity implements View.OnClickListener {
 
@@ -103,9 +105,20 @@ public class RegisterActivity extends ABaseActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(), "请输入邮箱", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                if(!isEmail(email)) {
+                    Toast.makeText(getApplicationContext(), "您输入的邮箱格式不正确", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 registerUser(username, password, input_cd, email);
                 break;
         }
+    }
+
+    private boolean isEmail(String email) {
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        Pattern p = Pattern.compile(str);
+        Matcher m = p.matcher(email);
+        return m.matches();
     }
 
     private void sendMessage(String tel) {
